@@ -1,10 +1,11 @@
 package be.kdg.transitstadler.database.dao;
 
-// be.kdg.transitstadler
 import be.kdg.transitstadler.model.businessobject.Line;
-// java.util
 import java.util.List;
 
+/**
+ * @author Igor Goossens (INF 101)
+ */
 public  class LineDao {
     /**
      * static class -> private constructor
