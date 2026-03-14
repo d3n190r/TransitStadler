@@ -1,4 +1,6 @@
 package be.kdg.transitstadler.model.businessobject;
 
-public class Line {
-}
+/**
+ * @author Igor Goossens (INF 101)
+ */
+public record Line(int lineId, String lineName, int operatorId) { }

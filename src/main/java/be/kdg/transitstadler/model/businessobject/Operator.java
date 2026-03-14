@@ -1,4 +1,6 @@
 package be.kdg.transitstadler.model.businessobject;
 
-public class Operator {
-}
+/**
+ * @author Igor Goossens (INF 101)
+ */
+public record Operator(int operatorId, String operatorName) { }
