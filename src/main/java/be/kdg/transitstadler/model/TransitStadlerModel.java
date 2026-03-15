@@ -47,9 +47,14 @@ public class TransitStadlerModel {
      * @param lineId The id of the line that should be changed.
      * @param newLineName The new name of the line.
      */
-    public void updateLine(int lineId, String newLineName) {
-        int newOperatorId = LineDao.read(lineId).operatorId();
-        updateLine(lineId, newLineName, newOperatorId);
+    public boolean updateLine(int lineId, String newLineName) {
+        // TODO: update documentation
+        Line oldLine = LineDao.read(lineId);
+        if (oldLine == null) {
+            // TODO: show error ≃ "Could not update line with lineId: {lineId}. Does it exist in the database?"
+            return false;
+        }
+        return updateLine(lineId, newLineName, oldLine.operatorId());
     }
 
     /**
@@ -58,9 +63,14 @@ public class TransitStadlerModel {
      * @param lineId The id of the line that should be changed.
      * @param newOperatorId The new operator associated with the line.
      */
-    public void updateLine(int lineId, int newOperatorId) {
-        String newLineName = LineDao.read(lineId).lineName();
-        updateLine(lineId, newLineName, newOperatorId);
+    public boolean updateLine(int lineId, int newOperatorId) {
+        // TODO: update documentation
+        Line oldLine = LineDao.read(lineId);
+        if (oldLine == null) {
+            // TODO: show error ≃ "Could not update line with lineId: {lineId}. Does it exist in the database?"
+            return false;
+        }
+        return updateLine(lineId, oldLine.lineName(), newOperatorId);
     }
 
     /**
@@ -70,8 +80,9 @@ public class TransitStadlerModel {
      * @param newLineName The new name of the line.
      * @param newOperatorId The new operator associated with the line.
      */
-    public void updateLine(int lineId, String newLineName, int newOperatorId) {
-        LineDao.update(new Line(lineId, newLineName, newOperatorId));
+    public boolean updateLine(int lineId, String newLineName, int newOperatorId) {
+        // TODO: update documentation
+        return LineDao.update(new Line(lineId, newLineName, newOperatorId));
     }
 
     /**
@@ -119,6 +130,7 @@ public class TransitStadlerModel {
      * @param newStationName The new name of the station.
      */
     public void updateStation(int stationId, String newStationName) {
+        // TODO: make boolean (+documentation)
         StationDao.update(new Station(stationId, newStationName));
     }
 
@@ -167,6 +179,7 @@ public class TransitStadlerModel {
      * @param newOperatorName The new name of the operator.
      */
     public void updateOperator(int operatorId, String newOperatorName) {
+        // TODO: make boolean (+documentation)
         OperatorDao.update(new Operator(operatorId, newOperatorName));
     }
 
