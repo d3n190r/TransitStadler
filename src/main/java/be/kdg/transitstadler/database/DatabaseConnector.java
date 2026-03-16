@@ -61,7 +61,7 @@ public class DatabaseConnector {
      * Sets the serverlocation for new connections. The default value is "jdbc:hsqldb:file:Database/TransitStadler".
      * @param newServerLocation The new location to use.
      */
-    public void setServerLocation(String newServerLocation) {
+    public static void setServerLocation(String newServerLocation) {
         serverLocation = newServerLocation;
     }
 
@@ -69,7 +69,7 @@ public class DatabaseConnector {
      * Sets the username for new connections. The default value is "sa".
      * @param newUsername The new username to use.
      */
-    public void setUsername(String newUsername) {
+    public static void setUsername(String newUsername) {
         username = newUsername;
     }
 
@@ -77,7 +77,7 @@ public class DatabaseConnector {
      * Sets the password for the new connections. The default value is "".
      * @param newPassword The new password to use.
      */
-    public void setPassword(String newPassword) {
+    public static void setPassword(String newPassword) {
         password = newPassword;
     }
 }
