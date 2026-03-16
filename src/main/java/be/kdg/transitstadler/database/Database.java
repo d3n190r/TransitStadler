@@ -36,7 +36,12 @@ public class Database {
         return result;
     }
 
-    // TODO: Documentation
+    /**
+     * Executes a SELECT on the database.
+     * @param query A SELECT query for the database, with a questionmark at parameter places.
+     * @param parameterValues The values that need to be filled in at the questionmarks.
+     * @return An set with all the rows the query returned.
+     */
     public static ResultSet executeQuery(String query, Object[] parameterValues) {
         CachedRowSet cachedRowSet;
         Connection connection = DatabaseConnector.getConnection();
@@ -61,7 +66,12 @@ public class Database {
         return cachedRowSet;
     }
 
-    // TODO: documentation
+    /**
+     * Executes a change query on the database (INSERT, UPDATE or DELETE).
+     * @param query A query of the right type, with a questionmark at parameter places.
+     * @param parameterValues The values that need to be filled in at the questionmarks.
+     * @return An int with how many rows were changed. If it is < 0 something went wrong and nothing changed.
+     */
     public static int executeChange(String query, Object[] parameterValues) {
         Connection connection = DatabaseConnector.getConnection();
         try {
@@ -71,7 +81,12 @@ public class Database {
         }
     }
 
-    // TODO: documentation
+    /**
+     * Executes a query on the database.
+     * @param query The query to be executed, with a questionmark at parameter places.
+     * @param parameterValues The values that need to be filled in at the questionmarks.
+     * @return An boolean indicating if the query ran succesfully.
+     */
     public static boolean executeAny(String query, Object[] parameterValues) {
         Connection connection = DatabaseConnector.getConnection();
         try {
