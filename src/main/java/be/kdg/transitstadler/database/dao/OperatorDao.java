@@ -58,25 +58,70 @@ public class OperatorDao {
         }
     }
 
-    // TODO: documentation
+    /**
+     * Reads the information of the operator with the given id from the database.
+     * @param operatorId The id of the operator to find the information.
+     * @return An Operator object with the information on the requested operator.
+     */
     public static Operator read(int operatorId) {
-        // TODO: implementation
-        return null;
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM ? WHERE operatorId = ?", new Object[] {operatorTableName, operatorId});
+        List<Operator> result = convertDbResultToObjectList(resultRows);
+        if (result == null) {
+            // TODO: error
+            System.err.println("[OperatorDao.read()] Could not find operator in the database width id " + operatorId);
+            return null;
+        } else if (result.size() != 1) {
+            // TODO: error
+            System.err.println("[OperatorDao.read()] Found multiple operators in the database with id " + operatorId);
+        }
+        return result.getFirst();
     }
 
-    // TODO: documentation
+    /**
+     * Reads all the operators from the database and returns them in a list.
+     * @return A list with all the operators from the database.
+     */
     public static List<Operator> readAll() {
-        // TODO: implementation
-        return null;
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM ?", new Object[] {operatorTableName});
+        return convertDbResultToObjectList(resultRows);
     }
 
-    // TODO: documentation
-    public static void update(Operator updatedOperator) {
-        // TODO: implementation
+    /**
+     * Updates the operator with the same id as the given Operator object to match the given Operator object.
+     * @param updatedOperator What the operator should look like after the update.
+     * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
+     */
+    public static boolean update(Operator updatedOperator) {
+        Object[] parameterValues = new Object[] {operatorTableName, updatedOperator.operatorName(), updatedOperator.operatorId()};
+        int changes = Database.executeChange("UPDATE ? SET operatorName = ? WHERE operatorId = ?", parameterValues);
+        if (changes == 1) {
+            return true;
+        } else if (changes < 1) {
+            // TODO: error
+            System.err.println("[OperatorDao.update()] No changes were made in the database.");
+        } else {
+            // TODO: error
+            System.err.println("[OperatorDao.update()] Somehow multiple operators with the same id exist in the database.");
+        }
+        return false;
     }
 
-    // TODO: documentation
-    public static void delete(int operatorId) {
-        // TODO: implementation
+    /**
+     * Deletes the operator with the requested id from the database.
+     * @param operatorId The id of the operator to delete.
+     * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
+     */
+    public static boolean delete(int operatorId) {
+        int changes = Database.executeChange("DELETE FROM ? WHERE operatorId = ?", new Object[] {operatorTableName, operatorId});
+        if (changes == 1) {
+            return true;
+        } else if (changes < 1) {
+            // TODO: error
+            System.err.println("[OperatoDao.delete()] No changes were made in the database.");
+        } else {
+            // TODO: error
+            System.err.println("[OperatorDao.delete()] Somehow multiple operators with the same id exist in the database.");
+        }
+        return false;
     }
 }

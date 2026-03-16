@@ -69,13 +69,12 @@ public class LineDao {
         if (result == null) {
             // TODO: error
             System.err.println("[LineDao.read()] Could not find line in the database with id " + lineId);
+            return null;
         } else if (result.size() != 1) {
             // TODO: error
             System.err.println("[LineDao.read()] Found multiple lines in the database with id " + lineId);
-        }else {
-            return result.getFirst();
         }
-        return null;
+        return result.getFirst();
     }
 
     /**
@@ -89,7 +88,7 @@ public class LineDao {
 
     /**
      * Updates the line with the same id as the given Line object to match the given Line object.
-     * @param updatedLine How the line should look like after the update.
+     * @param updatedLine What the line should look like after the update.
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean update(Line updatedLine) {
@@ -97,10 +96,10 @@ public class LineDao {
         int changes = Database.executeChange("UPDATE ? SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
         if (changes == 1) {
             return true;
-        } else if (changes < 0) {
+        } else if (changes < 1) {
             // TODO: error
             System.err.println("[LineDao.update()] No changes were made in the database.");
-        }else if (changes > 1) {
+        } else {
             // TODO: error
             System.err.println("[LineDao.update()] Somehow multiple lines with the same id exist in the database.");
         }
@@ -116,7 +115,7 @@ public class LineDao {
         int changes = Database.executeChange("DELETE FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
         if (changes == 1) {
             return true;
-        } else if (changes < 0) {
+        } else if (changes < 1) {
             // TODO: error
             System.err.println("[LineDao.delete()] No changes were made in the database.");
         } else {

@@ -58,25 +58,70 @@ public class StationDao {
         }
     }
 
-    // TODO: documentation
+    /**
+     * Reads the information of the station with the given id from the database.
+     * @param stationId The id of the station to find the information.
+     * @return An Station object with the information on the requested station.
+     */
     public static Station read(int stationId) {
-        // TODO: implementation
-        return null;
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM ? WHERE stationId = ?", new Object[] {stationTableName, stationId});
+        List<Station> result = convertDbResultToObjectList(resultRows);
+        if (result == null) {
+            // TODO: error
+            System.err.println("[stationDao.read()] Could not find station in the database width id " + stationId);
+            return null;
+        } else if (result.size() != 1) {
+            // TODO: error
+            System.err.println("[stationDao.read()] Found multiple stations in the database with id " + stationId);
+        }
+        return result.getFirst();
     }
 
-    // TODO: documentation
+    /**
+     * Reads all the stations from the database and returns them in a list.
+     * @return A list with all the stations from the database.
+     */
     public static List<Station> readAll() {
-        // TODO: implementation
-        return null;
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM ?", new Object[] {stationTableName});
+        return convertDbResultToObjectList(resultRows);
     }
 
-    // TODO: documentation
-    public static void update(Station updatedStation) {
-        // TODO: implementation
+    /**
+     * Updates the station with the same id as the given Station object to match the given Station object.
+     * @param updatedStation What the station should look like after the update.
+     * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
+     */
+    public static boolean update(Station updatedStation) {
+        Object[] parameterValues = new Object[] {stationTableName, updatedStation.stationName(), updatedStation.stationId()};
+        int changes = Database.executeChange("UPDATE ? SET stationName = ? WHERE stationId = ?", parameterValues);
+        if (changes == 1) {
+            return true;
+        } else if (changes < 1) {
+            // TODO: error
+            System.err.println("[StationDao.update()] No changes were made in the database.");
+        } else {
+            // TODO: error
+            System.err.println("[StationDao.update()] Somehow multiple stations with the same id exist in the database.");
+        }
+        return false;
     }
 
-    // TODO: documentation
-    public static void delete(int stationId) {
-        // TODO: implementation
+    /**
+     * Deletes the station with the requested id from the database.
+     * @param stationId The id of the station to delete.
+     * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
+     */
+    public static boolean delete(int stationId) {
+        int changes = Database.executeChange("DELETE FROM ? WHERE stationId = ?", new Object[] {stationTableName, stationId});
+        if (changes == 1) {
+            return true;
+        } else if (changes < 1) {
+            // TODO: error
+            System.err.println("[StationDao.delete()] No changes were made in the database.");
+        } else {
+            // TODO: error
+            System.err.println("[StationDao.delete()] Somehow multiple stations with the same id exist in the database.");
+        }
+        return false;
     }
 }
