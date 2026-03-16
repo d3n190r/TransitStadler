@@ -17,7 +17,8 @@ public class LineDao {
      * static class -> private constructor
      */
     private LineDao() {
-        // TODO: show error
+        // TODO: error
+        System.err.println("[LineDao.LineDao()] An instance of LineDao was created.");
     }
 
     /**
@@ -34,60 +35,94 @@ public class LineDao {
                 result.add(new Line(dbSet.getInt("lineId"), dbSet.getString("lineName"), dbSet.getInt("operatorName")));
             }
         } catch (SQLException e) {
-            // TODO: show error ≃ "Could not convert result from a query on the database."
+            // TODO: error
+            System.err.println("[LineDao.convertDbResultSetToObjectList()] Could not convert result from database.");
             return null;
         }
         return result;
     }
 
-    // TODO: documentation
+    /**
+     * Creates a new line in the database based on the given Line object.
+     * @param newLine The line that needs to be added to the database.
+     * @return Whether the insert was succesfull.
+     */
     public static boolean create(Line newLine) {
         Object[] parameterValues = new Object[] {lineTableName, newLine.lineName(), newLine.operatorId()};
-        return Database.executeAny("INSERT INTO ? (lineName, operatorName) VALUES ?", parameterValues);
+        if (Database.executeAny("INSERT INTO ? (lineName, operatorName) VALUES ?", parameterValues)) {
+            return true;
+        } else {
+            // TODO: error
+            System.err.println("[LineDao.create()] Could not create new line.");
+            return false;
+        }
     }
 
-    // TODO: documentation
+    /**
+     * Reads the information of the line with the given id from the database.
+     * @param lineId The id of the line to find the information.
+     * @return A Line object with the information on the requested line.
+     */
     public static Line read(int lineId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
         List<Line> result = convertDbResultSetToObjectList(resultRows);
         if (result == null) {
-            // TODO: show error ≃ "Could not find a line associated with lineId: {lineId}."
-            return null;
-        } else {
+            // TODO: error
+            System.err.println("[LineDao.read()] Could not find line in the database with id " + lineId);
+        } else if (result.size() != 1) {
+            // TODO: error
+            System.err.println("[LineDao.read()] Found multiple lines in the database with id " + lineId);
+        }else {
             return result.getFirst();
         }
+        return null;
     }
 
-    // TODO: documentation
+    /**
+     * Reads all the lines from the database and returns them in a list.
+     * @return A list with all the lines from the database.
+     */
     public static List<Line> readAll() {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM ?", new Object[] {lineTableName});
         return convertDbResultSetToObjectList(resultRows);
     }
 
-    // TODO: documentation
+    /**
+     * Updates the line with the same id as the given Line object to match the given Line object.
+     * @param updatedLine How the line should look like after the update.
+     * @return Whether the update was succesfull. This is also false if somehow multiple rows in the database were changed.
+     */
     public static boolean update(Line updatedLine) {
         Object[] parameterValues = new Object[] {lineTableName, updatedLine.lineName(), updatedLine.operatorId(), updatedLine.lineId()};
         int changes = Database.executeChange("UPDATE ? SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
         if (changes == 1) {
             return true;
         } else if (changes < 0) {
-            // TODO: show error ≃ Something went wrong
+            // TODO: error
+            System.err.println("[LineDao.update()] No changes were made in the database.");
         }else if (changes > 1) {
-            // TODO: show error ≃ "Something is wrong with lineId in the database"
+            // TODO: error
+            System.err.println("[LineDao.update()] Somehow multiple lines with the same id exist in the database.");
         }
         return false;
     }
 
-    // TODO: documentation
+    /**
+     * Deletes the line with the requested id from the database.
+     * @param lineId The id of the line to delete.
+     * @return Whether the update was succesfull. This is also false if somehow multiple rows in the database were changed.
+     */
     public static boolean delete(int lineId) {
         int changes = Database.executeChange("DELETE FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
         if (changes == 1) {
             return true;
-        } else if (changes == 0) {
-            return false;
+        } else if (changes < 0) {
+            // TODO: error
+            System.err.println("[LineDao.delete()] No changes were made in the database.");
         } else {
-            // TODO: show error ≃ "Something is wrong with lineId in the database"
-            return false;
+            // TODO: error
+            System.err.println("[LineDao.delete()] Somehow multiple lines with the same id exist in the database.");
         }
+        return false;
     }
 }
