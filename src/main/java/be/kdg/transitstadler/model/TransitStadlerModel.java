@@ -16,14 +16,14 @@ public class TransitStadlerModel {
      * Adds a new line to the database.
      * @param lineName The name of the new line.
      * @param operatorId The id associated with the operator of the new line.
+     * @return Whether the insertion was successful.
      */
-    public void addLine(String lineName, int operatorId) {
-        LineDao.create(new Line(-1, lineName, operatorId));
+    public boolean addLine(String lineName, int operatorId) {
+        return LineDao.create(new Line(-1, lineName, operatorId));
     }
 
     /**
      * Returns all the info in the database of a line based on the given id.
-     *
      * @param lineId The id of the line of interest.
      * @return A Line object with the information of the requested line.
      */
@@ -33,7 +33,6 @@ public class TransitStadlerModel {
 
     /**
      * Returns all the lines in the database.
-     *
      * @return List with all the lines from the database.
      */
     public List<Line> getAllLines() {
@@ -42,15 +41,13 @@ public class TransitStadlerModel {
 
     /**
      * Updates the information of an existing line in the database.
-     *
      * @param lineId The id of the line that should be changed.
      * @param newLineName The new name of the line.
+     * @return Whether the update was successful.
      */
     public boolean updateLine(int lineId, String newLineName) {
-        // TODO: update documentation
         Line oldLine = LineDao.read(lineId);
         if (oldLine == null) {
-            // TODO: show error ≃ "Could not update line with lineId: {lineId}. Does it exist in the database?"
             return false;
         }
         return updateLine(lineId, newLineName, oldLine.operatorId());
@@ -58,15 +55,13 @@ public class TransitStadlerModel {
 
     /**
      * Updates the information of an existing line in the database.
-     *
      * @param lineId The id of the line that should be changed.
      * @param newOperatorId The new operator associated with the line.
+     * @return Whether the update was successful.
      */
     public boolean updateLine(int lineId, int newOperatorId) {
-        // TODO: update documentation
         Line oldLine = LineDao.read(lineId);
         if (oldLine == null) {
-            // TODO: show error ≃ "Could not update line with lineId: {lineId}. Does it exist in the database?"
             return false;
         }
         return updateLine(lineId, oldLine.lineName(), newOperatorId);
@@ -74,39 +69,36 @@ public class TransitStadlerModel {
 
     /**
      * Updates the information of an existing line in the database.
-     *
      * @param lineId The id of the line that needs to be changed.
      * @param newLineName The new name of the line.
      * @param newOperatorId The new operator associated with the line.
+     * @return Whether the update was successful.
      */
     public boolean updateLine(int lineId, String newLineName, int newOperatorId) {
-        // TODO: update documentation
         return LineDao.update(new Line(lineId, newLineName, newOperatorId));
     }
 
     /**
      * Deletes the line from the database.
-     *
      * @param lineId The id of the line that needs to be deleted.
+     * @return Whether the deletion was successful.
      */
-    public void deleteLine(int lineId) {
-        // TODO: make boolean (+docuementation)
-        LineDao.delete(lineId);
+    public boolean deleteLine(int lineId) {
+        return LineDao.delete(lineId);
     }
 
 
     /**
      * Adds a new station to the database.
-     *
      * @param stationName The name of the new station.
+     * @return Whether the insertion was successful.
      */
-    public void addStation(String stationName) {
-        StationDao.create(new Station(-1, stationName));
+    public boolean addStation(String stationName) {
+        return StationDao.create(new Station(-1, stationName));
     }
 
     /**
      * Returns all the info in the database of a station based on the given id.
-     *
      * @param stationId The id of the station of interest.
      * @return A Station object with the information of the requested station.
      */
@@ -116,7 +108,6 @@ public class TransitStadlerModel {
 
     /**
      * Returns all the stations in the database.
-     *
      * @return List with all the stations from the database.
      */
     public List<Station> getAllStations() {
@@ -125,38 +116,35 @@ public class TransitStadlerModel {
 
     /**
      * Updates the information of an existing station in the database.
-     *
      * @param stationId The id of the station that needs to be changed.
      * @param newStationName The new name of the station.
+     * @return Whether the update was successful.
      */
-    public void updateStation(int stationId, String newStationName) {
-        // TODO: make boolean (+documentation)
-        StationDao.update(new Station(stationId, newStationName));
+    public boolean updateStation(int stationId, String newStationName) {
+        return StationDao.update(new Station(stationId, newStationName));
     }
 
     /**
      * Deletes the station from the database.
-     *
      * @param stationId The id of the station that needs to be deleted.
+     * @return Whether the deletion was successful.
      */
-    public void deleteStation(int stationId) {
-        // TODO: make boolean (+docuementation)
-        StationDao.delete(stationId);
+    public boolean deleteStation(int stationId) {
+        return StationDao.delete(stationId);
     }
 
 
     /**
      * Adds a new operator to the database.
-     *
      * @param operatorName The name of the new operator.
+     * @return Whether the insertion was successful.
      */
-    public void addOperator(String operatorName) {
-        OperatorDao.create(new Operator(-1, operatorName));
+    public boolean addOperator(String operatorName) {
+        return OperatorDao.create(new Operator(-1, operatorName));
     }
 
     /**
      * Returns all the info in the database of an operator based on the given id.
-     *
      * @param operatorId The id of the operator of interest.
      * @return A Operator object with the information of the requested operator.
      */
@@ -166,7 +154,6 @@ public class TransitStadlerModel {
 
     /**
      * Returns all the operators in the database.
-     *
      * @return List with all the operators from the database.
      */
     public List<Operator> getAllOperators() {
@@ -175,22 +162,20 @@ public class TransitStadlerModel {
 
     /**
      * Updates the information of an existing operator in the database.
-     *
      * @param operatorId The id of the operator that needs to be changed.
      * @param newOperatorName The new name of the operator.
+     * @return Whether the update was successful.
      */
-    public void updateOperator(int operatorId, String newOperatorName) {
-        // TODO: make boolean (+documentation)
-        OperatorDao.update(new Operator(operatorId, newOperatorName));
+    public boolean updateOperator(int operatorId, String newOperatorName) {
+        return OperatorDao.update(new Operator(operatorId, newOperatorName));
     }
 
     /**
-     * Deletes the station from the database.
-     *
+     * Deletes the operator from the database.
      * @param operatorId The id of the operator that needs to be deleted.
+     * @return Whether the deletion was successful.
      */
-    public void deleteOperator(int operatorId) {
-        // TODO: make boolean (+docuementation)
-        OperatorDao.delete(operatorId);
+    public boolean deleteOperator(int operatorId) {
+        return OperatorDao.delete(operatorId);
     }
 }
