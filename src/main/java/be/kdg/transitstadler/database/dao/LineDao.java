@@ -23,7 +23,7 @@ public class LineDao {
 
     /**
      * Helper method to convert the result from the database to businessobjects.
-     * @param dbSet The ResultSet to convert, the method will convert the full list.
+     * @param dbSet The ResultSet to convert, the method will convert the full set.
      * @return The ResultSet converted to a List.
      */
     private static List<Line> convertDbResultSetToObjectList(ResultSet dbSet) {
@@ -45,7 +45,7 @@ public class LineDao {
     /**
      * Creates a new line in the database based on the given Line object.
      * @param newLine The line that needs to be added to the database.
-     * @return Whether the insert was succesfull.
+     * @return Whether the insert was successful.
      */
     public static boolean create(Line newLine) {
         Object[] parameterValues = new Object[] {lineTableName, newLine.lineName(), newLine.operatorId()};
@@ -90,7 +90,7 @@ public class LineDao {
     /**
      * Updates the line with the same id as the given Line object to match the given Line object.
      * @param updatedLine How the line should look like after the update.
-     * @return Whether the update was succesfull. This is also false if somehow multiple rows in the database were changed.
+     * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean update(Line updatedLine) {
         Object[] parameterValues = new Object[] {lineTableName, updatedLine.lineName(), updatedLine.operatorId(), updatedLine.lineId()};
@@ -110,7 +110,7 @@ public class LineDao {
     /**
      * Deletes the line with the requested id from the database.
      * @param lineId The id of the line to delete.
-     * @return Whether the update was succesfull. This is also false if somehow multiple rows in the database were changed.
+     * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean delete(int lineId) {
         int changes = Database.executeChange("DELETE FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
