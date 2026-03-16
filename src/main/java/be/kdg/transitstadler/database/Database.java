@@ -1,36 +1,84 @@
 package be.kdg.transitstadler.database;
 
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetProvider;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author Igor Goossens (INF 101)
  */
 public class Database {
-    // TODO: attributes & constructor
-
-    // TODO: documentation
-    public static ResultSet executeQuery(String query) {return executeQuery(query, new Object[0]);}
-
-    // TODO: documentation
-    public static ResultSet executeQuery(String query, Object[] parameterValues) {
-        // TODO: implementation
-        return null;
+    /**
+     * static class -> private constructor
+     */
+    private Database() {
+        // TODO: show error ≃
+        //       DEVELOPER: "[yyyy/mm/dd hh:mm:ss - Database.Database()] An instance of Database was created"
+        //       NORMAL: "[mm/dd hh:mm] An instance of Database was created"
     }
 
-    // TODO: documentation
-    public static int executeChange(String query) {return executeChange(query, new Object[0]);}
+    /**
+     * Prepares an statement to be executed on the database.
+     * @param connection The connection with the database.
+     * @param query The query to prepare.
+     * @param parameterValues The values that need to be added to the query.
+     * @return The query in PreparedStatement form.
+     * @throws SQLException If the query is invalid, parameter binding fails or the connection with the database gets lost.
+     */
+    private static PreparedStatement prepareStatement(Connection connection, String query, Object[] parameterValues) throws SQLException {
+        PreparedStatement result = connection.prepareStatement(query);
+        for (int i = 0; i < parameterValues.length; i++) {
+            result.setObject(i, parameterValues[i]);
+        }
+        return result;
+    }
+
+    // TODO: Documentation
+    public static ResultSet executeQuery(String query, Object[] parameterValues) {
+        CachedRowSet cachedRowSet;
+        Connection connection = DatabaseConnector.getConnection();
+        PreparedStatement preparedStatement;
+
+        if (connection == null) {
+            return null;
+        }
+        try {
+            preparedStatement = prepareStatement(connection, query, parameterValues);
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+            cachedRowSet.populate(preparedStatement.executeQuery());
+
+        } catch (SQLException e) {
+            // TODO: show error ≃
+            //       DEVELOPER: "[yyyy/mm/dd hh:mm:ss - Database.executeQuery()] Could execute query"
+            //       NORMAL: "[mm/dd hh:mm] Could not execute query"
+            return null;
+        } finally {
+            DatabaseConnector.closeConnection();
+        }
+        return cachedRowSet;
+    }
 
     // TODO: documentation
     public static int executeChange(String query, Object[] parameterValues) {
-        // TODO: implementation
-        return 0;
+        Connection connection = DatabaseConnector.getConnection();
+        try {
+            return prepareStatement(connection, query, parameterValues).executeUpdate();
+        } catch (SQLException e) {
+            return -1;
+        }
     }
 
     // TODO: documentation
-    public static void executeAny(String query) {executeAny(query, new Object[0]);}
-
-    // TODO: documentation
-    public static void executeAny(String query, Object[] parameterValues) {
-        // TODO: implementation
+    public static boolean executeAny(String query, Object[] parameterValues) {
+        Connection connection = DatabaseConnector.getConnection();
+        try {
+            prepareStatement(connection, query, parameterValues).execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 }

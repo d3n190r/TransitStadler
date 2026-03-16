@@ -22,7 +22,6 @@ public class LineDao {
 
     /**
      * Helper method to convert the result from the database to businessobjects.
-     *
      * @param dbSet The ResultSet to convert, the method will convert the full list.
      * @return The ResultSet converted to a List.
      */
@@ -42,9 +41,9 @@ public class LineDao {
     }
 
     // TODO: documentation
-    public static void create(Line newLine) {
+    public static boolean create(Line newLine) {
         Object[] parameterValues = new Object[] {lineTableName, newLine.lineName(), newLine.operatorId()};
-        Database.executeAny("INSERT INTO ? (lineName, operatorName) VALUES ?", parameterValues);
+        return Database.executeAny("INSERT INTO ? (lineName, operatorName) VALUES ?", parameterValues);
     }
 
     // TODO: documentation
@@ -68,13 +67,27 @@ public class LineDao {
     // TODO: documentation
     public static boolean update(Line updatedLine) {
         Object[] parameterValues = new Object[] {lineTableName, updatedLine.lineName(), updatedLine.operatorId(), updatedLine.lineId()};
-        Database.executeAny("UPDATE ? SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
-        // TODO: implement true/false logic
-        return true;
+        int changes = Database.executeChange("UPDATE ? SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
+        if (changes == 1) {
+            return true;
+        } else if (changes < 0) {
+            // TODO: show error ≃ Something went wrong
+        }else if (changes > 1) {
+            // TODO: show error ≃ "Something is wrong with lineId in the database"
+        }
+        return false;
     }
 
     // TODO: documentation
-    public static void delete(int lineId) {
-        Database.executeAny("DELETE FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
+    public static boolean delete(int lineId) {
+        int changes = Database.executeChange("DELETE FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
+        if (changes == 1) {
+            return true;
+        } else if (changes == 0) {
+            return false;
+        } else {
+            // TODO: show error ≃ "Something is wrong with lineId in the database"
+            return false;
+        }
     }
 }

@@ -14,7 +14,6 @@ import java.util.List;
 public class TransitStadlerModel {
     /**
      * Adds a new line to the database.
-     *
      * @param lineName The name of the new line.
      * @param operatorId The id associated with the operator of the new line.
      */
@@ -91,6 +90,7 @@ public class TransitStadlerModel {
      * @param lineId The id of the line that needs to be deleted.
      */
     public void deleteLine(int lineId) {
+        // TODO: make boolean (+docuementation)
         LineDao.delete(lineId);
     }
 
@@ -140,6 +140,7 @@ public class TransitStadlerModel {
      * @param stationId The id of the station that needs to be deleted.
      */
     public void deleteStation(int stationId) {
+        // TODO: make boolean (+docuementation)
         StationDao.delete(stationId);
     }
 
@@ -189,6 +190,7 @@ public class TransitStadlerModel {
      * @param operatorId The id of the operator that needs to be deleted.
      */
     public void deleteOperator(int operatorId) {
+        // TODO: make boolean (+docuementation)
         OperatorDao.delete(operatorId);
     }
 }
