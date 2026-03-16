@@ -4,12 +4,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author Igor Goossens (INF 101)
+ */
 public class DatabaseConnector {
     private static Connection connection = null;
 
     private static String serverLocation = "jdbc:hsqldb:file:Database/TransitStadler";
     private static String username = "sa";
     private static String password = "";
+
+    /**
+     * static class -> private constructor
+     */
+    private DatabaseConnector() {
+        // TODO: error
+        System.err.println("[DatabaseConnector.DatabaseConnector()] An instance of DatabaseConnector was created.");
+    }
 
     /**
      * Establishes a connection with the database if none is present and returns it.
@@ -22,9 +33,8 @@ public class DatabaseConnector {
             }
             connection = DriverManager.getConnection(serverLocation, username, password);
         } catch (SQLException e) {
-            // TODO: show error ≃
-            //       DEVELOPER: "[yyyy/mm/dd hh:mm:ss - DatabaseConnector.getConnection()] Could not establish a connection with the Database"
-            //       NORMAL: "[mm/dd hh:mm] Could not establish a connection with the Database"
+            // TODO: error
+            System.err.println("[DatabaseConnector.getConnection()] An error occurred while trying to create the connection.");
             connection = null;
         }
         return connection;
@@ -41,9 +51,8 @@ public class DatabaseConnector {
                 connection.close();
             }
         } catch (SQLException e) {
-            // TODO: show error ≃
-            //       DEVELOPER: "[yyyy/mm/dd hh:mm:ss - DatabaseConnector.closeConnection()] Could not close the connection with the Database"
-            //       NORMAL: "[mm/dd hh:mm] Could not close the connection with the Database"
+            // TODO: error
+            System.err.println("[DatabaseConnector.closeConnection()] An error occurred while closing the connection.");
         }
         connection = null;
     }

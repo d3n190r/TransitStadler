@@ -15,9 +15,8 @@ public class Database {
      * static class -> private constructor
      */
     private Database() {
-        // TODO: show error ≃
-        //       DEVELOPER: "[yyyy/mm/dd hh:mm:ss - Database.Database()] An instance of Database was created"
-        //       NORMAL: "[mm/dd hh:mm] An instance of Database was created"
+        // TODO: error
+        System.err.println("[Database.Database()] An instance of Database was created.");
     }
 
     /**
@@ -56,9 +55,8 @@ public class Database {
             cachedRowSet.populate(preparedStatement.executeQuery());
 
         } catch (SQLException e) {
-            // TODO: show error ≃
-            //       DEVELOPER: "[yyyy/mm/dd hh:mm:ss - Database.executeQuery()] Could execute query"
-            //       NORMAL: "[mm/dd hh:mm] Could not execute query"
+            // TODO: error
+            System.err.println("[Database.executeQuery()] Could not execute query");
             return null;
         } finally {
             DatabaseConnector.closeConnection();
@@ -77,6 +75,8 @@ public class Database {
         try {
             return prepareStatement(connection, query, parameterValues).executeUpdate();
         } catch (SQLException e) {
+            // TODO: error
+            System.err.println("[Database.executeChange()] Could not execute query");
             return -1;
         }
     }
@@ -93,6 +93,8 @@ public class Database {
             prepareStatement(connection, query, parameterValues).execute();
             return true;
         } catch (SQLException e) {
+            // TODO: error
+            System.err.println("[Database.executeAny()] Could not execute query");
             return false;
         }
     }
