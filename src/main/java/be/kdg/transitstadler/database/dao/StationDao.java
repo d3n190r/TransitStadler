@@ -26,7 +26,7 @@ public class StationDao {
      * @param dbSet The ResultSet to convert, the method will convert the full set.
      * @return The ResultSet converted to a List.
      */
-    private static List<Station> convertDbResultToObjectList(ResultSet dbSet) {
+    private static List<Station> convertDbResultSetToObjectList(ResultSet dbSet) {
         if (dbSet == null) {return null;}
         ArrayList<Station> result = new ArrayList<>();
         try {
@@ -36,7 +36,7 @@ public class StationDao {
             }
         } catch (SQLException e) {
             // TODO: error
-            System.err.println("StationDao.convertDbResultToObjectList()] Could not convert result from database.");
+            System.err.println("StationDao.convertDbResultSetToObjectList()] Could not convert result from database.");
             return null;
         }
         return result;
@@ -65,7 +65,7 @@ public class StationDao {
      */
     public static Station read(int stationId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM " + stationTableName + " WHERE stationId = ?", new Object[] {stationId});
-        List<Station> result = convertDbResultToObjectList(resultRows);
+        List<Station> result = convertDbResultSetToObjectList(resultRows);
         if (result == null) {
             // TODO: error
             System.err.println("[stationDao.read()] Could not find station in the database width id " + stationId);
@@ -83,7 +83,7 @@ public class StationDao {
      */
     public static List<Station> readAll() {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM" + stationTableName);
-        return convertDbResultToObjectList(resultRows);
+        return convertDbResultSetToObjectList(resultRows);
     }
 
     /**
@@ -123,5 +123,11 @@ public class StationDao {
             System.err.println("[StationDao.delete()] Somehow multiple stations with the same id exist in the database.");
         }
         return false;
+    }
+
+    // TODO: documentation
+    public static List<Station> allStationsOnLine(int lineId) {
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + stationTableName + "WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.stationId = station.stationId AND stop.lineId = ?)", new Object[] {lineId});
+        return convertDbResultSetToObjectList(resultRows);
     }
 }

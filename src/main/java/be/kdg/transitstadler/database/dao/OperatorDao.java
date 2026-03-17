@@ -26,7 +26,7 @@ public class OperatorDao {
      * @param dbSet The Resultset to convert, the method will convert the full set.
      * @return The ResultSet converted to a List.
      */
-    private static List<Operator> convertDbResultToObjectList(ResultSet dbSet) {
+    private static List<Operator> convertDbResultSetToObjectList(ResultSet dbSet) {
         if (dbSet == null) {return null;}
         ArrayList<Operator> result = new ArrayList<>();
         try {
@@ -36,7 +36,7 @@ public class OperatorDao {
             }
         } catch (SQLException e) {
             // TODO: error
-            System.err.println("[OperatorDao.convertDbResultToObjectList()] Could not convert result from database.");
+            System.err.println("[OperatorDao.convertDbResultSetToObjectList()] Could not convert result from database.");
             return null;
         }
         return result;
@@ -65,7 +65,7 @@ public class OperatorDao {
      */
     public static Operator read(int operatorId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM " + operatorTableName + " WHERE operatorId = ?", new Object[] {operatorId});
-        List<Operator> result = convertDbResultToObjectList(resultRows);
+        List<Operator> result = convertDbResultSetToObjectList(resultRows);
         if (result == null) {
             // TODO: error
             System.err.println("[OperatorDao.read()] Could not find operator in the database width id " + operatorId);
@@ -83,7 +83,7 @@ public class OperatorDao {
      */
     public static List<Operator> readAll() {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM" + operatorTableName);
-        return convertDbResultToObjectList(resultRows);
+        return convertDbResultSetToObjectList(resultRows);
     }
 
     /**

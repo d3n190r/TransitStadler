@@ -124,4 +124,16 @@ public class LineDao {
         }
         return false;
     }
+
+    // TODO: documentation
+    public static List<Line> allLinesOfOperator(int operatorId) {
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + "WHERE operatorId = ?", new Object[] {operatorId});
+        return convertDbResultSetToObjectList(resultRows);
+    }
+
+    // TODO: documentation
+    public static List<Line> allLinesAtStation(int stationId) {
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + "WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
+        return convertDbResultSetToObjectList(resultRows);
+    }
 }
