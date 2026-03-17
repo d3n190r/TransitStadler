@@ -125,7 +125,11 @@ public class StationDao {
         return false;
     }
 
-    // TODO: documentation
+    /**
+     * Reads al the stations associated with the line with the given id.
+     * @param lineId The id of the line whose stations need to be searched.
+     * @return All the stations of the specified line.
+     */
     public static List<Station> allStationsOnLine(int lineId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM " + stationTableName + "WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.stationId = station.stationId AND stop.lineId = ?)", new Object[] {lineId});
         return convertDbResultSetToObjectList(resultRows);

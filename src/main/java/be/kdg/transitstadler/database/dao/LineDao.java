@@ -125,13 +125,21 @@ public class LineDao {
         return false;
     }
 
-    // TODO: documentation
+    /**
+     * Reads all the lines associated with the operator with the given id.
+     * @param operatorId The id of the operator whose lines need to be searched.
+     * @return All the lines of the specified operator.
+     */
     public static List<Line> allLinesOfOperator(int operatorId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + "WHERE operatorId = ?", new Object[] {operatorId});
         return convertDbResultSetToObjectList(resultRows);
     }
 
-    // TODO: documentation
+    /**
+     * Reads al the lines associated with the station with the given id.
+     * @param stationId The id of the station whose lines need to be searched.
+     * @return All the lines of the specified station.
+     */
     public static List<Line> allLinesAtStation(int stationId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + "WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
         return convertDbResultSetToObjectList(resultRows);
