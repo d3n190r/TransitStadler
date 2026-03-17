@@ -48,8 +48,8 @@ public class OperatorDao {
      * @return Whether the insert was successful.
      */
     public static boolean create(Operator newOperator) {
-        Object[] parameterValues = new Object[] {operatorTableName, newOperator.operatorName()};
-        if (Database.executeAny("INSERT INTO ? (operatorName) VALUES ?", parameterValues)) {
+        Object[] parameterValues = new Object[] {newOperator.operatorName()};
+        if (Database.executeAny("INSERT INTO " + operatorTableName + "(operatorName) VALUES (?)", parameterValues)) {
             return true;
         } else {
             // TODO: error
@@ -64,7 +64,7 @@ public class OperatorDao {
      * @return An Operator object with the information on the requested operator.
      */
     public static Operator read(int operatorId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM ? WHERE operatorId = ?", new Object[] {operatorTableName, operatorId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + operatorTableName + " WHERE operatorId = ?", new Object[] {operatorId});
         List<Operator> result = convertDbResultToObjectList(resultRows);
         if (result == null) {
             // TODO: error
@@ -82,7 +82,7 @@ public class OperatorDao {
      * @return A list with all the operators from the database.
      */
     public static List<Operator> readAll() {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM ?", new Object[] {operatorTableName});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM" + operatorTableName);
         return convertDbResultToObjectList(resultRows);
     }
 
@@ -92,8 +92,8 @@ public class OperatorDao {
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean update(Operator updatedOperator) {
-        Object[] parameterValues = new Object[] {operatorTableName, updatedOperator.operatorName(), updatedOperator.operatorId()};
-        int changes = Database.executeChange("UPDATE ? SET operatorName = ? WHERE operatorId = ?", parameterValues);
+        Object[] parameterValues = new Object[] {updatedOperator.operatorName(), updatedOperator.operatorId()};
+        int changes = Database.executeChange("UPDATE " + operatorTableName + " SET operatorName = ? WHERE operatorId = ?", parameterValues);
         if (changes == 1) {
             return true;
         } else if (changes < 1) {
@@ -112,7 +112,7 @@ public class OperatorDao {
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean delete(int operatorId) {
-        int changes = Database.executeChange("DELETE FROM ? WHERE operatorId = ?", new Object[] {operatorTableName, operatorId});
+        int changes = Database.executeChange("DELETE FROM " + operatorTableName + " WHERE operatorId = ?", new Object[] {operatorId});
         if (changes == 1) {
             return true;
         } else if (changes < 1) {

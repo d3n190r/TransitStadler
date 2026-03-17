@@ -48,8 +48,8 @@ public class LineDao {
      * @return Whether the insert was successful.
      */
     public static boolean create(Line newLine) {
-        Object[] parameterValues = new Object[] {lineTableName, newLine.lineName(), newLine.operatorId()};
-        if (Database.executeAny("INSERT INTO ? (lineName, operatorName) VALUES ?", parameterValues)) {
+        Object[] parameterValues = new Object[] {newLine.lineName(), newLine.operatorId()};
+        if (Database.executeAny("INSERT INTO " + lineTableName + " (lineName, operatorName) VALUES (?)", parameterValues)) {
             return true;
         } else {
             // TODO: error
@@ -64,7 +64,7 @@ public class LineDao {
      * @return A Line object with the information on the requested line.
      */
     public static Line read(int lineId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM" + lineTableName + "WHERE lineId = ?", new Object[] {lineId});
         List<Line> result = convertDbResultSetToObjectList(resultRows);
         if (result == null) {
             // TODO: error
@@ -82,7 +82,7 @@ public class LineDao {
      * @return A list with all the lines from the database.
      */
     public static List<Line> readAll() {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM ?", new Object[] {lineTableName});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName);
         return convertDbResultSetToObjectList(resultRows);
     }
 
@@ -92,8 +92,8 @@ public class LineDao {
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean update(Line updatedLine) {
-        Object[] parameterValues = new Object[] {lineTableName, updatedLine.lineName(), updatedLine.operatorId(), updatedLine.lineId()};
-        int changes = Database.executeChange("UPDATE ? SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
+        Object[] parameterValues = new Object[] {updatedLine.lineName(), updatedLine.operatorId(), updatedLine.lineId()};
+        int changes = Database.executeChange("UPDATE " + lineTableName + " SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
         if (changes == 1) {
             return true;
         } else if (changes < 1) {
@@ -112,7 +112,7 @@ public class LineDao {
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean delete(int lineId) {
-        int changes = Database.executeChange("DELETE FROM ? WHERE lineId = ?", new Object[] {lineTableName, lineId});
+        int changes = Database.executeChange("DELETE FROM " + lineTableName + " WHERE lineId = ?", new Object[] {lineId});
         if (changes == 1) {
             return true;
         } else if (changes < 1) {

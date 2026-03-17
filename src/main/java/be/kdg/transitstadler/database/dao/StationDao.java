@@ -48,8 +48,8 @@ public class StationDao {
      * @return Whether the insert was successful.
      */
     public static boolean create(Station newStation) {
-        Object[] parameterValues = new Object[] {stationTableName, newStation.stationName()};
-        if (Database.executeAny("INSERT INTO ? (stationName) VALUES ?", parameterValues)) {
+        Object[] parameterValues = new Object[] {newStation.stationName()};
+        if (Database.executeAny("INSERT INTO " + stationTableName + "(stationName) VALUES (?)", parameterValues)) {
             return true;
         } else {
             // TODO: error
@@ -64,7 +64,7 @@ public class StationDao {
      * @return An Station object with the information on the requested station.
      */
     public static Station read(int stationId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM ? WHERE stationId = ?", new Object[] {stationTableName, stationId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + stationTableName + " WHERE stationId = ?", new Object[] {stationId});
         List<Station> result = convertDbResultToObjectList(resultRows);
         if (result == null) {
             // TODO: error
@@ -82,7 +82,7 @@ public class StationDao {
      * @return A list with all the stations from the database.
      */
     public static List<Station> readAll() {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM ?", new Object[] {stationTableName});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM" + stationTableName);
         return convertDbResultToObjectList(resultRows);
     }
 
@@ -92,8 +92,8 @@ public class StationDao {
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean update(Station updatedStation) {
-        Object[] parameterValues = new Object[] {stationTableName, updatedStation.stationName(), updatedStation.stationId()};
-        int changes = Database.executeChange("UPDATE ? SET stationName = ? WHERE stationId = ?", parameterValues);
+        Object[] parameterValues = new Object[] {updatedStation.stationName(), updatedStation.stationId()};
+        int changes = Database.executeChange("UPDATE " + stationTableName + " SET stationName = ? WHERE stationId = ?", parameterValues);
         if (changes == 1) {
             return true;
         } else if (changes < 1) {
@@ -112,7 +112,7 @@ public class StationDao {
      * @return Whether the update was successful. This is also false if somehow multiple rows in the database were changed.
      */
     public static boolean delete(int stationId) {
-        int changes = Database.executeChange("DELETE FROM ? WHERE stationId = ?", new Object[] {stationTableName, stationId});
+        int changes = Database.executeChange("DELETE FROM " + stationTableName + " WHERE stationId = ?", new Object[] {stationId});
         if (changes == 1) {
             return true;
         } else if (changes < 1) {

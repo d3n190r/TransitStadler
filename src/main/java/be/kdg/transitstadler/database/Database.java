@@ -37,9 +37,18 @@ public class Database {
 
     /**
      * Executes a SELECT on the database.
+     * @param query A SELECT query for the database.
+     * @return A set with all the rows the query returned.
+     */
+    public static ResultSet executeQuery(String query) {
+        return executeQuery(query, new Object[0]);
+    }
+
+    /**
+     * Executes a SELECT on the database.
      * @param query A SELECT query for the database, with a questionmark at parameter places.
      * @param parameterValues The values that need to be filled in at the questionmarks.
-     * @return An set with all the rows the query returned.
+     * @return A set with all the rows the query returned.
      */
     public static ResultSet executeQuery(String query, Object[] parameterValues) {
         CachedRowSet cachedRowSet;
@@ -63,6 +72,15 @@ public class Database {
 
     /**
      * Executes a change query on the database (INSERT, UPDATE or DELETE).
+     * @param query A query of the right type.
+     * @return An int with how many rows were changed. If it is < 0 something went wrong and nothing changed.
+     */
+    public static int executeChange(String query) {
+        return executeChange(query, new Object[0]);
+    }
+
+    /**
+     * Executes a change query on the database (INSERT, UPDATE or DELETE).
      * @param query A query of the right type, with a questionmark at parameter places.
      * @param parameterValues The values that need to be filled in at the questionmarks.
      * @return An int with how many rows were changed. If it is < 0 something went wrong and nothing changed.
@@ -81,6 +99,15 @@ public class Database {
             DatabaseConnector.closeConnection();
         }
         return result;
+    }
+
+    /**
+     * Executes a query on the database.
+     * @param query The query to be executed.
+     * @return An boolean indicating if the query ran succesfully.
+     */
+    public static boolean executeAny(String query) {
+        return executeAny(query, new Object[0]);
     }
 
     /**
