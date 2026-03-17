@@ -178,4 +178,31 @@ public class TransitStadlerModel {
     public boolean deleteOperator(int operatorId) {
         return OperatorDao.delete(operatorId);
     }
+
+    /**
+     * Returns all the lines of a specified operator.
+     * @param operatorId The id of the operator to find the lines of.
+     * @return The lines of the specified operator.
+     */
+    public List<Line> getAllLinesByOperator(int operatorId) {
+        return LineDao.allLinesOfOperator(operatorId);
+    }
+
+    /**
+     * Returns all the lines of a specified station.
+     * @param stationId The id of the station to find the lines of.
+     * @return The lines of the specified station.
+     */
+    public List<Line> getAllLinesByStation(int stationId) {
+        return LineDao.allLinesAtStation(stationId);
+    }
+
+    /**
+     * Returns all the stations of a specified line.
+     * @param lineId The id of the line to find the stations of.
+     * @return The stations of the specified line.
+     */
+    public List<Station> getAllStationsByLine(int lineId) {
+        return StationDao.allStationsOnLine(lineId);
+    }
 }
