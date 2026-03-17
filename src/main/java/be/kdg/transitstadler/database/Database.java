@@ -46,9 +46,6 @@ public class Database {
         Connection connection = DatabaseConnector.getConnection();
         PreparedStatement preparedStatement;
 
-        if (connection == null) {
-            return null;
-        }
         try {
             preparedStatement = prepareStatement(connection, query, parameterValues);
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
@@ -72,13 +69,18 @@ public class Database {
      */
     public static int executeChange(String query, Object[] parameterValues) {
         Connection connection = DatabaseConnector.getConnection();
+        int result;
+
         try {
-            return prepareStatement(connection, query, parameterValues).executeUpdate();
+            result = prepareStatement(connection, query, parameterValues).executeUpdate();
         } catch (SQLException e) {
             // TODO: error
             System.err.println("[Database.executeChange()] Could not execute query");
             return -1;
+        }  finally {
+            DatabaseConnector.closeConnection();
         }
+        return result;
     }
 
     /**
@@ -89,13 +91,18 @@ public class Database {
      */
     public static boolean executeAny(String query, Object[] parameterValues) {
         Connection connection = DatabaseConnector.getConnection();
+        boolean result;
+
         try {
             prepareStatement(connection, query, parameterValues).execute();
-            return true;
+            result = true;
         } catch (SQLException e) {
             // TODO: error
             System.err.println("[Database.executeAny()] Could not execute query");
-            return false;
+            result = false;
+        } finally {
+            DatabaseConnector.closeConnection();
         }
+        return result;
     }
 }
