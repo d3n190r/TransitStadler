@@ -19,9 +19,9 @@ public class DatabaseBuilder {
         Database.executeAny("DROP SCHEMA IF EXISTS public CASCADE", new Object[0]);
         Database.executeAny("CREATE SCHEMA public", new Object[0]);
 
-        Database.executeAny("CREATE TABLE Operator (OperatorName varchar(255) PRIMARY KEY)", new Object[0]);
-        Database.executeAny("CREATE TABLE Station (StationName varchar(255) PRIMARY KEY)", new Object[0]);
-        Database.executeAny("CREATE TABLE Line (LineName varchar(255), OperatorName varchar(255), PRIMARY KEY (LineName, OperatorName), FOREIGN KEY (OperatorName) REFERENCES Operator(OperatorName))", new Object[0]);
-        Database.executeAny("CREATE TABLE Stop (StationName varchar(255), LineName varchar(255), OperatorName varchar(255), StopSequence int NOT NULL, PRIMARY KEY(StationName, LineName, OperatorName), FOREIGN KEY (StationName) REFERENCES Station(StationName), FOREIGN KEY (LineName, OperatorName) REFERENCES Line(LineName, OperatorName), UNIQUE (LineName, StopSequence))", new Object[0]);
+        Database.executeAny("CREATE TABLE IF NOT EXISTS Operator (OperatorId INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, OperatorName VARCHAR(255) UNIQUE NOT NULL);", new Object[0]);
+        Database.executeAny("CREATE TABLE IF NOT EXISTS Station (StationId INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, StationName VARCHAR(255) UNIQUE NOT NULL);", new Object[0]);
+        Database.executeAny("CREATE TABLE IF NOT EXISTS Line (LineId INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, LineName VARCHAR(255) NOT NULL, OperatorId INTEGER REFERENCES Operator(OperatorId) NOT NULL, UNIQUE(LineName, OperatorId));", new Object[0]);
+        Database.executeAny("CREATE TABLE IF NOT EXISTS Stop (LineId INTEGER REFERENCES Line(LineId), StationId INTEGER REFERENCES Station(StationId), StopSequence int NOT NULL, PRIMARY KEY(LineId, StationId), FOREIGN KEY (StationId) REFERENCES Station(StationId), FOREIGN KEY (LineId) REFERENCES Line(LineId), UNIQUE (LineId, StopSequence));", new Object[0]);
     }
 }
