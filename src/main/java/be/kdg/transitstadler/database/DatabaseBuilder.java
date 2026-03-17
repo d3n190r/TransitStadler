@@ -1,7 +1,5 @@
 package be.kdg.transitstadler.database;
 
-import java.sql.SQLException;
-
 /**
  * @author Igor Goossens (INF 101)
  */
