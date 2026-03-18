@@ -1,5 +1,6 @@
 package be.kdg.transitstadler.view.overview;
 
+import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -82,9 +83,9 @@ public class OverviewView extends BorderPane {
      */
     private void setNodeMarkup() {
         // Set visual space between Nodes //
-        //NodeHelpers.applyMarginsToChildren(this, 10);
-        //NodeHelpers.applyMarginsToChildren(hbMain, 10);
-        //NodeHelpers.applyMarginsToChildren(hbEditButtons, 5);
+        LayoutUtils.applyMarginsToChildren(this, 10);
+        LayoutUtils.applyMarginsToChildren(hbMain, 10);
+        LayoutUtils.applyMarginsToChildren(hbEditButtons, 5);
 
         // Some improvements to the Lines (right) part of the screen //
         vbLinesAndButtons.setAlignment(Pos.TOP_CENTER);
