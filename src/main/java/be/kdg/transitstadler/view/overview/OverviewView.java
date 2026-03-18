@@ -30,9 +30,6 @@ public class OverviewView extends BorderPane {
 
     private VBox vbLinesAndButtons;
 
-    /**
-     * Creates a new overviewView.
-     */
     public OverviewView() {
         this.initialiseNodes();
         this.layoutNodes();
