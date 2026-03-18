@@ -82,7 +82,7 @@ public class OperatorDao {
      * @return A list with all the operators from the database.
      */
     public static List<Operator> readAll() {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM" + operatorTableName);
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + operatorTableName);
         return convertDbResultSetToObjectList(resultRows);
     }
 

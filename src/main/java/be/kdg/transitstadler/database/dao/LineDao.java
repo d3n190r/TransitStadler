@@ -49,7 +49,7 @@ public class LineDao {
      */
     public static boolean create(Line newLine) {
         Object[] parameterValues = new Object[] {newLine.lineName(), newLine.operatorId()};
-        if (Database.executeAny("INSERT INTO " + lineTableName + " (lineName, operatorName) VALUES (?)", parameterValues)) {
+        if (Database.executeAny("INSERT INTO " + lineTableName + "(lineName, operatorName) VALUES (?)", parameterValues)) {
             return true;
         } else {
             // TODO: error
@@ -64,7 +64,7 @@ public class LineDao {
      * @return A Line object with the information on the requested line.
      */
     public static Line read(int lineId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM" + lineTableName + "WHERE lineId = ?", new Object[] {lineId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + " WHERE lineId = ?", new Object[] {lineId});
         List<Line> result = convertDbResultSetToObjectList(resultRows);
         if (result == null) {
             // TODO: error
@@ -131,7 +131,7 @@ public class LineDao {
      * @return All the lines of the specified operator.
      */
     public static List<Line> allLinesOfOperator(int operatorId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + "WHERE operatorId = ?", new Object[] {operatorId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + " WHERE operatorId = ?", new Object[] {operatorId});
         return convertDbResultSetToObjectList(resultRows);
     }
 
@@ -141,7 +141,7 @@ public class LineDao {
      * @return All the lines of the specified station.
      */
     public static List<Line> allLinesAtStation(int stationId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + "WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + " WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
         return convertDbResultSetToObjectList(resultRows);
     }
 }

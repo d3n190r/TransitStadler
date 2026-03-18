@@ -30,7 +30,7 @@ public class Database {
     private static PreparedStatement prepareStatement(Connection connection, String query, Object[] parameterValues) throws SQLException {
         PreparedStatement result = connection.prepareStatement(query);
         for (int i = 0; i < parameterValues.length; i++) {
-            result.setObject(i, parameterValues[i]);
+            result.setObject(i+1, parameterValues[i]);
         }
         return result;
     }

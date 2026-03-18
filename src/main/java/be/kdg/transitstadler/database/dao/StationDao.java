@@ -82,7 +82,7 @@ public class StationDao {
      * @return A list with all the stations from the database.
      */
     public static List<Station> readAll() {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM" + stationTableName);
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + stationTableName);
         return convertDbResultSetToObjectList(resultRows);
     }
 
