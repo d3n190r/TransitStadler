@@ -3,6 +3,14 @@ package be.kdg.transitstadler.view.overview;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.edit.EditPresenter;
+import be.kdg.transitstadler.view.edit.EditTypes;
+import be.kdg.transitstadler.view.edit.EditView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * @author Igor Goossens (INF 101)
@@ -25,7 +33,28 @@ public class OverviewPresenter {
     /**
      * Adds all the eventhandlers for the controls in the view.
      */
-    private void addEventHandlers() {}
+    private void addEventHandlers() {
+        this.view.getBtnEditStation().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                openEditWindow(EditTypes.STATION);
+            }
+        });
+
+        this.view.getBtnEditLine().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                openEditWindow(EditTypes.LINE);
+            }
+        });
+
+        this.view.getBtnEditBoth().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                openEditWindow(EditTypes.STOP);
+            }
+        });
+    }
 
     /**
      * Puts the data from the model in the view.
@@ -41,9 +70,9 @@ public class OverviewPresenter {
         }
     }
 
-    /* *
+    /**
      * Helper function to open the editWindow.
-     *
+     */
     private void openEditWindow(EditTypes editType) {
         EditView editView = new EditView(editType);
         new EditPresenter(model, editView);
@@ -53,5 +82,5 @@ public class OverviewPresenter {
         editStage.setScene(new Scene(editView));
         editStage.setMinWidth(500);
         editStage.showAndWait();
-    }*/
+    }
 }

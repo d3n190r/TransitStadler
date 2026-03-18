@@ -99,4 +99,10 @@ public class OverviewView extends BorderPane {
     public ListView<String> getLvStationList() {
         return lvStationList;
     }
+
+    public Button getBtnEditStation() {return btnEditStation;}
+
+    public Button getBtnEditLine() {return btnEditLine;}
+
+    public Button getBtnEditBoth() {return btnEditBoth;}
 }
