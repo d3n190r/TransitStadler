@@ -32,7 +32,7 @@ public class LineDao {
         try {
             dbSet.beforeFirst();
             while (dbSet.next()) {
-                result.add(new Line(dbSet.getInt("lineId"), dbSet.getString("lineName"), dbSet.getInt("operatorName")));
+                result.add(new Line(dbSet.getInt("lineId"), dbSet.getString("lineName"), dbSet.getInt("operatorId")));
             }
         } catch (SQLException e) {
             // TODO: error
@@ -49,7 +49,7 @@ public class LineDao {
      */
     public static boolean create(Line newLine) {
         Object[] parameterValues = new Object[] {newLine.lineName(), newLine.operatorId()};
-        if (Database.executeAny("INSERT INTO " + lineTableName + "(lineName, operatorName) VALUES (?)", parameterValues)) {
+        if (Database.executeAny("INSERT INTO " + lineTableName + "(lineName, operatorId) VALUES (?, ?)", parameterValues)) {
             return true;
         } else {
             // TODO: error

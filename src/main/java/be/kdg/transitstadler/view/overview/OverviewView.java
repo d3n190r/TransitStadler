@@ -92,4 +92,14 @@ public class OverviewView extends BorderPane {
         lblLines.setStyle("-fx-font-weight: bold");
         lblLines.setPadding(new Insets(0, 0, 5, 0));
     }
+
+    // TODO: Documentation
+    public ListView<String> getLvLinesList() {
+        return lvLinesList;
+    }
+
+    // TODO: Documentation
+    public ListView<String> getLvStationList() {
+        return lvStationList;
+    }
 }

@@ -18,7 +18,7 @@ public class LayoutUtils {
      */
 
     /**
-     * Sets a given margin to all the elements currently in the container.
+     * Sets a given margin to all the elements currently in the hbox.
      * @param hBox The hbox whose elements should have the margin.
      * @param margin The amount of margin to set.
      */
@@ -29,7 +29,7 @@ public class LayoutUtils {
     }
 
     /**
-     * Sets a given margin to all the elements currently in the container.
+     * Sets a given margin to all the elements currently in the vbox.
      * @param vBox The vbox whose elements should have the margin.
      * @param margin The amount of margin to set.
      */
@@ -40,7 +40,7 @@ public class LayoutUtils {
     }
 
     /**
-     * Sets a given margin to all the elements currently in the container.
+     * Sets a given margin to all the elements currently in the borderpane.
      * @param borderPane The borderpane whose elements should have the margin.
      * @param margin The amount of margin to set.
      */
