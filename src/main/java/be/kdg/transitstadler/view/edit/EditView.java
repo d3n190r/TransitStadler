@@ -1,4 +1,4 @@
 package be.kdg.transitstadler.view.edit;
 
-public class editView {
+public class EditView {
 }
