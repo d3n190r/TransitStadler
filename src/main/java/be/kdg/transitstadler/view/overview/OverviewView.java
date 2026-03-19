@@ -121,7 +121,7 @@ public class OverviewView extends BorderPane {
         hbFooter.setAlignment(Pos.CENTER);
 
         vbStations.setAlignment(Pos.CENTER);
-        vbLineInfo.setAlignment(Pos.CENTER);
+        vbLineInfo.setAlignment(Pos.TOP_CENTER);
 
         // Some improvements to the Lines (right) part of the screen //
         lblLines.setStyle("-fx-font-weight: bold");
