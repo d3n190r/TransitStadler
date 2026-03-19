@@ -56,12 +56,10 @@ public class OverviewView extends BorderPane {
     private void initialiseNodes() {
         // ListView //
         lvLinesList = new ListView<>();
-        lvLinesList.getSelectionModel().select(0);
         lvLinesList.setCellFactory(new LineCellFactory());
 
 
         lvStationList = new ListView<>();
-        lvStationList.getSelectionModel().select(0);
         lvStationList.setCellFactory(new StationCellFactory());
 
         // Label //
@@ -133,6 +131,8 @@ public class OverviewView extends BorderPane {
         tfLineId.setDisable(true);
         tfOperatorName.setDisable(true);
 
+        btnEditLine.setDisable(true);
+        btnEditOperator.setDisable(true);
         btnEditStation.setDisable(true);
     }
 

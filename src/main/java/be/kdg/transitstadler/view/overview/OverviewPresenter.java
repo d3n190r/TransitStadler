@@ -33,6 +33,7 @@ public class OverviewPresenter {
      * Adds all the eventhandlers for the controls in the view.
      */
     private void addEventHandlers() {
+        // When a new lines gets selected
         this.view.getLvLinesList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Line>() {
             @Override
             public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
@@ -46,10 +47,13 @@ public class OverviewPresenter {
                     view.getTfLineId().setText(String.valueOf(newValue.lineId()));
                     view.getTfOperatorName().setText(model.getOperatorInfo(newValue.operatorId()).operatorName());
                 }
+                view.getBtnEditLine().setDisable(false);
+                view.getBtnEditOperator().setDisable(false);
                 view.getBtnEditStation().setDisable(true);
             }
         });
 
+        // When a new station gets selected
         this.view.getLvStationList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Station>() {
             @Override
             public void changed(ObservableValue<? extends Station> observableValue, Station station, Station t1) {
@@ -72,5 +76,7 @@ public class OverviewPresenter {
         for (Line currentLine: model.getAllLines()) {
             view.getLvLinesList().getItems().add(currentLine);
         }
+
+        view.getLvLinesList().getSelectionModel().select(0);
     }
 }
