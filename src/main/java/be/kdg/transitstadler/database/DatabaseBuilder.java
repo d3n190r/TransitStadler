@@ -42,6 +42,7 @@ public class DatabaseBuilder {
             success &= Database.executeAny("INSERT INTO line (lineName, operatorId) VALUES ('M6', 1)");
             success &= Database.executeAny("INSERT INTO line (lineName, operatorId) VALUES ('T44', 1)");
             success &= Database.executeAny("INSERT INTO line (lineName, operatorId) VALUES ('T89', 1)");
+            success &= Database.executeAny("INSERT INTO line (lineName, operatorId) VALUES ('S1', 0)");
 
             success &= Database.executeAny("INSERT INTO station (stationName) VALUES ('Delacroix')");
             success &= Database.executeAny("INSERT INTO station (stationName) VALUES ('Gare du Midi')");
@@ -51,6 +52,7 @@ public class DatabaseBuilder {
             success &= Database.executeAny("INSERT INTO stop (lineId, stationId, stopSequence) VALUES (0, 0, 2)");
             success &= Database.executeAny("INSERT INTO stop (lineId, stationId, stopSequence) VALUES (1, 1, 1)");
             success &= Database.executeAny("INSERT INTO stop (lineId, stationId, stopSequence) VALUES (3, 2, 1)");
+            success &= Database.executeAny("INSERT INTO stop (lineId, stationId, stopSequence) VALUES (4, 1, 3)");
         }
 
         return success;
