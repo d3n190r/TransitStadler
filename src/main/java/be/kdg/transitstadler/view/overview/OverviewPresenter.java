@@ -3,6 +3,10 @@ package be.kdg.transitstadler.view.overview;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+import java.util.List;
 
 /**
  * @author Igor Goossens (INF 101)
@@ -28,7 +32,33 @@ public class OverviewPresenter {
     /**
      * Adds all the eventhandlers for the controls in the view.
      */
-    private void addEventHandlers() {}
+    private void addEventHandlers() {
+        this.view.getLvLinesList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Line>() {
+            @Override
+            public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
+                List<Station> stationList = view.getLvStationList().getItems();
+                stationList.clear();
+                List<Station> newStationList = model.getAllStationsByLine(newValue.lineId());
+                if (newStationList != null) {
+                    for (Station currentStation : newStationList) {
+                        view.getLvStationList().getItems().add(currentStation);
+                    }
+                    view.getTfLineId().setText(String.valueOf(newValue.lineId()));
+                    view.getTfOperatorName().setText(model.getOperatorInfo(newValue.operatorId()).operatorName());
+                }
+                view.getBtnEditStation().setDisable(true);
+            }
+        });
+
+        this.view.getLvStationList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Station>() {
+            @Override
+            public void changed(ObservableValue<? extends Station> observableValue, Station station, Station t1) {
+                if (view.getBtnEditStation().isDisabled()) {
+                    view.getBtnEditStation().setDisable(false);
+                }
+            }
+        });
+    }
 
     /**
      * Puts the data from the model in the view.

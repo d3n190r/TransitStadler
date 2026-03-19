@@ -129,6 +129,11 @@ public class OverviewView extends BorderPane {
 
         lvLinesList.setOrientation(Orientation.HORIZONTAL);
         lvLinesList.setMaxHeight(30);
+
+        tfLineId.setDisable(true);
+        tfOperatorName.setDisable(true);
+
+        btnEditStation.setDisable(true);
     }
 
     // TODO: Documentation
@@ -146,4 +151,8 @@ public class OverviewView extends BorderPane {
     public Button getBtnEditLine() {return btnEditLine;}
 
     public Button getBtnEditOperator() {return btnEditOperator;}
+
+    public TextField getTfLineId() {return tfLineId;}
+
+    public TextField getTfOperatorName() {return tfOperatorName;}
 }
