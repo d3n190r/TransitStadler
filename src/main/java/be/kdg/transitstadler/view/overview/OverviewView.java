@@ -1,11 +1,17 @@
 package be.kdg.transitstadler.view.overview;
 
+import be.kdg.transitstadler.model.businessobject.Line;
+import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.LineCellFactory;
+import be.kdg.transitstadler.view.StationCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,20 +21,28 @@ import javafx.scene.layout.VBox;
  */
 public class OverviewView extends BorderPane {
     // private Node attributes (javafx.scene.control)
-    private ListView<String> lvStationList;
-    private ListView<String> lvLinesList;
+    private ListView<Line> lvLinesList;
+    private ListView<Station> lvStationList;
 
     private Label lblLines;
+    private Label lblStations;
+    private Label lblOperator;
+    private Label lblId;
 
-    private Button btnEditStation;
     private Button btnEditLine;
-    private Button btnEditBoth;
+    private Button btnEditStation;
+    private Button btnEditOperator;
+
+    private TextField tfLineId;
+    private TextField tfOperatorName;
 
     // private Node attributes (javafx.scene.layout)
-    private HBox hbMain;
-    private HBox hbEditButtons;
+    private HBox hbHeader;
+    private HBox hbCenter;
+    private HBox hbFooter;
 
-    private VBox vbLinesAndButtons;
+    private VBox vbStations;
+    private VBox vbLineInfo;
 
     public OverviewView() {
         this.initialiseNodes();
@@ -41,17 +55,29 @@ public class OverviewView extends BorderPane {
      */
     private void initialiseNodes() {
         // ListView //
-        lvStationList = new ListView<>();
-
         lvLinesList = new ListView<>();
+        lvLinesList.getSelectionModel().select(0);
+        lvLinesList.setCellFactory(new LineCellFactory());
+
+
+        lvStationList = new ListView<>();
+        lvStationList.getSelectionModel().select(0);
+        lvStationList.setCellFactory(new StationCellFactory());
 
         // Label //
         lblLines = new Label("Lines:");
+        lblStations = new Label("Stations:");
+        lblOperator = new Label("Operator:");
+        lblId = new Label("Id:");
 
         // Button //
         btnEditStation = new Button("Edit Station");
         btnEditLine = new Button("Edit Line");
-        btnEditBoth = new Button("Edit Both");
+        btnEditOperator = new Button("Edit Operator");
+
+        // TextField //
+        tfLineId = new TextField();
+        tfOperatorName = new TextField();
     }
 
     /**
@@ -59,20 +85,24 @@ public class OverviewView extends BorderPane {
      */
     private void layoutNodes() {
         // Panes //
-        hbMain = new HBox();
+        hbHeader = new HBox();
+        hbCenter = new HBox();
+        hbFooter = new HBox();
 
-        vbLinesAndButtons = new VBox();
-        hbEditButtons = new HBox();
+        vbLineInfo = new VBox();
+        vbStations = new VBox();
 
         // Add to Panes //
-        hbEditButtons.getChildren().addAll(btnEditStation, btnEditLine, btnEditBoth);
+        hbHeader.getChildren().addAll(lblLines, lvLinesList);
+        hbCenter.getChildren().addAll(vbStations, vbLineInfo);
+        hbFooter.getChildren().addAll(btnEditLine, btnEditStation, btnEditOperator);
 
-        vbLinesAndButtons.getChildren().addAll(lblLines, lvLinesList, hbEditButtons);
+        vbStations.getChildren().addAll(lblStations, lvStationList);
+        vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, tfOperatorName);
 
-        hbMain.getChildren().add(lvStationList);
-        hbMain.getChildren().add(vbLinesAndButtons);
-
-        this.setCenter(hbMain);
+        this.setTop(hbHeader);
+        this.setCenter(hbCenter);
+        this.setBottom(hbFooter);
     }
 
     /**
@@ -80,23 +110,34 @@ public class OverviewView extends BorderPane {
      */
     private void setNodeMarkup() {
         // Set visual space between Nodes //
-        LayoutUtils.applyMarginsToChildren(this, 10);
-        LayoutUtils.applyMarginsToChildren(hbMain, 10);
-        LayoutUtils.applyMarginsToChildren(hbEditButtons, 5);
+        LayoutUtils.applyMarginsToChildren(this, 5);
+        LayoutUtils.applyMarginsToChildren(hbHeader, 5);
+        LayoutUtils.applyMarginsToChildren(hbCenter, 5);
+        LayoutUtils.applyMarginsToChildren(hbFooter, 5);
+
+        // Location of Nodes //
+        hbHeader.setAlignment(Pos.CENTER);
+        hbCenter.setAlignment(Pos.CENTER);
+        hbFooter.setAlignment(Pos.CENTER);
+
+        vbStations.setAlignment(Pos.CENTER);
+        vbLineInfo.setAlignment(Pos.CENTER);
 
         // Some improvements to the Lines (right) part of the screen //
-        vbLinesAndButtons.setAlignment(Pos.TOP_CENTER);
         lblLines.setStyle("-fx-font-weight: bold");
         lblLines.setPadding(new Insets(0, 0, 5, 0));
+
+        lvLinesList.setOrientation(Orientation.HORIZONTAL);
+        lvLinesList.setMaxHeight(30);
     }
 
     // TODO: Documentation
-    public ListView<String> getLvLinesList() {
+    public ListView<Line> getLvLinesList() {
         return lvLinesList;
     }
 
     // TODO: Documentation
-    public ListView<String> getLvStationList() {
+    public ListView<Station> getLvStationList() {
         return lvStationList;
     }
 
@@ -104,5 +145,5 @@ public class OverviewView extends BorderPane {
 
     public Button getBtnEditLine() {return btnEditLine;}
 
-    public Button getBtnEditBoth() {return btnEditBoth;}
+    public Button getBtnEditOperator() {return btnEditOperator;}
 }
