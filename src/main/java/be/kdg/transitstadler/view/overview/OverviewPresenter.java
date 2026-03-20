@@ -79,7 +79,7 @@ public class OverviewPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditLineView editLineView = new EditLineView();
-                new EditLinePresenter(model, editLineView);
+                new EditLinePresenter(model, editLineView, view.getLvLinesList().getSelectionModel().getSelectedItem());
                 Stage editLineStage = new Stage();
                 editLineStage.setTitle("Edit Line");
                 editLineStage.initOwner(view.getScene().getWindow());
