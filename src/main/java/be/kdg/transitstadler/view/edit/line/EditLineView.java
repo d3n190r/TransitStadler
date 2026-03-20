@@ -29,7 +29,9 @@ public class EditLineView extends BorderPane {
 
     private ListView<Station> lvStationList;
 
+    private Button btnCancel;
     private Button btnSave;
+    private Button btnDelete;
 
     private VBox vbCenter;
 
@@ -37,6 +39,7 @@ public class EditLineView extends BorderPane {
     private HBox hbName;
     private HBox hbOperatorId;
     private HBox hbOperatorName;
+    private HBox hbButtons;
 
     public EditLineView() {
         this.initialiseNodes();
@@ -62,24 +65,20 @@ public class EditLineView extends BorderPane {
         lvStationList = new ListView<>();
         lvStationList.setCellFactory(new StationCellFactory());
 
+        btnCancel = new Button("Cancel");
         btnSave = new Button("Save");
+        btnDelete = new Button("Delete");
     }
 
     private void layoutNodes() {
-        hbId = new HBox();
-        hbId.getChildren().addAll(lblLineId, tfLineId);
-
-        hbName = new HBox();
-        hbName.getChildren().addAll(lblLineName, tfLineName);
-
-        hbOperatorId = new HBox();
-        hbOperatorId.getChildren().addAll(lblOperatorId, tfOperatorId);
-
-        hbOperatorName = new HBox();
-        hbOperatorName.getChildren().addAll(lblOperatorName, mbOperatorName);
+        hbId = new HBox(lblLineId, tfLineId);
+        hbName = new HBox(lblLineName, tfLineName);
+        hbOperatorId = new HBox(lblOperatorId, tfOperatorId);
+        hbOperatorName = new HBox(lblOperatorName, mbOperatorName);
+        hbButtons = new HBox(btnCancel, btnSave, btnDelete);
 
         vbCenter = new VBox();
-        vbCenter.getChildren().addAll(hbId, hbName, hbOperatorId, hbOperatorName, lblStops, lvStationList, btnSave);
+        vbCenter.getChildren().addAll(hbId, hbName, hbOperatorId, hbOperatorName, lblStops, lvStationList, hbButtons);
 
         this.setCenter(vbCenter);
     }
@@ -96,6 +95,8 @@ public class EditLineView extends BorderPane {
 
         LayoutUtils.applyMarginsToChildren(hbOperatorName, 2);
         hbOperatorName.setAlignment(Pos.CENTER);
+
+        LayoutUtils.applyMarginsToChildren(hbButtons, 7);
 
         LayoutUtils.applyMarginsToChildren(vbCenter, 5);
         LayoutUtils.applyMarginsToChildren(this, 5);
@@ -116,6 +117,10 @@ public class EditLineView extends BorderPane {
     public Button getBtnSave() {
         return btnSave;
     }
+
+    public Button getBtnCancel() {return btnCancel;}
+
+    public Button getBtnDelete() {return btnDelete;}
 
     public MenuButton getMbOperatorName() {
         return mbOperatorName;

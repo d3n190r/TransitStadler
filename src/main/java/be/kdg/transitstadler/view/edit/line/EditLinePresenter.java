@@ -7,7 +7,11 @@ import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
+
+import java.util.function.Consumer;
 
 public class EditLinePresenter {
     private final TransitStadlerModel model;
@@ -28,6 +32,31 @@ public class EditLinePresenter {
             public void handle(ActionEvent actionEvent) {
                 model.updateLine(line.lineId(), view.getTfLineName().getText(), Integer.parseInt(view.getTfOperatorId().getText()));
                 view.getScene().getWindow().hide();
+            }
+        });
+
+        this.view.getBtnCancel().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                view.getScene().getWindow().hide();
+            }
+        });
+
+        this.view.getBtnDelete().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Delete line");
+                alert.setHeaderText("Do you really want to delte " + line.lineName()  + "?");
+                alert.showAndWait().ifPresent(new Consumer<ButtonType>() {
+                    @Override
+                    public void accept(ButtonType buttonType) {
+                        if (buttonType == ButtonType.OK) {
+                            model.deleteLine(line.lineId());
+                            view.getScene().getWindow().hide();
+                        }
+                    }
+                });
             }
         });
     }
