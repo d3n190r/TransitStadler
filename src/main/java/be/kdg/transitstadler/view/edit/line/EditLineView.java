@@ -43,7 +43,7 @@ public class EditLineView extends VBox {
 
         mbOperatorName = new MenuButton();
 
-        lvStationList = new ListView<Station>();
+        lvStationList = new ListView<>();
         lvStationList.setCellFactory(new StationCellFactory());
 
         btnSave = new Button("Save");

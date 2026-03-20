@@ -11,26 +11,19 @@ import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Igor Goossens (INF 101)
  */
 public class OverviewPresenter {
-    private TransitStadlerModel model;
-    private OverviewView view;
-
-    String currentLine = null;
-    String currentStation = null;
+    private final TransitStadlerModel model;
+    private final OverviewView view;
 
     /**
      * @param model The model that handles the data.
@@ -48,7 +41,7 @@ public class OverviewPresenter {
      */
     private void addEventHandlers() {
         // When a new lines gets selected
-        this.view.getLvLinesList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Line>() {
+        this.view.getLvLinesList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
                 if (newValue == null) {
@@ -74,7 +67,7 @@ public class OverviewPresenter {
         });
 
         // When a new station gets selected
-        this.view.getLvStationList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Station>() {
+        this.view.getLvStationList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Station> observableValue, Station station, Station t1) {
                 if (view.getBtnEditStation().isDisabled()) {
@@ -84,7 +77,7 @@ public class OverviewPresenter {
         });
 
         // When editLine gets clicked
-        this.view.getBtnEditLine().setOnAction(new EventHandler<ActionEvent>() {
+        this.view.getBtnEditLine().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditLineView editLineView = new EditLineView();
@@ -100,7 +93,7 @@ public class OverviewPresenter {
         });
 
         // When editOperator gets clicked
-        this.view.getBtnEditOperator().setOnAction(new EventHandler<ActionEvent>() {
+        this.view.getBtnEditOperator().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditOperatorView editOperatorView = new EditOperatorView();
@@ -116,7 +109,7 @@ public class OverviewPresenter {
         });
 
         // When editStation gets clicked
-        this.view.getBtnEditStation().setOnAction(new  EventHandler<ActionEvent>() {
+        this.view.getBtnEditStation().setOnAction(new  EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditStationView editStationView = new EditStationView();

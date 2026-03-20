@@ -8,9 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 
 public class EditLinePresenter {
-    private TransitStadlerModel model;
-    private EditLineView view;
-    private Line line;
+    private final TransitStadlerModel model;
+    private final EditLineView view;
+    private final Line line;
 
     public EditLinePresenter(TransitStadlerModel model, EditLineView view, Line line) {
         this.model = model;
@@ -21,7 +21,7 @@ public class EditLinePresenter {
     }
 
     private void addEventHandlers() {
-        this.view.getBtnSave().setOnAction(new EventHandler<ActionEvent>() {
+        this.view.getBtnSave().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 model.updateLine(line.lineId(), view.getTfLineName().getText(), Integer.parseInt(view.getTfOperatorId().getText()));
