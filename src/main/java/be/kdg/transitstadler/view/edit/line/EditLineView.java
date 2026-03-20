@@ -2,10 +2,7 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.StationCellFactory;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 public class EditLineView extends VBox {
@@ -22,6 +19,8 @@ public class EditLineView extends VBox {
     private MenuButton mbOperatorName;
 
     private ListView<Station> lvStationList;
+
+    private Button btnSave;
 
     public EditLineView() {
         this.initialiseNodes();
@@ -46,10 +45,12 @@ public class EditLineView extends VBox {
 
         lvStationList = new ListView<Station>();
         lvStationList.setCellFactory(new StationCellFactory());
+
+        btnSave = new Button("Save");
     }
 
     private void layoutNodes() {
-        this.getChildren().addAll(lblLineId, tfLineId, lblLineName, tfLineName, lblOperatorId, tfOperatorId, lblOperatorName, mbOperatorName, lblStops, lvStationList);
+        this.getChildren().addAll(lblLineId, tfLineId, lblLineName, tfLineName, lblOperatorId, tfOperatorId, lblOperatorName, mbOperatorName, lblStops, lvStationList, btnSave);
     }
 
     private void setNodeMarkup() {}
@@ -64,5 +65,9 @@ public class EditLineView extends VBox {
 
     public TextField getTfOperatorId() {
         return tfOperatorId;
+    }
+
+    public Button getBtnSave() {
+        return btnSave;
     }
 }

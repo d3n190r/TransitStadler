@@ -130,10 +130,6 @@ public class OverviewView extends BorderPane {
 
         tfLineId.setDisable(true);
         tfOperatorName.setDisable(true);
-
-        btnEditLine.setDisable(true);
-        btnEditOperator.setDisable(true);
-        btnEditStation.setDisable(true);
     }
 
     // TODO: Documentation

@@ -93,7 +93,7 @@ public class LineDao {
      */
     public static boolean update(Line updatedLine) {
         Object[] parameterValues = new Object[] {updatedLine.lineName(), updatedLine.operatorId(), updatedLine.lineId()};
-        int changes = Database.executeChange("UPDATE " + lineTableName + " SET lineName = ?, operatorName = ? WHERE lineId = ?", parameterValues);
+        int changes = Database.executeChange("UPDATE " + lineTableName + " SET lineName = ?, operatorId = ? WHERE lineId = ?", parameterValues);
         if (changes == 1) {
             return true;
         } else if (changes < 1) {

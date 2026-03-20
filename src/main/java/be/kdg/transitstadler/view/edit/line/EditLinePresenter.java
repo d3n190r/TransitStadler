@@ -2,6 +2,8 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class EditLinePresenter {
     private TransitStadlerModel model;
@@ -16,7 +18,15 @@ public class EditLinePresenter {
         this.updateView();
     }
 
-    private void addEventHandlers() {}
+    private void addEventHandlers() {
+        this.view.getBtnSave().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                model.updateLine(line.lineId(), view.getTfLineName().getText(), Integer.parseInt(view.getTfOperatorId().getText()));
+                view.getScene().getWindow().hide();
+            }
+        });
+    }
 
     private void updateView() {
         this.view.getTfLineName().setText(line.lineName());

@@ -11,12 +11,15 @@ import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +51,12 @@ public class OverviewPresenter {
         this.view.getLvLinesList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Line>() {
             @Override
             public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
+                if (newValue == null) {
+                    view.getBtnEditLine().setDisable(true);
+                    view.getBtnEditStation().setDisable(true);
+                    view.getBtnEditOperator().setDisable(true);
+                    return;
+                }
                 List<Station> stationList = view.getLvStationList().getItems();
                 stationList.clear();
                 List<Station> newStationList = model.getAllStationsByLine(newValue.lineId());
@@ -86,6 +95,7 @@ public class OverviewPresenter {
                 editLineStage.initModality(Modality.APPLICATION_MODAL);
                 editLineStage.setScene(new Scene(editLineView));
                 editLineStage.showAndWait();
+                updateView();
             }
         });
 
@@ -101,6 +111,7 @@ public class OverviewPresenter {
                 editOperatorStage.initModality(Modality.APPLICATION_MODAL);
                 editOperatorStage.setScene(new Scene(editOperatorView));
                 editOperatorStage.showAndWait();
+                updateView();
             }
         });
 
@@ -116,6 +127,7 @@ public class OverviewPresenter {
                 editStationStage.initModality(Modality.APPLICATION_MODAL);
                 editStationStage.setScene(new Scene(editStationView));
                 editStationStage.showAndWait();
+                updateView();
             }
         });
     }
