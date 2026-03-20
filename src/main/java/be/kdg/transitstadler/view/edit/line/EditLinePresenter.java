@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
 
 import java.util.function.Consumer;
 
@@ -75,10 +74,12 @@ public class EditLinePresenter {
         this.view.getTfLineId().setText(String.valueOf(line.lineId()));
         this.view.getTfOperatorId().setText(String.valueOf(line.operatorId()));
         this.view.getCbOperatorName().getItems().clear();
-        for (Operator operator : model.getAllOperators()) {
-            this.view.getCbOperatorName().getItems().add(operator);
+        for (Operator currentOperator : model.getAllOperators()) {
+            this.view.getCbOperatorName().getItems().add(currentOperator);
+            if (currentOperator.operatorId() == line.operatorId()) {
+                this.view.getCbOperatorName().getSelectionModel().select(currentOperator);
+            }
         }
-
         for (Station station : model.getAllStationsByLine(line.lineId())) {
             this.view.getLvStationList().getItems().add(station);
         }

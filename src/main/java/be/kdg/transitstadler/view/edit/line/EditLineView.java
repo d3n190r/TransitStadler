@@ -2,6 +2,7 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.utils.ComboBoxOperatorCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.StationCellFactory;
 
@@ -22,7 +23,7 @@ public class EditLineView extends BorderPane {
     private TextField tfLineName;
     private TextField tfOperatorId;
 
-    private ChoiceBox<Operator> cbOperatorName;
+    private ComboBox<Operator> cbOperatorName;
 
     private ListView<Station> lvStationList;
 
@@ -57,7 +58,8 @@ public class EditLineView extends BorderPane {
         tfOperatorId = new TextField();
         tfOperatorId.setDisable(true);
 
-        cbOperatorName = new ChoiceBox<>();
+        cbOperatorName = new ComboBox<>();
+        cbOperatorName.setConverter(new ComboBoxOperatorCellFactory());
 
         lvStationList = new ListView<>();
         lvStationList.setCellFactory(new StationCellFactory());
@@ -119,7 +121,7 @@ public class EditLineView extends BorderPane {
 
     public Button getBtnDelete() {return btnDelete;}
 
-    public ChoiceBox<Operator> getCbOperatorName() {
+    public ComboBox<Operator> getCbOperatorName() {
         return cbOperatorName;
     }
 
