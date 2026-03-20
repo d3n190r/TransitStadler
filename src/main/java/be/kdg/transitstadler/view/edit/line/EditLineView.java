@@ -41,7 +41,7 @@ public class EditLineView extends VBox {
         tfOperatorId = new TextField();
         tfOperatorId.setDisable(true);
 
-        mbOperatorName = new MenuButton("Edit");
+        mbOperatorName = new MenuButton();
 
         lvStationList = new ListView<Station>();
         lvStationList.setCellFactory(new StationCellFactory());
@@ -69,5 +69,9 @@ public class EditLineView extends VBox {
 
     public Button getBtnSave() {
         return btnSave;
+    }
+
+    public MenuButton getMbOperatorName() {
+        return mbOperatorName;
     }
 }

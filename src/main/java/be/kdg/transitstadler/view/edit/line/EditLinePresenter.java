@@ -2,8 +2,10 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
+import be.kdg.transitstadler.model.businessobject.Operator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.MenuItem;
 
 public class EditLinePresenter {
     private TransitStadlerModel model;
@@ -32,5 +34,10 @@ public class EditLinePresenter {
         this.view.getTfLineName().setText(line.lineName());
         this.view.getTfLineId().setText(String.valueOf(line.lineId()));
         this.view.getTfOperatorId().setText(String.valueOf(line.operatorId()));
+        this.view.getMbOperatorName().setText(model.getOperatorInfo(line.operatorId()).operatorName());
+        this.view.getMbOperatorName().getItems().clear();
+        for (Operator operator : model.getAllOperators()) {
+            this.view.getMbOperatorName().getItems().add(new MenuItem(operator.operatorName()));
+        }
     }
 }
