@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view;
+package be.kdg.transitstadler.view.utils;
 
 import be.kdg.transitstadler.model.businessobject.Line;
 import javafx.scene.control.ListCell;

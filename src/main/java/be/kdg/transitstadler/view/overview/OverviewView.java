@@ -2,8 +2,8 @@ package be.kdg.transitstadler.view.overview;
 
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.LineCellFactory;
-import be.kdg.transitstadler.view.StationCellFactory;
+import be.kdg.transitstadler.view.utils.LineCellFactory;
+import be.kdg.transitstadler.view.utils.StationCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 
 import javafx.geometry.Insets;
