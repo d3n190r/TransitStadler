@@ -5,6 +5,8 @@ import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 
 import be.kdg.transitstadler.model.businessobject.Station;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -48,7 +50,7 @@ public class EditLinePresenter {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Delete line");
                 alert.setHeaderText("Do you really want to delte " + line.lineName()  + "?");
-                alert.showAndWait().ifPresent(new Consumer<ButtonType>() {
+                alert.showAndWait().ifPresent(new Consumer<>() {
                     @Override
                     public void accept(ButtonType buttonType) {
                         if (buttonType == ButtonType.OK) {
@@ -59,16 +61,22 @@ public class EditLinePresenter {
                 });
             }
         });
+
+        this.view.getCbOperatorName().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends Operator> observableValue, Operator oldValue, Operator newValue) {
+                view.getTfOperatorId().setText(String.valueOf(newValue.operatorId()));
+            }
+        });
     }
 
     private void updateView() {
         this.view.getTfLineName().setText(line.lineName());
         this.view.getTfLineId().setText(String.valueOf(line.lineId()));
         this.view.getTfOperatorId().setText(String.valueOf(line.operatorId()));
-        this.view.getMbOperatorName().setText(model.getOperatorInfo(line.operatorId()).operatorName());
-        this.view.getMbOperatorName().getItems().clear();
+        this.view.getCbOperatorName().getItems().clear();
         for (Operator operator : model.getAllOperators()) {
-            this.view.getMbOperatorName().getItems().add(new MenuItem(operator.operatorName()));
+            this.view.getCbOperatorName().getItems().add(operator);
         }
 
         for (Station station : model.getAllStationsByLine(line.lineId())) {

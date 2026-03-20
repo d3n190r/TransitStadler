@@ -1,15 +1,12 @@
 package be.kdg.transitstadler.view.edit.line;
 
+import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.StationCellFactory;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,7 +22,7 @@ public class EditLineView extends BorderPane {
     private TextField tfLineName;
     private TextField tfOperatorId;
 
-    private MenuButton mbOperatorName;
+    private ChoiceBox<Operator> cbOperatorName;
 
     private ListView<Station> lvStationList;
 
@@ -60,7 +57,7 @@ public class EditLineView extends BorderPane {
         tfOperatorId = new TextField();
         tfOperatorId.setDisable(true);
 
-        mbOperatorName = new MenuButton();
+        cbOperatorName = new ChoiceBox<>();
 
         lvStationList = new ListView<>();
         lvStationList.setCellFactory(new StationCellFactory());
@@ -74,7 +71,7 @@ public class EditLineView extends BorderPane {
         hbId = new HBox(lblLineId, tfLineId);
         hbName = new HBox(lblLineName, tfLineName);
         hbOperatorId = new HBox(lblOperatorId, tfOperatorId);
-        hbOperatorName = new HBox(lblOperatorName, mbOperatorName);
+        hbOperatorName = new HBox(lblOperatorName, cbOperatorName);
         hbButtons = new HBox(btnCancel, btnSave, btnDelete);
 
         vbCenter = new VBox();
@@ -122,8 +119,8 @@ public class EditLineView extends BorderPane {
 
     public Button getBtnDelete() {return btnDelete;}
 
-    public MenuButton getMbOperatorName() {
-        return mbOperatorName;
+    public ChoiceBox<Operator> getCbOperatorName() {
+        return cbOperatorName;
     }
 
     public ListView<Station> getLvStationList() {
