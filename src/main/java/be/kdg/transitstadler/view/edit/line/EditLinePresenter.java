@@ -3,6 +3,7 @@ package be.kdg.transitstadler.view.edit.line;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;

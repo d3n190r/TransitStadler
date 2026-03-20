@@ -5,6 +5,7 @@ import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.LineCellFactory;
 import be.kdg.transitstadler.view.StationCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;

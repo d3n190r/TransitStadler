@@ -9,6 +9,7 @@ import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
 import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
 import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.util.List;
 
 /**

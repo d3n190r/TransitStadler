@@ -2,7 +2,12 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.StationCellFactory;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class EditLineView extends VBox {
