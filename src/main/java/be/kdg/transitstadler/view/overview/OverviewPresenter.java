@@ -3,8 +3,19 @@ package be.kdg.transitstadler.view.overview;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.edit.line.EditLinePresenter;
+import be.kdg.transitstadler.view.edit.line.EditLineView;
+import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
+import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
+import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
+import be.kdg.transitstadler.view.edit.station.EditStationView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -60,6 +71,51 @@ public class OverviewPresenter {
                 if (view.getBtnEditStation().isDisabled()) {
                     view.getBtnEditStation().setDisable(false);
                 }
+            }
+        });
+
+        // When editLine gets clicked
+        this.view.getBtnEditLine().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                EditLineView editLineView = new EditLineView();
+                new EditLinePresenter(model, editLineView);
+                Stage editLineStage = new Stage();
+                editLineStage.setTitle("Edit Line");
+                editLineStage.initOwner(view.getScene().getWindow());
+                editLineStage.initModality(Modality.APPLICATION_MODAL);
+                editLineStage.setScene(new Scene(editLineView));
+                editLineStage.showAndWait();
+            }
+        });
+
+        // When editOperator gets clicked
+        this.view.getBtnEditOperator().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                EditOperatorView editOperatorView = new EditOperatorView();
+                new EditOperatorPresenter(model, editOperatorView);
+                Stage editOperatorStage = new Stage();
+                editOperatorStage.setTitle("Edit Operator");
+                editOperatorStage.initOwner(view.getScene().getWindow());
+                editOperatorStage.initModality(Modality.APPLICATION_MODAL);
+                editOperatorStage.setScene(new Scene(editOperatorView));
+                editOperatorStage.showAndWait();
+            }
+        });
+
+        // When editStation gets clicked
+        this.view.getBtnEditStation().setOnAction(new  EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                EditStationView editStationView = new EditStationView();
+                new EditStationPresenter(model, editStationView);
+                Stage editStationStage = new Stage();
+                editStationStage.setTitle("Edit Station");
+                editStationStage.initOwner(view.getScene().getWindow());
+                editStationStage.initModality(Modality.APPLICATION_MODAL);
+                editStationStage.setScene(new Scene(editStationView));
+                editStationStage.showAndWait();
             }
         });
     }
