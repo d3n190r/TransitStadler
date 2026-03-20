@@ -99,7 +99,7 @@ public class OverviewPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditOperatorView editOperatorView = new EditOperatorView();
-                new EditOperatorPresenter(model, editOperatorView);
+                new EditOperatorPresenter(model, editOperatorView, model.getOperatorInfo(view.getLvLinesList().getSelectionModel().getSelectedItem().operatorId()));
                 Stage editOperatorStage = new Stage();
                 editOperatorStage.setTitle("Edit Operator");
                 editOperatorStage.initOwner(view.getScene().getWindow());

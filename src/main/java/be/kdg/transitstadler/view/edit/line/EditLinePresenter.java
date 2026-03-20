@@ -3,8 +3,8 @@ package be.kdg.transitstadler.view.edit.line;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
-
 import be.kdg.transitstadler.model.businessobject.Station;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -48,7 +48,7 @@ public class EditLinePresenter {
             public void handle(ActionEvent actionEvent) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Delete line");
-                alert.setHeaderText("Do you really want to delte " + line.lineName()  + "?");
+                alert.setHeaderText("Do you really want to delete " + line.lineName()  + "?");
                 alert.showAndWait().ifPresent(new Consumer<>() {
                     @Override
                     public void accept(ButtonType buttonType) {
