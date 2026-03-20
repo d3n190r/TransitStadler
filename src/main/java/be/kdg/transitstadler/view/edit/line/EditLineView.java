@@ -2,9 +2,9 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.utils.ComboBoxOperatorCellFactory;
+import be.kdg.transitstadler.view.utils.cellFactory.ComboBoxOperatorCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
-import be.kdg.transitstadler.view.utils.StationCellFactory;
+import be.kdg.transitstadler.view.utils.cellFactory.StationCellFactory;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
