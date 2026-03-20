@@ -4,12 +4,14 @@ import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.StationCellFactory;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class EditLineView extends BorderPane {
@@ -30,6 +32,11 @@ public class EditLineView extends BorderPane {
     private Button btnSave;
 
     private VBox vbCenter;
+
+    private HBox hbId;
+    private HBox hbName;
+    private HBox hbOperatorId;
+    private HBox hbOperatorName;
 
     public EditLineView() {
         this.initialiseNodes();
@@ -59,13 +66,37 @@ public class EditLineView extends BorderPane {
     }
 
     private void layoutNodes() {
+        hbId = new HBox();
+        hbId.getChildren().addAll(lblLineId, tfLineId);
+
+        hbName = new HBox();
+        hbName.getChildren().addAll(lblLineName, tfLineName);
+
+        hbOperatorId = new HBox();
+        hbOperatorId.getChildren().addAll(lblOperatorId, tfOperatorId);
+
+        hbOperatorName = new HBox();
+        hbOperatorName.getChildren().addAll(lblOperatorName, mbOperatorName);
+
         vbCenter = new VBox();
-        vbCenter.getChildren().addAll(lblLineId, tfLineId, lblLineName, tfLineName, lblOperatorId, tfOperatorId, lblOperatorName, mbOperatorName, lblStops, lvStationList, btnSave);
+        vbCenter.getChildren().addAll(hbId, hbName, hbOperatorId, hbOperatorName, lblStops, lvStationList, btnSave);
 
         this.setCenter(vbCenter);
     }
 
     private void setNodeMarkup() {
+        LayoutUtils.applyMarginsToChildren(hbId, 2);
+        hbId.setAlignment(Pos.CENTER);
+
+        LayoutUtils.applyMarginsToChildren(hbName, 2);
+        hbName.setAlignment(Pos.CENTER);
+
+        LayoutUtils.applyMarginsToChildren(hbOperatorId, 2);
+        hbOperatorId.setAlignment(Pos.CENTER);
+
+        LayoutUtils.applyMarginsToChildren(hbOperatorName, 2);
+        hbOperatorName.setAlignment(Pos.CENTER);
+
         LayoutUtils.applyMarginsToChildren(vbCenter, 5);
         LayoutUtils.applyMarginsToChildren(this, 5);
     }
@@ -88,5 +119,9 @@ public class EditLineView extends BorderPane {
 
     public MenuButton getMbOperatorName() {
         return mbOperatorName;
+    }
+
+    public ListView<Station> getLvStationList() {
+        return lvStationList;
     }
 }

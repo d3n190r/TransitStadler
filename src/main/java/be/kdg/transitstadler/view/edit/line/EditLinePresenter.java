@@ -4,6 +4,7 @@ import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 
+import be.kdg.transitstadler.model.businessobject.Station;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
@@ -39,6 +40,10 @@ public class EditLinePresenter {
         this.view.getMbOperatorName().getItems().clear();
         for (Operator operator : model.getAllOperators()) {
             this.view.getMbOperatorName().getItems().add(new MenuItem(operator.operatorName()));
+        }
+
+        for (Station station : model.getAllStationsByLine(line.lineId())) {
+            this.view.getLvStationList().getItems().add(station);
         }
     }
 }
