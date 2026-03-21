@@ -53,7 +53,6 @@ public class EditStationPresenter {
                         }
                     }
                 });
-                model.deleteStation(station.stationId());
                 view.getScene().getWindow().hide();
             }
         });
