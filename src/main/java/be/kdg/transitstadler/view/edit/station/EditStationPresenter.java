@@ -80,5 +80,8 @@ public class EditStationPresenter {
     private void updateView() {
         this.view.getTfStationId().setText(String.valueOf(station.stationId()));
         this.view.getTfStationName().setText(station.stationName());
+        if (!model.getAllLinesByStation(station.stationId()).isEmpty()) {
+            this.view.getBtnDelete().setDisable(true);
+        }
     }
 }

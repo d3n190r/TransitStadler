@@ -79,5 +79,8 @@ public class EditOperatorPresenter {
     private void updateView() {
         this.view.getTfOperatorId().setText(String.valueOf(operator.operatorId()));
         this.view.getTfOperatorName().setText(operator.operatorName());
+        if (!model.getAllLinesByOperator(operator.operatorId()).isEmpty()) {
+            view.getBtnDelete().setDisable(true);
+        }
     }
 }

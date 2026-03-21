@@ -140,5 +140,8 @@ public class EditLinePresenter {
         for (Station station : model.getAllStationsByLine(line.lineId())) {
             this.view.getLvStationList().getItems().add(station);
         }
+        if (!model.getAllStationsByLine(line.lineId()).isEmpty()) {
+            this.view.getBtnDelete().setDisable(true);
+        }
     }
 }

@@ -143,7 +143,7 @@ public class LineDao {
      * @return All the lines of the specified station.
      */
     public static List<Line> allLinesAtStation(int stationId) {
-        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + " WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
+        ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + " WHERE EXISTS (SELECT 'x' FROM " + stopsTableName + " WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
         return convertDbResultSetToObjectList(resultRows);
     }
 
