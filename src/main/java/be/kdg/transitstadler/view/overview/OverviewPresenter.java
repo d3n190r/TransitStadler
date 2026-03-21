@@ -5,6 +5,8 @@ import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.create.line.CreateLinePresenter;
 import be.kdg.transitstadler.view.create.line.CreateLineView;
+import be.kdg.transitstadler.view.create.operator.CreateOperatorPresenter;
+import be.kdg.transitstadler.view.create.operator.CreateOperatorView;
 import be.kdg.transitstadler.view.edit.line.EditLinePresenter;
 import be.kdg.transitstadler.view.edit.line.EditLineView;
 import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
@@ -163,6 +165,21 @@ public class OverviewPresenter {
                 createLineStage.initModality(Modality.APPLICATION_MODAL);
                 createLineStage.setScene(new Scene(createLineView));
                 createLineStage.showAndWait();
+                updateView();
+            }
+        });
+
+        this.view.getBtnAddOperator().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                CreateOperatorView createOperatorView = new CreateOperatorView();
+                new CreateOperatorPresenter(model, createOperatorView);
+                Stage createOperatorStage = new Stage();
+                createOperatorStage.setTitle("Create Operator");
+                createOperatorStage.initOwner(view.getScene().getWindow());
+                createOperatorStage.initModality(Modality.APPLICATION_MODAL);
+                createOperatorStage.setScene(new Scene(createOperatorView));
+                createOperatorStage.showAndWait();
                 updateView();
             }
         });
