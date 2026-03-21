@@ -115,7 +115,7 @@ public class OverviewPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditStationView editStationView = new EditStationView();
-                new EditStationPresenter(model, editStationView);
+                new EditStationPresenter(model, editStationView, view.getLvStationList().getSelectionModel().getSelectedItem());
                 Stage editStationStage = new Stage();
                 editStationStage.setTitle("Edit Station");
                 editStationStage.initOwner(view.getScene().getWindow());

@@ -30,14 +30,18 @@ public class EditLineView extends BorderPane {
     private Button btnCancel;
     private Button btnSave;
     private Button btnDelete;
+    private Button btnAddStop;
+    private Button btnDeleteStop;
 
     private VBox vbCenter;
+    private VBox vbStops;
 
     private HBox hbId;
     private HBox hbName;
     private HBox hbOperatorId;
     private HBox hbOperatorName;
     private HBox hbButtons;
+    private HBox hbStopButtons;
 
     public EditLineView() {
         this.initialiseNodes();
@@ -64,6 +68,8 @@ public class EditLineView extends BorderPane {
         lvStationList = new ListView<>();
         lvStationList.setCellFactory(new StationCellFactory());
 
+        btnAddStop = new Button("Add stop");
+        btnDeleteStop = new Button("Delete stop");
         btnCancel = new Button("Cancel");
         btnSave = new Button("Save");
         btnDelete = new Button("Delete");
@@ -75,9 +81,10 @@ public class EditLineView extends BorderPane {
         hbOperatorId = new HBox(lblOperatorId, tfOperatorId);
         hbOperatorName = new HBox(lblOperatorName, cbOperatorName);
         hbButtons = new HBox(btnCancel, btnSave, btnDelete);
+        hbStopButtons = new HBox(btnAddStop, btnDeleteStop);
 
-        vbCenter = new VBox();
-        vbCenter.getChildren().addAll(hbId, hbName, hbOperatorId, hbOperatorName, lblStops, lvStationList, hbButtons);
+        vbStops = new VBox(lblStops, lvStationList, hbStopButtons);
+        vbCenter = new VBox(hbId, hbName, hbOperatorId, hbOperatorName, vbStops, hbButtons);
 
         this.setCenter(vbCenter);
     }
@@ -96,6 +103,8 @@ public class EditLineView extends BorderPane {
         hbOperatorName.setAlignment(Pos.CENTER);
 
         LayoutUtils.applyMarginsToChildren(hbButtons, 7);
+
+        LayoutUtils.applyMarginsToChildren(hbStopButtons, 7);
 
         LayoutUtils.applyMarginsToChildren(vbCenter, 5);
         LayoutUtils.applyMarginsToChildren(this, 5);
