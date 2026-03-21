@@ -7,6 +7,8 @@ import be.kdg.transitstadler.view.create.line.CreateLinePresenter;
 import be.kdg.transitstadler.view.create.line.CreateLineView;
 import be.kdg.transitstadler.view.create.operator.CreateOperatorPresenter;
 import be.kdg.transitstadler.view.create.operator.CreateOperatorView;
+import be.kdg.transitstadler.view.create.station.CreateStationPresenter;
+import be.kdg.transitstadler.view.create.station.CreateStationView;
 import be.kdg.transitstadler.view.edit.line.EditLinePresenter;
 import be.kdg.transitstadler.view.edit.line.EditLineView;
 import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
@@ -23,7 +25,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -180,6 +181,21 @@ public class OverviewPresenter {
                 createOperatorStage.initModality(Modality.APPLICATION_MODAL);
                 createOperatorStage.setScene(new Scene(createOperatorView));
                 createOperatorStage.showAndWait();
+                updateView();
+            }
+        });
+
+        this.view.getBtnAddStation().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                CreateStationView createStationView = new CreateStationView();
+                new CreateStationPresenter(model, createStationView);
+                Stage createStationStage = new Stage();
+                createStationStage.setTitle("Create Station");
+                createStationStage.initOwner(view.getScene().getWindow());
+                createStationStage.initModality(Modality.APPLICATION_MODAL);
+                createStationStage.setScene(new Scene(createStationView));
+                createStationStage.showAndWait();
                 updateView();
             }
         });

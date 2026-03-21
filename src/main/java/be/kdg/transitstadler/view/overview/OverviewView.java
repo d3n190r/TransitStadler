@@ -146,7 +146,7 @@ public class OverviewView extends BorderPane {
         lblLines.setPadding(new Insets(0, 0, 5, 0));
 
         lvLinesList.setOrientation(Orientation.HORIZONTAL);
-        lvLinesList.setMaxHeight(30);
+        lvLinesList.setMaxHeight(40);
 
         tfLineId.setDisable(true);
         tfOperatorName.setDisable(true);
