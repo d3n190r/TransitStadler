@@ -6,6 +6,7 @@ import be.kdg.transitstadler.database.dao.StationDao;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
+
 import java.util.List;
 
 /**
@@ -204,5 +205,13 @@ public class TransitStadlerModel {
      */
     public List<Station> getAllStationsByLine(int lineId) {
         return StationDao.allStationsOnLine(lineId);
+    }
+
+    public boolean deleteStop(int lineId, int stationId) {
+        return LineDao.deleteStop(lineId, stationId);
+    }
+
+    public boolean addStop(int lineId, int stationId) {
+        return LineDao.addStop(lineId, stationId);
     }
 }

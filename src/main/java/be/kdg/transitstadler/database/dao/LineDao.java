@@ -2,6 +2,7 @@ package be.kdg.transitstadler.database.dao;
 
 import be.kdg.transitstadler.database.Database;
 import be.kdg.transitstadler.model.businessobject.Line;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class LineDao {
     private static final String lineTableName = "line";
+    private static final String stopsTableName = "stop";
 
     /**
      * static class -> private constructor
@@ -143,5 +145,21 @@ public class LineDao {
     public static List<Line> allLinesAtStation(int stationId) {
         ResultSet resultRows = Database.executeQuery("SELECT * FROM " + lineTableName + " WHERE EXISTS (SELECT 'x' FROM stops WHERE stop.lineId = line.lineId AND stop.stationId = ?)", new Object[] {stationId});
         return convertDbResultSetToObjectList(resultRows);
+    }
+
+    public static boolean deleteStop(int lineId, int stationId) {
+        return Database.executeChange("DELETE FROM " + stopsTableName + " WHERE lineId = ? AND stationId = ?", new Object[] {lineId, stationId}) == 1;
+    }
+
+    public static boolean addStop(int lineId, int stationId) {
+        try {
+            ResultSet result = Database.executeQuery("SELECT MAX(stopSequence) FROM " + stopsTableName + " WHERE lineId = ?", new Object[]{lineId});
+            result.next();
+            int i = result.getInt(1) + 1;
+            return Database.executeAny("INSERT INTO " + stopsTableName + "(lineId, stationId, stopsequence) VALUES (?, ?, ?)", new Object[] {lineId, stationId, i+1});
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

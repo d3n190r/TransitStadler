@@ -63,7 +63,6 @@ public class Database {
         } catch (SQLException e) {
             // TODO: error
             System.err.println("[Database.executeQuery()] Could not execute query");
-            e.printStackTrace();
             return null;
         } finally {
             DatabaseConnector.closeConnection();
