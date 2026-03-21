@@ -155,6 +155,8 @@ public class OverviewView extends BorderPane {
         imgNetwork.setFitWidth(300);
         VBox.setMargin(imgNetwork, new Insets(10, 0, 0, 0));
 
+        hbInsertButtons.setAlignment(Pos.TOP_CENTER);
+
         this.setPrefSize(600, 500);
     }
 

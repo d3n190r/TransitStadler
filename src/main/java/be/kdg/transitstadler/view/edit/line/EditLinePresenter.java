@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -103,6 +104,24 @@ public class EditLinePresenter {
                         }
                     }
                 });
+            }
+        });
+
+        this.view.getTfLineName().setOnKeyTyped(new EventHandler<>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String  text = view.getTfLineName().getText();
+                if (text.isEmpty()) {
+                    view.getBtnSave().setDisable(true);
+                    return;
+                }
+                for (Line currentLine: model.getAllLines()) {
+                    if (currentLine.lineId() != line.lineId() && currentLine.lineName().equals(text)) {
+                        view.getBtnSave().setDisable(true);
+                        return;
+                    }
+                }
+                view.getBtnSave().setDisable(false);
             }
         });
     }

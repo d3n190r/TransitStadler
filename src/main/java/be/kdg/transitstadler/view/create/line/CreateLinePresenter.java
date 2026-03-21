@@ -1,9 +1,11 @@
 package be.kdg.transitstadler.view.create.line;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
+import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 
 public class CreateLinePresenter {
     private final TransitStadlerModel model;
@@ -24,12 +26,31 @@ public class CreateLinePresenter {
                 view.getScene().getWindow().hide();
             }
         });
+
+        view.getTxtLineName().setOnKeyTyped(new EventHandler<>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String text = view.getTxtLineName().getText();
+                if (text.isEmpty()) {
+                    view.getBtnCreate().setDisable(true);
+                    return;
+                }
+                for (Line currentLine : model.getAllLines()) {
+                    if (currentLine.lineName().equals(text)) {
+                        view.getBtnCreate().setDisable(true);
+                        return;
+                    }
+                }
+                view.getBtnCreate().setDisable(false);
+            }
+        });
     }
 
     private void updateView() {
         for (Operator currentOperator:model.getAllOperators()) {
             view.getCbOperatorId().getItems().add(currentOperator);
         }
+        view.getBtnCreate().setDisable(true);
     }
 
 }

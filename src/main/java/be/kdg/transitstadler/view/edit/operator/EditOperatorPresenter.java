@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyEvent;
 
 import java.util.function.Consumer;
 
@@ -53,6 +54,24 @@ public class EditOperatorPresenter {
                         }
                     }
                 });
+            }
+        });
+
+        this.view.getTfOperatorName().setOnKeyTyped(new  EventHandler<>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String  text = view.getTfOperatorName().getText();
+                if (text.isEmpty()) {
+                    view.getBtnSave().setDisable(true);
+                    return;
+                }
+                for (Operator currentOperator: model.getAllOperators()) {
+                    if (currentOperator.operatorId() != operator.operatorId() && currentOperator.operatorName().equals(text)) {
+                        view.getBtnSave().setDisable(true);
+                        return;
+                    }
+                }
+                view.getBtnSave().setDisable(false);
             }
         });
     }

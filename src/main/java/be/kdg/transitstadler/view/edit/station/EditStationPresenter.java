@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyEvent;
 
 import java.util.function.Consumer;
 
@@ -54,6 +55,24 @@ public class EditStationPresenter {
                     }
                 });
                 view.getScene().getWindow().hide();
+            }
+        });
+
+        this.view.getTfStationName().setOnKeyTyped(new EventHandler<>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String  text = view.getTfStationName().getText();
+                if (text.isEmpty()) {
+                    view.getBtnSave().setDisable(true);
+                    return;
+                }
+                for (Station currentStation: model.getAllStations()) {
+                    if (currentStation.stationId() != station.stationId() && currentStation.stationName().equals(text)) {
+                        view.getBtnSave().setDisable(true);
+                        return;
+                    }
+                }
+                view.getBtnSave().setDisable(false);
             }
         });
     }

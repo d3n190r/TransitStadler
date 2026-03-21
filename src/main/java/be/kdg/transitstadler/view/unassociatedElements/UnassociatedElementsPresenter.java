@@ -73,9 +73,12 @@ public class UnassociatedElementsPresenter {
         for (Operator currentOperator: model.getAllOperators()) {
             view.getLvOperator().getItems().add(currentOperator);
         }
+        view.getLvOperator().getSelectionModel().select(0);
+
         view.getLvStations().getItems().clear();
         for (Station currentStation: model.getAllStations()) {
             view.getLvStations().getItems().add(currentStation);
         }
+        view.getLvStations().getSelectionModel().select(0);
     }
 }
