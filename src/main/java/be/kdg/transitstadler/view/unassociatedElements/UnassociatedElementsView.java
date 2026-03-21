@@ -11,7 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class UnassociatedElementsView extends HBox {
+public class UnassociatedElementsView extends VBox {
     private Label lblStations;
     private Label lblOperators;
 
@@ -20,9 +20,12 @@ public class UnassociatedElementsView extends HBox {
 
     private Button btnEditStation;
     private Button btnEditOperator;
+    private Button btnBackToLineOverview;
 
     private VBox vbStations;
     private VBox vbOperator;
+
+    private HBox hbLists;
 
     public UnassociatedElementsView() {
         this.initialiseNodes();
@@ -42,17 +45,42 @@ public class UnassociatedElementsView extends HBox {
 
         btnEditStation = new Button("Edit station");
         btnEditOperator = new Button("Edit operator");
+        btnBackToLineOverview = new Button("Back to line overview");
     }
 
     private void layoutNodes() {
         vbStations = new VBox(lblStations, lvStations, btnEditStation);
         vbOperator = new VBox(lblOperators, lvOperator, btnEditOperator);
 
-        this.getChildren().setAll(vbStations, vbOperator);
+        hbLists = new HBox(vbStations, vbOperator);
+
+        this.getChildren().setAll(hbLists, btnBackToLineOverview);
     }
 
     private void setNodeMarkup() {
         vbStations.setAlignment(Pos.TOP_CENTER);
         vbOperator.setAlignment(Pos.TOP_CENTER);
+
+        this.setAlignment(Pos.TOP_CENTER);
+    }
+
+    public Button getBtnEditStation() {
+        return btnEditStation;
+    }
+
+    public Button getBtnEditOperator() {
+        return btnEditOperator;
+    }
+
+    public Button getBtnBackToLineOverview() {
+        return btnBackToLineOverview;
+    }
+
+    public ListView<Station> getLvStations() {
+        return lvStations;
+    }
+
+    public ListView<Operator> getLvOperator() {
+        return lvOperator;
     }
 }

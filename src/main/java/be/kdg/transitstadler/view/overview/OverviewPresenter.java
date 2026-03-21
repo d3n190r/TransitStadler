@@ -133,7 +133,7 @@ public class OverviewPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 UnassociatedElementsView unassociatedElementsView = new UnassociatedElementsView();
-                new UnassociatedElementsPresenter();
+                new UnassociatedElementsPresenter(model, unassociatedElementsView);
                 view.getScene().setRoot(unassociatedElementsView);
                 unassociatedElementsView.getScene().getWindow().sizeToScene();
             }
