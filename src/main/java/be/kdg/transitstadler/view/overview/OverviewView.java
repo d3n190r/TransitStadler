@@ -9,10 +9,7 @@ import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -33,6 +30,7 @@ public class OverviewView extends BorderPane {
     private Button btnEditLine;
     private Button btnEditStation;
     private Button btnEditOperator;
+    private Button btnUnassociated;
 
     private TextField tfLineId;
     private TextField tfOperatorName;
@@ -73,6 +71,7 @@ public class OverviewView extends BorderPane {
         btnEditStation = new Button("Edit Station");
         btnEditLine = new Button("Edit Line");
         btnEditOperator = new Button("Edit Operator");
+        btnUnassociated = new Button("Unassociated elements");
 
         // TextField //
         tfLineId = new TextField();
@@ -94,7 +93,7 @@ public class OverviewView extends BorderPane {
         // Add to Panes //
         hbHeader.getChildren().addAll(lblLines, lvLinesList);
         hbCenter.getChildren().addAll(vbStations, vbLineInfo);
-        hbFooter.getChildren().addAll(btnEditLine, btnEditStation, btnEditOperator);
+        hbFooter.getChildren().addAll(btnEditLine, btnEditStation, btnEditOperator, btnUnassociated);
 
         vbStations.getChildren().addAll(lblStations, lvStationList);
         vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, tfOperatorName);
@@ -152,4 +151,6 @@ public class OverviewView extends BorderPane {
     public TextField getTfLineId() {return tfLineId;}
 
     public TextField getTfOperatorName() {return tfOperatorName;}
+
+    public Button getBtnUnassociated() {return btnUnassociated;}
 }

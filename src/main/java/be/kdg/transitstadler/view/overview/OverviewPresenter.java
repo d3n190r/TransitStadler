@@ -10,6 +10,8 @@ import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
 import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
 
+import be.kdg.transitstadler.view.unassociatedElements.UnassociatedElementsPresenter;
+import be.kdg.transitstadler.view.unassociatedElements.UnassociatedElementsView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -123,6 +125,17 @@ public class OverviewPresenter {
                 editStationStage.setScene(new Scene(editStationView));
                 editStationStage.showAndWait();
                 updateView();
+            }
+        });
+
+        // When toUnassociated gets clicked
+        this.view.getBtnUnassociated().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                UnassociatedElementsView unassociatedElementsView = new UnassociatedElementsView();
+                new UnassociatedElementsPresenter();
+                view.getScene().setRoot(unassociatedElementsView);
+                unassociatedElementsView.getScene().getWindow().sizeToScene();
             }
         });
     }
