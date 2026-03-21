@@ -10,6 +10,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,6 +36,8 @@ public class OverviewView extends BorderPane {
 
     private TextField tfLineId;
     private TextField tfOperatorName;
+
+    private ImageView imgNetwork;
 
     // private Node attributes (javafx.scene.layout)
     private HBox hbHeader;
@@ -76,6 +80,9 @@ public class OverviewView extends BorderPane {
         // TextField //
         tfLineId = new TextField();
         tfOperatorName = new TextField();
+
+        // ImageView //
+        imgNetwork = new ImageView(new Image("networkMap.png"));
     }
 
     /**
@@ -96,7 +103,7 @@ public class OverviewView extends BorderPane {
         hbFooter.getChildren().addAll(btnEditLine, btnEditStation, btnEditOperator, btnUnassociated);
 
         vbStations.getChildren().addAll(lblStations, lvStationList);
-        vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, tfOperatorName);
+        vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, tfOperatorName, imgNetwork);
 
         this.setTop(hbHeader);
         this.setCenter(hbCenter);
@@ -130,6 +137,10 @@ public class OverviewView extends BorderPane {
 
         tfLineId.setDisable(true);
         tfOperatorName.setDisable(true);
+
+        imgNetwork.setPreserveRatio(true);
+        imgNetwork.setFitWidth(300);
+        VBox.setMargin(imgNetwork, new Insets(10, 0, 0, 0));
     }
 
     // TODO: Documentation
