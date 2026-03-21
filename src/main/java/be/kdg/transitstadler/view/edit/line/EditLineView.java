@@ -144,4 +144,8 @@ public class EditLineView extends BorderPane {
     public ListView<Station> getLvStationList() {
         return lvStationList;
     }
+
+    public Button getBtnAddStop() {return btnAddStop;}
+
+    public Button getBtnDeleteStop() {return btnDeleteStop;}
 }

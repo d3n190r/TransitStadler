@@ -5,12 +5,17 @@ import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
 
+import be.kdg.transitstadler.view.edit.line.addStop.AddStopPresenter;
+import be.kdg.transitstadler.view.edit.line.addStop.AddStopView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.function.Consumer;
 
@@ -65,6 +70,39 @@ public class EditLinePresenter {
             @Override
             public void changed(ObservableValue<? extends Operator> observableValue, Operator oldValue, Operator newValue) {
                 view.getTfOperatorId().setText(String.valueOf(newValue.operatorId()));
+            }
+        });
+
+        this.view.getBtnAddStop().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                AddStopView addStopView = new AddStopView();
+                new AddStopPresenter(model, addStopView, line);
+                Stage addStopStage = new Stage();
+                addStopStage.setTitle("Add stop");
+                addStopStage.initOwner(view.getScene().getWindow());
+                addStopStage.initModality(Modality.APPLICATION_MODAL);
+                addStopStage.setScene(new Scene(addStopView));
+                addStopStage.showAndWait();
+                view.getScene().getWindow().hide();
+            }
+        });
+
+        this.view.getBtnDeleteStop().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Delete stop");
+                alert.setHeaderText("Do you really want to delete this stop?");
+                alert.showAndWait().ifPresent(new Consumer<>() {
+                    @Override
+                    public void accept(ButtonType buttonType) {
+                        if (buttonType == ButtonType.OK) {
+                            model.deleteStop(line.lineId(), view.getLvStationList().getSelectionModel().getSelectedItem().stationId());
+                            view.getScene().getWindow().hide();
+                        }
+                    }
+                });
             }
         });
     }
