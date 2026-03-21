@@ -1,7 +1,6 @@
 package be.kdg.transitstadler;
 
 import be.kdg.transitstadler.database.DatabaseBuilder;
-import be.kdg.transitstadler.database.dao.LineDao;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.view.overview.OverviewPresenter;
 import be.kdg.transitstadler.view.overview.OverviewView;

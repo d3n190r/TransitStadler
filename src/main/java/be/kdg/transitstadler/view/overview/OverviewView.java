@@ -141,6 +141,8 @@ public class OverviewView extends BorderPane {
         imgNetwork.setPreserveRatio(true);
         imgNetwork.setFitWidth(300);
         VBox.setMargin(imgNetwork, new Insets(10, 0, 0, 0));
+
+        this.setPrefSize(600, 500);
     }
 
     // TODO: Documentation

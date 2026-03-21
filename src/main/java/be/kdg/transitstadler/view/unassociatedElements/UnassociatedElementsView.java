@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class UnassociatedElementsView extends VBox {
@@ -61,7 +62,12 @@ public class UnassociatedElementsView extends VBox {
         vbStations.setAlignment(Pos.TOP_CENTER);
         vbOperator.setAlignment(Pos.TOP_CENTER);
 
+        HBox.setHgrow(vbStations, Priority.ALWAYS);
+        HBox.setHgrow(vbOperator, Priority.ALWAYS);
+
         this.setAlignment(Pos.TOP_CENTER);
+        this.setFillWidth(true);
+        this.setPrefSize(600, 500);
     }
 
     public Button getBtnEditStation() {
