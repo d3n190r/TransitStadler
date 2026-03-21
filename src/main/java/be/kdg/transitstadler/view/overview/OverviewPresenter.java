@@ -3,6 +3,8 @@ package be.kdg.transitstadler.view.overview;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.create.line.CreateLinePresenter;
+import be.kdg.transitstadler.view.create.line.CreateLineView;
 import be.kdg.transitstadler.view.edit.line.EditLinePresenter;
 import be.kdg.transitstadler.view.edit.line.EditLineView;
 import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
@@ -147,6 +149,21 @@ public class OverviewPresenter {
             public void handle(DragEvent mouseEvent) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.showAndWait();
+            }
+        });
+
+        this.view.getBtnAddLine().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                CreateLineView createLineView = new CreateLineView();
+                new CreateLinePresenter(model, createLineView);
+                Stage createLineStage = new Stage();
+                createLineStage.setTitle("Create Line");
+                createLineStage.initOwner(view.getScene().getWindow());
+                createLineStage.initModality(Modality.APPLICATION_MODAL);
+                createLineStage.setScene(new Scene(createLineView));
+                createLineStage.showAndWait();
+                updateView();
             }
         });
     }

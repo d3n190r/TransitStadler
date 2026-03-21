@@ -181,4 +181,10 @@ public class OverviewView extends BorderPane {
     public Button getBtnUnassociated() {return btnUnassociated;}
 
     public ImageView getImgNetwork() {return imgNetwork;}
+
+    public Button getBtnAddLine() {return btnAddLine;}
+
+    public Button getBtnAddStation() {return btnAddStation;}
+
+    public Button getBtnAddOperator() {return btnAddOperator;}
 }
