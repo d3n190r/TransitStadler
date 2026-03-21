@@ -164,4 +164,6 @@ public class OverviewView extends BorderPane {
     public TextField getTfOperatorName() {return tfOperatorName;}
 
     public Button getBtnUnassociated() {return btnUnassociated;}
+
+    public ImageView getImgNetwork() {return imgNetwork;}
 }
