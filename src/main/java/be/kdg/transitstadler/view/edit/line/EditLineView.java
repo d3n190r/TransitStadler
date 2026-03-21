@@ -8,9 +8,8 @@ import be.kdg.transitstadler.view.utils.cellFactory.StationCellFactory;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class EditLineView extends BorderPane {
     private Label lblLineId;
@@ -108,6 +107,14 @@ public class EditLineView extends BorderPane {
 
         LayoutUtils.applyMarginsToChildren(vbCenter, 5);
         LayoutUtils.applyMarginsToChildren(this, 5);
+
+        btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
+        btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
+        btnSave.setTextFill(Color.WHITE);
+        btnDelete.setTextFill(Color.WHITE);
+
+        btnAddStop.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(5), null)));
+        btnDeleteStop.setBackground(new Background(new BackgroundFill(Color.ORANGERED, new CornerRadii(5), null)));
     }
 
     public TextField getTfLineId() {

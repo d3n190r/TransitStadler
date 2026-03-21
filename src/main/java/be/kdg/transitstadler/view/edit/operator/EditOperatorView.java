@@ -4,8 +4,8 @@ import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class EditOperatorView extends VBox {
     private Label lblOperatorId;
@@ -48,6 +48,10 @@ public class EditOperatorView extends VBox {
     private void setNodeMarkup() {
         LayoutUtils.applyMarginsToChildren(hbButtons, 7);
         LayoutUtils.applyMarginsToChildren(this, 5);
+        btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
+        btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
+        btnSave.setTextFill(Color.WHITE);
+        btnDelete.setTextFill(Color.WHITE);
     }
 
     public Button getBtnCancel() {
