@@ -2,9 +2,9 @@ package be.kdg.transitstadler.view.edit.line;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.utils.cellFactory.ComboBoxOperatorCellFactory;
+import be.kdg.transitstadler.view.utils.stringConverter.OperatorStringConverter;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
-import be.kdg.transitstadler.view.utils.cellFactory.StationCellFactory;
+import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -62,10 +62,10 @@ public class EditLineView extends BorderPane {
         tfOperatorId.setDisable(true);
 
         cbOperatorName = new ComboBox<>();
-        cbOperatorName.setConverter(new ComboBoxOperatorCellFactory());
+        cbOperatorName.setConverter(new OperatorStringConverter());
 
         lvStationList = new ListView<>();
-        lvStationList.setCellFactory(new StationCellFactory());
+        lvStationList.setCellFactory(new ListViewStationCellFactory());
 
         btnAddStop = new Button("Add stop");
         btnDeleteStop = new Button("Delete stop");

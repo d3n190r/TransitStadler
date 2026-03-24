@@ -1,21 +1,21 @@
 package be.kdg.transitstadler.view.utils.cellFactory;
 
-import be.kdg.transitstadler.model.businessobject.Line;
+import be.kdg.transitstadler.model.businessobject.Station;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
-public class LineCellFactory implements Callback<ListView<Line>, ListCell<Line>> {
+public class ListViewStationCellFactory implements Callback<ListView<Station>, ListCell<Station>> {
     @Override
-    public ListCell<Line> call(ListView<Line> param) {
+    public ListCell<Station> call(ListView<Station> param) {
         return new ListCell<>(){
             @Override
-            public void updateItem(Line line, boolean empty) {
+            public void updateItem(Station line, boolean empty) {
                 super.updateItem(line, empty);
                 if (empty || line == null) {
                     setText(null);
                 } else {
-                    setText(line.lineName());
+                    setText(line.stationName());
                 }
             }
         };

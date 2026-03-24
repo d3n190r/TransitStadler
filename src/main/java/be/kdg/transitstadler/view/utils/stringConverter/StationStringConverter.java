@@ -1,9 +1,9 @@
-package be.kdg.transitstadler.view.utils.cellFactory;
+package be.kdg.transitstadler.view.utils.stringConverter;
 
 import be.kdg.transitstadler.model.businessobject.Station;
 import javafx.util.StringConverter;
 
-public class ComboBoxStationCellFactory extends StringConverter<Station> {
+public class StationStringConverter extends StringConverter<Station> {
     @Override
     public Station fromString(String string) {
         return null;

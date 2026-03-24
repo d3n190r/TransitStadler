@@ -2,8 +2,8 @@ package be.kdg.transitstadler.view.overview;
 
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.utils.cellFactory.LineCellFactory;
-import be.kdg.transitstadler.view.utils.cellFactory.StationCellFactory;
+import be.kdg.transitstadler.view.utils.cellFactory.ListViewLineCellFactory;
+import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 
 import javafx.geometry.Insets;
@@ -64,11 +64,11 @@ public class OverviewView extends BorderPane {
     private void initialiseNodes() {
         // ListView //
         lvLinesList = new ListView<>();
-        lvLinesList.setCellFactory(new LineCellFactory());
+        lvLinesList.setCellFactory(new ListViewLineCellFactory());
 
 
         lvStationList = new ListView<>();
-        lvStationList.setCellFactory(new StationCellFactory());
+        lvStationList.setCellFactory(new ListViewStationCellFactory());
 
         // Label //
         lblLines = new Label("Lines:");

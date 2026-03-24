@@ -1,7 +1,7 @@
 package be.kdg.transitstadler.view.edit.line.addStop;
 
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.utils.cellFactory.ComboBoxStationCellFactory;
+import be.kdg.transitstadler.view.utils.stringConverter.StationStringConverter;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.FlowPane;
 
@@ -18,7 +18,7 @@ public class AddStopView extends FlowPane {
 
     private void initialiseNodes() {
         cbStations = new ComboBox<>();
-        cbStations.setConverter(new ComboBoxStationCellFactory());
+        cbStations.setConverter(new StationStringConverter());
     }
 
     private void layoutNodes() {

@@ -1,7 +1,7 @@
 package be.kdg.transitstadler.view.create.line;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
-import be.kdg.transitstadler.view.utils.cellFactory.ComboBoxOperatorCellFactory;
+import be.kdg.transitstadler.view.utils.stringConverter.OperatorStringConverter;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -30,7 +30,7 @@ public class CreateLineView extends VBox {
         txtLineName = new TextField();
         lblOperatorId = new Label("Operator ID");
         cbOperatorId = new ComboBox<>();
-        cbOperatorId.setConverter(new ComboBoxOperatorCellFactory());
+        cbOperatorId.setConverter(new OperatorStringConverter());
         btnCreate = new Button("Create");
     }
 

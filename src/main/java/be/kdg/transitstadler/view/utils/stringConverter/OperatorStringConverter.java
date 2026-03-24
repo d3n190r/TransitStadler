@@ -1,9 +1,9 @@
-package be.kdg.transitstadler.view.utils.cellFactory;
+package be.kdg.transitstadler.view.utils.stringConverter;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import javafx.util.StringConverter;
 
-public class ComboBoxOperatorCellFactory extends StringConverter<Operator> {
+public class OperatorStringConverter extends StringConverter<Operator> {
     @Override
     public Operator fromString(String string) {
         return null;

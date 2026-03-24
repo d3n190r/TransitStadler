@@ -3,7 +3,7 @@ package be.kdg.transitstadler.view.unassociatedElements;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewOperatorCellFactory;
-import be.kdg.transitstadler.view.utils.cellFactory.StationCellFactory;
+import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,7 +39,7 @@ public class UnassociatedElementsView extends VBox {
         this.lblOperators = new Label("Operators");
 
         this.lvStations = new ListView<>();
-        this.lvStations.setCellFactory(new StationCellFactory());
+        this.lvStations.setCellFactory(new ListViewStationCellFactory());
 
         this.lvOperator = new ListView<>();
         lvOperator.setCellFactory(new ListViewOperatorCellFactory());
