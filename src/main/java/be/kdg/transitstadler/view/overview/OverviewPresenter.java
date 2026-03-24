@@ -18,6 +18,7 @@ import be.kdg.transitstadler.view.edit.station.EditStationView;
 
 import be.kdg.transitstadler.view.unassociatedElements.UnassociatedElementsPresenter;
 import be.kdg.transitstadler.view.unassociatedElements.UnassociatedElementsView;
+import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -95,10 +96,9 @@ public class OverviewPresenter {
                 EditLineView editLineView = new EditLineView();
                 new EditLinePresenter(model, editLineView, view.getLvLinesList().getSelectionModel().getSelectedItem());
                 Stage editLineStage = new Stage();
-                editLineStage.setTitle("Edit Line");
                 editLineStage.initOwner(view.getScene().getWindow());
                 editLineStage.initModality(Modality.APPLICATION_MODAL);
-                editLineStage.setScene(new Scene(editLineView));
+                LayoutUtils.setupStage(editLineStage, editLineView, "Edit Line");
                 editLineStage.showAndWait();
                 updateView();
             }

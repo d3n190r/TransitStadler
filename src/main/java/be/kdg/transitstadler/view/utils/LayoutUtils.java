@@ -2,14 +2,24 @@ package be.kdg.transitstadler.view.utils;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * @author Igor Goossens (INF 101)
  */
 public class LayoutUtils {
+    public static void setupStage(Stage stage, Parent view, String title) {
+        stage.setTitle(title);
+        stage.setScene(new Scene(view));
+        stage.setResizable(false);
+        stage.sizeToScene();
+    }
+
     /* applyMarginsToChildren gives all !ALREADY ADDED! children of the container the same margin.
      * Already made for the following containers:
      * - HBox

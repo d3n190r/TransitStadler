@@ -135,6 +135,7 @@ public class OverviewView extends BorderPane {
         lblLines.setPadding(new Insets(0, 0, 5, 0));
         // lv
         lvLinesList.setOrientation(Orientation.HORIZONTAL);
+        lvLinesList.setPrefWidth(300);
         lvLinesList.setMinHeight(40);
         lvLinesList.setMaxHeight(40);
         lvLinesList.setCellFactory(new ListViewLineCellFactory());
