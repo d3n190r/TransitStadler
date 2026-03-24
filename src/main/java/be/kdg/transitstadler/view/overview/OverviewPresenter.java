@@ -111,10 +111,8 @@ public class OverviewPresenter {
                 EditOperatorView editOperatorView = new EditOperatorView();
                 new EditOperatorPresenter(model, editOperatorView, model.getOperatorInfo(view.getLvLinesList().getSelectionModel().getSelectedItem().operatorId()));
                 Stage editOperatorStage = new Stage();
-                editOperatorStage.setTitle("Edit Operator");
-                editOperatorStage.initOwner(view.getScene().getWindow());
                 editOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                editOperatorStage.setScene(new Scene(editOperatorView));
+                LayoutUtils.setupStage(editOperatorStage, editOperatorView, "Edit Operator");
                 editOperatorStage.showAndWait();
                 updateView();
             }
@@ -127,10 +125,8 @@ public class OverviewPresenter {
                 EditStationView editStationView = new EditStationView();
                 new EditStationPresenter(model, editStationView, view.getLvStationList().getSelectionModel().getSelectedItem());
                 Stage editStationStage = new Stage();
-                editStationStage.setTitle("Edit Station");
-                editStationStage.initOwner(view.getScene().getWindow());
                 editStationStage.initModality(Modality.APPLICATION_MODAL);
-                editStationStage.setScene(new Scene(editStationView));
+                LayoutUtils.setupStage(editStationStage, editStationView, "Edit Station");
                 editStationStage.showAndWait();
                 updateView();
             }
@@ -161,10 +157,8 @@ public class OverviewPresenter {
                 CreateLineView createLineView = new CreateLineView();
                 new CreateLinePresenter(model, createLineView);
                 Stage createLineStage = new Stage();
-                createLineStage.setTitle("Create Line");
-                createLineStage.initOwner(view.getScene().getWindow());
                 createLineStage.initModality(Modality.APPLICATION_MODAL);
-                createLineStage.setScene(new Scene(createLineView));
+                LayoutUtils.setupStage(createLineStage, createLineView, "Create Line");
                 createLineStage.showAndWait();
                 updateView();
             }
@@ -176,10 +170,8 @@ public class OverviewPresenter {
                 CreateOperatorView createOperatorView = new CreateOperatorView();
                 new CreateOperatorPresenter(model, createOperatorView);
                 Stage createOperatorStage = new Stage();
-                createOperatorStage.setTitle("Create Operator");
-                createOperatorStage.initOwner(view.getScene().getWindow());
                 createOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                createOperatorStage.setScene(new Scene(createOperatorView));
+                LayoutUtils.setupStage(createOperatorStage, createOperatorView, "Create Operator");
                 createOperatorStage.showAndWait();
                 updateView();
             }
@@ -191,10 +183,8 @@ public class OverviewPresenter {
                 CreateStationView createStationView = new CreateStationView();
                 new CreateStationPresenter(model, createStationView);
                 Stage createStationStage = new Stage();
-                createStationStage.setTitle("Create Station");
-                createStationStage.initOwner(view.getScene().getWindow());
                 createStationStage.initModality(Modality.APPLICATION_MODAL);
-                createStationStage.setScene(new Scene(createStationView));
+                LayoutUtils.setupStage(createStationStage, createStationView, "Create Station");
                 createStationStage.showAndWait();
                 updateView();
             }

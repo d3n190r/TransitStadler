@@ -7,6 +7,7 @@ import be.kdg.transitstadler.model.businessobject.Station;
 
 import be.kdg.transitstadler.view.edit.line.addStop.AddStopPresenter;
 import be.kdg.transitstadler.view.edit.line.addStop.AddStopView;
+import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -80,10 +81,8 @@ public class EditLinePresenter {
                 AddStopView addStopView = new AddStopView();
                 new AddStopPresenter(model, addStopView, line);
                 Stage addStopStage = new Stage();
-                addStopStage.setTitle("Add stop");
-                addStopStage.initOwner(view.getScene().getWindow());
                 addStopStage.initModality(Modality.APPLICATION_MODAL);
-                addStopStage.setScene(new Scene(addStopView));
+                LayoutUtils.setupStage(addStopStage, addStopView, "Add Stop");
                 addStopStage.showAndWait();
                 view.getScene().getWindow().hide();
             }

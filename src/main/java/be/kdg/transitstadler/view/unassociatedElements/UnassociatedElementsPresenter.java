@@ -9,9 +9,9 @@ import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
 import be.kdg.transitstadler.view.overview.OverviewPresenter;
 import be.kdg.transitstadler.view.overview.OverviewView;
+import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,10 +33,8 @@ public class UnassociatedElementsPresenter {
                 EditOperatorView editOperatorView = new EditOperatorView();
                 new EditOperatorPresenter(model, editOperatorView, model.getOperatorInfo(view.getLvOperator().getSelectionModel().getSelectedItem().operatorId()));
                 Stage editOperatorStage = new Stage();
-                editOperatorStage.setTitle("Edit Operator");
-                editOperatorStage.initOwner(view.getScene().getWindow());
                 editOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                editOperatorStage.setScene(new Scene(editOperatorView));
+                LayoutUtils.setupStage(editOperatorStage, editOperatorView, "Edit Operator");
                 editOperatorStage.showAndWait();
                 updateView();
             }
@@ -48,10 +46,8 @@ public class UnassociatedElementsPresenter {
                 EditStationView editStationView = new EditStationView();
                 new EditStationPresenter(model, editStationView, view.getLvStations().getSelectionModel().getSelectedItem());
                 Stage editStationStage = new Stage();
-                editStationStage.setTitle("Edit Station");
-                editStationStage.initOwner(view.getScene().getWindow());
                 editStationStage.initModality(Modality.APPLICATION_MODAL);
-                editStationStage.setScene(new Scene(editStationView));
+                LayoutUtils.setupStage(editStationStage, editStationView, "Edit Station");
                 editStationStage.showAndWait();
                 updateView();
             }
