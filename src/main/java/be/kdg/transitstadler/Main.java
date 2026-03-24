@@ -20,6 +20,7 @@ public class Main  extends Application {
         OverviewPresenter presenter = new OverviewPresenter(model, view);
         primaryStage.setScene(new Scene(view));
         primaryStage.setTitle("TransitStadler");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }
