@@ -24,10 +24,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -140,11 +144,23 @@ public class OverviewPresenter {
             }
         });
 
-        this.view.getImgNetwork().setOnDragExited(new EventHandler<>() {
+        this.view.getImgNetwork().setOnDragOver(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                dragEvent.acceptTransferModes(TransferMode.COPY);
+            }
+        });
+
+        this.view.getImgNetwork().setOnDragDropped(new EventHandler<>() {
             @Override
             public void handle(DragEvent mouseEvent) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.showAndWait();
+                Dragboard dragboard = mouseEvent.getDragboard();
+                if (dragboard.hasFiles()) {
+                    File file = dragboard.getFiles().getFirst();
+                    Image image = new Image(file.toURI().toString());
+                    view.getImgNetwork().setImage(image);
+                    view.getScene().getWindow().sizeToScene();
+                }
             }
         });
 

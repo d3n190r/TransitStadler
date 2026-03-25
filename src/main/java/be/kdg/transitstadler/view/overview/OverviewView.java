@@ -177,15 +177,9 @@ public class OverviewView extends BorderPane {
         VBox.setMargin(imgNetwork, new Insets(10, 0, 0, 0));
     }
 
-    // TODO: Documentation
-    public ListView<Line> getLvLinesList() {
-        return lvLinesList;
-    }
+    public ListView<Line> getLvLinesList() {return lvLinesList;}
 
-    // TODO: Documentation
-    public ListView<Station> getLvStationList() {
-        return lvStationList;
-    }
+    public ListView<Station> getLvStationList() {return lvStationList;}
 
     public TextField getTfLineId() {return tfLineId;}
 
