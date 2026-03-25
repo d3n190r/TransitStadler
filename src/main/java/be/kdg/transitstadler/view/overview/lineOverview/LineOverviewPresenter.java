@@ -56,7 +56,10 @@ public class LineOverviewPresenter extends OverviewPresenter {
                         stationList.addAll(newStationList);
                     }
                     view.getTfLineId().setText(String.valueOf(newValue.lineId()));
-                    view.getTfOperatorName().setText(model.getOperatorInfo(newValue.operatorId()).operatorName());
+                    view.getCbOperatorName().getItems().clear();
+                    //view.getTfOperatorName().setText(model.getOperatorInfo(newValue.operatorId()).operatorName());
+                    view.getCbOperatorName().getItems().add(model.getOperatorInfo(newValue.operatorId()));
+                    view.getCbOperatorName().getSelectionModel().select(0);
                     view.getMiEditLine().setDisable(false);
                     view.getMiEditStation().setDisable(true);
                 }

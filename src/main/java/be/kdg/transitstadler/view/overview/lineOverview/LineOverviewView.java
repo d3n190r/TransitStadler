@@ -8,9 +8,11 @@ import be.kdg.transitstadler.view.utils.cellFactory.ListViewLineCellFactory;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 
+import be.kdg.transitstadler.view.utils.stringConverter.OperatorStringConverter;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -26,6 +28,8 @@ import javafx.scene.text.FontWeight;
  */
 public class LineOverviewView extends OverviewView {
     // private Node attributes (javafx.scene.control)
+    private ComboBox<Operator> cbOperatorName;
+
     private Label lblId;
     private Label lblLines;
     private Label lblOperator;
@@ -58,6 +62,8 @@ public class LineOverviewView extends OverviewView {
      */
     private void initialiseNodes() {
         // javafx.scene.control
+        cbOperatorName = new ComboBox<>();
+
         lblId = new Label("Id:");
         lblLines = new Label("Lines:");
         lblOperator = new Label("Operator:");
@@ -88,7 +94,7 @@ public class LineOverviewView extends OverviewView {
         hbLines.getChildren().addAll(lblLines, lvLinesList);
 
         vbTop.getChildren().addAll(hbLines);
-        vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, tfOperatorName, imgNetwork);
+        vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, cbOperatorName, imgNetwork);
         vbStations.getChildren().addAll(lblStations, lvStationList);
     }
 
@@ -96,6 +102,9 @@ public class LineOverviewView extends OverviewView {
      * Changes the appearance of the nodes created in this.initialiseNodes() & this.layoutNodes().
      */
     protected void setNodeMarkup() {
+        cbOperatorName.setConverter(new OperatorStringConverter());
+        cbOperatorName.setDisable(true);
+        cbOperatorName.setMinWidth(300);
         // lbl
         lblLines.setFont(Font.font("System", FontWeight.BOLD, 12));
         lblLines.setAlignment(Pos.CENTER_LEFT);
@@ -130,9 +139,9 @@ public class LineOverviewView extends OverviewView {
 
         // ???
         VBox.setMargin(imgNetwork, new Insets(10, 0, 0, 0));
-
-        miEditOperator.setDisable(true);
     }
+
+    public ComboBox<Operator> getCbOperatorName() {return cbOperatorName;}
 
     public ListView<Line> getLvLinesList() {return lvLinesList;}
 
@@ -140,7 +149,7 @@ public class LineOverviewView extends OverviewView {
 
     public TextField getTfLineId() {return tfLineId;}
 
-    public TextField getTfOperatorName() {return tfOperatorName;}
+    //public TextField getTfOperatorName() {return tfOperatorName;}
 
     public ImageView getImgNetwork() {return imgNetwork;}
 
@@ -151,7 +160,7 @@ public class LineOverviewView extends OverviewView {
 
     @Override
     public Operator getSelectedOperator() {
-        return null;
+        return cbOperatorName.getValue();
     }
 
     @Override
