@@ -12,7 +12,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
@@ -123,6 +122,14 @@ public class EditLinePresenter {
                 view.getBtnSave().setDisable(false);
             }
         });
+
+        this.view.getLvStationList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Station> observableValue, Station station, Station t1) {
+                view.getBtnDeleteStop().setDisable(false);
+            }
+        });
     }
 
     private void updateView() {
@@ -142,5 +149,6 @@ public class EditLinePresenter {
         if (!model.getAllStationsByLine(line.lineId()).isEmpty()) {
             this.view.getBtnDelete().setDisable(true);
         }
+        this.view.getBtnDeleteStop().setDisable(true);
     }
 }
