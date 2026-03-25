@@ -9,10 +9,7 @@ import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -26,12 +23,6 @@ import javafx.scene.text.FontWeight;
  */
 public class OverviewView extends BorderPane {
     // private Node attributes (javafx.scene.control)
-    private Button btnAddLine;
-    private Button btnAddOperator;
-    private Button btnAddStation;
-    private Button btnEditLine;
-    private Button btnEditOperator;
-    private Button btnEditStation;
     private Button btnUnassociated;
 
     private Label lblId;
@@ -42,6 +33,18 @@ public class OverviewView extends BorderPane {
     private ListView<Line> lvLinesList;
     private ListView<Station> lvStationList;
 
+    private Menu menuEdit;
+    private Menu menuAdd;
+
+    private MenuBar menuBar;
+
+    private MenuItem miAddLine;
+    private MenuItem miAddOperator;
+    private MenuItem miAddStation;
+    private MenuItem miEditLine;
+    private MenuItem miEditOperator;
+    private MenuItem miEditStation;
+
     private TextField tfLineId;
     private TextField tfOperatorName;
 
@@ -50,11 +53,10 @@ public class OverviewView extends BorderPane {
 
     // private Node attributes (javafx.scene.layout)
     private HBox hbCenter;
-    private HBox hbEditButtons;
-    private HBox hbInsertButtons;
-    private HBox hbHeader;
+    private HBox hbLines;
+    private HBox hbFooter;
 
-    private VBox vbFooter;
+    private VBox vbHeader;
     private VBox vbLineInfo;
     private VBox vbStations;
 
@@ -69,12 +71,6 @@ public class OverviewView extends BorderPane {
      */
     private void initialiseNodes() {
         // javafx.scene.control
-        btnAddLine = new Button("Add Line");
-        btnAddOperator = new Button("Add Operator");
-        btnAddStation = new Button("Add Station");
-        btnEditLine = new Button("Edit Line");
-        btnEditOperator = new Button("Edit Operator");
-        btnEditStation = new Button("Edit Station");
         btnUnassociated = new Button("Unassociated elements");
 
         lblId = new Label("Id:");
@@ -84,6 +80,21 @@ public class OverviewView extends BorderPane {
 
         lvLinesList = new ListView<>();
         lvStationList = new ListView<>();
+
+        miAddLine = new MenuItem("Add Line");
+        miAddOperator = new MenuItem("Add Operator");
+        miAddStation = new MenuItem("Add Station");
+        miEditLine = new MenuItem("Edit LIne");
+        miEditOperator = new MenuItem("Edit Operator");
+        miEditStation = new MenuItem("Edit Station");
+
+        menuEdit = new Menu("Edit");
+        menuAdd = new Menu("Add");
+        menuEdit.getItems().addAll(miEditLine, miEditOperator, miEditStation);
+        menuAdd.getItems().addAll(miAddLine, miAddOperator, miAddStation);
+
+        menuBar = new MenuBar();
+        menuBar.getMenus().addAll(menuEdit, menuAdd);
 
         tfLineId = new TextField();
         tfOperatorName = new TextField();
@@ -98,28 +109,26 @@ public class OverviewView extends BorderPane {
     private void layoutNodes() {
         // javafx.scene.layout
         hbCenter = new HBox();
-        hbEditButtons = new HBox();
-        hbInsertButtons = new HBox();
-        hbHeader = new HBox();
+        hbLines = new HBox();
+        hbFooter = new HBox();
 
-        vbFooter = new VBox();
+        vbHeader = new VBox();
         vbLineInfo = new VBox();
         vbStations = new VBox();
 
         // Add to Panes
         hbCenter.getChildren().addAll(vbStations, vbLineInfo);
-        hbEditButtons.getChildren().addAll(btnEditLine, btnEditStation, btnEditOperator, btnUnassociated);
-        hbInsertButtons.getChildren().addAll(btnAddLine, btnAddStation, btnAddOperator);
-        hbHeader.getChildren().addAll(lblLines, lvLinesList);
+        hbLines.getChildren().addAll(lblLines, lvLinesList);
+        hbFooter.getChildren().addAll(btnUnassociated);
 
-        vbFooter.getChildren().addAll(hbEditButtons, hbInsertButtons);
+        vbHeader.getChildren().addAll(menuBar, hbLines);
         vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, tfOperatorName, imgNetwork);
         vbStations.getChildren().addAll(lblStations, lvStationList);
 
         // Add to OverviewView
-        this.setBottom(vbFooter);
+        this.setBottom(hbFooter);
         this.setCenter(hbCenter);
-        this.setTop(hbHeader);
+        this.setTop(vbHeader);
     }
 
     /**
@@ -127,6 +136,7 @@ public class OverviewView extends BorderPane {
      */
     private void setNodeMarkup() {
         // btn
+        btnUnassociated.setMinWidth(150);
         // lbl
         lblLines.setFont(Font.font("System", FontWeight.BOLD, 12));
         lblLines.setAlignment(Pos.CENTER_LEFT);
@@ -140,6 +150,8 @@ public class OverviewView extends BorderPane {
         lvLinesList.setMaxHeight(40);
         lvLinesList.setCellFactory(new ListViewLineCellFactory());
         lvStationList.setCellFactory(new ListViewStationCellFactory());
+        // mb
+        menuBar.setMinWidth(300);
         // tf
         tfLineId.setDisable(true);
         tfOperatorName.setDisable(true);
@@ -148,21 +160,16 @@ public class OverviewView extends BorderPane {
         imgNetwork.setFitWidth(300);
         // Panes
         LayoutUtils.applyMarginsToChildren(this, 5);
-        LayoutUtils.applyMarginsToChildren(hbHeader, 5);
+        LayoutUtils.applyMarginsToChildren(hbLines, 5);
         LayoutUtils.applyMarginsToChildren(hbCenter, 5);
-        LayoutUtils.applyMarginsToChildren(hbEditButtons, 5);
-        LayoutUtils.applyMarginsToChildren(hbInsertButtons, 5);
             // HBox
-        hbHeader.setMinHeight(40);
-        hbHeader.setMaxHeight(40);
-        hbInsertButtons.setAlignment(Pos.TOP_CENTER);
-        hbEditButtons.setAlignment(Pos.TOP_CENTER);
-        hbHeader.setAlignment(Pos.CENTER);
+        hbLines.setAlignment(Pos.CENTER);
         hbCenter.setAlignment(Pos.CENTER);
             // VBox
-        vbFooter.setAlignment(Pos.CENTER);
+        hbFooter.setAlignment(Pos.TOP_CENTER);
         vbStations.setAlignment(Pos.CENTER);
         vbLineInfo.setAlignment(Pos.TOP_CENTER);
+        vbHeader.setAlignment(Pos.TOP_CENTER);
             // OverviewView
         this.setPrefSize(600, 500);
 
@@ -180,12 +187,6 @@ public class OverviewView extends BorderPane {
         return lvStationList;
     }
 
-    public Button getBtnEditStation() {return btnEditStation;}
-
-    public Button getBtnEditLine() {return btnEditLine;}
-
-    public Button getBtnEditOperator() {return btnEditOperator;}
-
     public TextField getTfLineId() {return tfLineId;}
 
     public TextField getTfOperatorName() {return tfOperatorName;}
@@ -194,9 +195,15 @@ public class OverviewView extends BorderPane {
 
     public ImageView getImgNetwork() {return imgNetwork;}
 
-    public Button getBtnAddLine() {return btnAddLine;}
+    public MenuItem getMiEditLine() {return miEditLine;}
 
-    public Button getBtnAddStation() {return btnAddStation;}
+    public MenuItem getMiEditOperator() {return miEditOperator;}
 
-    public Button getBtnAddOperator() {return btnAddOperator;}
+    public MenuItem getMiEditStation() {return miEditStation;}
+
+    public MenuItem getMiAddLine() {return miAddLine;}
+
+    public MenuItem getMiAddOperator() {return miAddOperator;}
+
+    public MenuItem getMiAddStation() {return miAddStation;}
 }

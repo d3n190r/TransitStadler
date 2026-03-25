@@ -23,7 +23,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.DragEvent;
 import javafx.stage.Modality;
@@ -58,9 +57,9 @@ public class OverviewPresenter {
             @Override
             public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
                 if (newValue == null) {
-                    view.getBtnEditLine().setDisable(true);
-                    view.getBtnEditStation().setDisable(true);
-                    view.getBtnEditOperator().setDisable(true);
+                    view.getMiEditLine().setDisable(true);
+                    view.getMiEditStation().setDisable(true);
+                    view.getMiEditOperator().setDisable(true);
                     return;
                 }
                 List<Station> stationList = view.getLvStationList().getItems();
@@ -73,9 +72,9 @@ public class OverviewPresenter {
                     view.getTfLineId().setText(String.valueOf(newValue.lineId()));
                     view.getTfOperatorName().setText(model.getOperatorInfo(newValue.operatorId()).operatorName());
                 }
-                view.getBtnEditLine().setDisable(false);
-                view.getBtnEditOperator().setDisable(false);
-                view.getBtnEditStation().setDisable(true);
+                view.getMiEditLine().setDisable(false);
+                view.getMiEditOperator().setDisable(false);
+                view.getMiEditStation().setDisable(true);
             }
         });
 
@@ -83,14 +82,12 @@ public class OverviewPresenter {
         this.view.getLvStationList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Station> observableValue, Station station, Station t1) {
-                if (view.getBtnEditStation().isDisabled()) {
-                    view.getBtnEditStation().setDisable(false);
-                }
+                view.getMiEditStation().setDisable(false);
             }
         });
 
         // When editLine gets clicked
-        this.view.getBtnEditLine().setOnAction(new EventHandler<>() {
+        this.view.getMiEditLine().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditLineView editLineView = new EditLineView();
@@ -105,7 +102,7 @@ public class OverviewPresenter {
         });
 
         // When editOperator gets clicked
-        this.view.getBtnEditOperator().setOnAction(new EventHandler<>() {
+        this.view.getMiEditOperator().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditOperatorView editOperatorView = new EditOperatorView();
@@ -119,7 +116,7 @@ public class OverviewPresenter {
         });
 
         // When editStation gets clicked
-        this.view.getBtnEditStation().setOnAction(new  EventHandler<>() {
+        this.view.getMiEditStation().setOnAction(new  EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 EditStationView editStationView = new EditStationView();
@@ -151,7 +148,7 @@ public class OverviewPresenter {
             }
         });
 
-        this.view.getBtnAddLine().setOnAction(new EventHandler<>() {
+        this.view.getMiAddLine().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 CreateLineView createLineView = new CreateLineView();
@@ -164,7 +161,7 @@ public class OverviewPresenter {
             }
         });
 
-        this.view.getBtnAddOperator().setOnAction(new EventHandler<>() {
+        this.view.getMiAddOperator().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 CreateOperatorView createOperatorView = new CreateOperatorView();
@@ -177,7 +174,7 @@ public class OverviewPresenter {
             }
         });
 
-        this.view.getBtnAddStation().setOnAction(new EventHandler<>() {
+        this.view.getMiAddStation().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 CreateStationView createStationView = new CreateStationView();
