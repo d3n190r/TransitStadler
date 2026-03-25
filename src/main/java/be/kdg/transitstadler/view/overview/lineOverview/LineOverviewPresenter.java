@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.overview;
+package be.kdg.transitstadler.view.overview.lineOverview;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
@@ -16,14 +16,13 @@ import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
 import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
 
-import be.kdg.transitstadler.view.unassociatedElements.UnassociatedElementsPresenter;
-import be.kdg.transitstadler.view.unassociatedElements.UnassociatedElementsView;
+import be.kdg.transitstadler.view.overview.generalOverview.GeneralOverviewPresenter;
+import be.kdg.transitstadler.view.overview.generalOverview.GeneralOverviewView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -37,15 +36,15 @@ import java.util.List;
 /**
  * @author Igor Goossens (INF 101)
  */
-public class OverviewPresenter {
+public class LineOverviewPresenter {
     private final TransitStadlerModel model;
-    private final OverviewView view;
+    private final LineOverviewView view;
 
     /**
      * @param model The model that handles the data.
      * @param view The view that interacts with the user.
      */
-    public OverviewPresenter(TransitStadlerModel model, OverviewView view) {
+    public LineOverviewPresenter(TransitStadlerModel model, LineOverviewView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();
@@ -137,10 +136,10 @@ public class OverviewPresenter {
         this.view.getBtnUnassociated().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                UnassociatedElementsView unassociatedElementsView = new UnassociatedElementsView();
-                new UnassociatedElementsPresenter(model, unassociatedElementsView);
-                view.getScene().setRoot(unassociatedElementsView);
-                unassociatedElementsView.getScene().getWindow().sizeToScene();
+                GeneralOverviewView generalOverviewView = new GeneralOverviewView();
+                new GeneralOverviewPresenter(model, generalOverviewView);
+                view.getScene().setRoot(generalOverviewView);
+                generalOverviewView.getScene().getWindow().sizeToScene();
             }
         });
 

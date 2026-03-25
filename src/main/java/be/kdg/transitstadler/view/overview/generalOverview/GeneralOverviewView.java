@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.unassociatedElements;
+package be.kdg.transitstadler.view.overview.generalOverview;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class UnassociatedElementsView extends VBox {
+public class GeneralOverviewView extends VBox {
     private Label lblStations;
     private Label lblOperators;
 
@@ -28,7 +28,7 @@ public class UnassociatedElementsView extends VBox {
 
     private HBox hbLists;
 
-    public UnassociatedElementsView() {
+    public GeneralOverviewView() {
         this.initialiseNodes();
         this.layoutNodes();
         this.setNodeMarkup();

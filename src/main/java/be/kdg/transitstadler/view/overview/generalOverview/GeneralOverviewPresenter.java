@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.unassociatedElements;
+package be.kdg.transitstadler.view.overview.generalOverview;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Operator;
@@ -7,19 +7,19 @@ import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
 import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
 import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
-import be.kdg.transitstadler.view.overview.OverviewPresenter;
-import be.kdg.transitstadler.view.overview.OverviewView;
+import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewPresenter;
+import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UnassociatedElementsPresenter {
+public class GeneralOverviewPresenter {
     private final TransitStadlerModel model;
-    private final UnassociatedElementsView view;
+    private final GeneralOverviewView view;
 
-    public UnassociatedElementsPresenter(TransitStadlerModel model, UnassociatedElementsView view) {
+    public GeneralOverviewPresenter(TransitStadlerModel model, GeneralOverviewView view) {
         this.model = model;
         this.view = view;
         this.addEventHandlers();
@@ -56,10 +56,10 @@ public class UnassociatedElementsPresenter {
         this.view.getBtnBackToLineOverview().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                OverviewView overviewView = new OverviewView();
-                new OverviewPresenter(model, overviewView);
-                view.getScene().setRoot(overviewView);
-                overviewView.getScene().getWindow().sizeToScene();
+                LineOverviewView lineOverviewView = new LineOverviewView();
+                new LineOverviewPresenter(model, lineOverviewView);
+                view.getScene().setRoot(lineOverviewView);
+                lineOverviewView.getScene().getWindow().sizeToScene();
             }
         });
     }

@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.overview;
+package be.kdg.transitstadler.view.overview.lineOverview;
 
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
@@ -21,7 +21,7 @@ import javafx.scene.text.FontWeight;
 /**
  * @author Igor Goossens (INF 101)
  */
-public class OverviewView extends BorderPane {
+public class LineOverviewView extends BorderPane {
     // private Node attributes (javafx.scene.control)
     private Button btnUnassociated;
 
@@ -60,7 +60,7 @@ public class OverviewView extends BorderPane {
     private VBox vbLineInfo;
     private VBox vbStations;
 
-    public OverviewView() {
+    public LineOverviewView() {
         this.initialiseNodes();
         this.layoutNodes();
         this.setNodeMarkup();
