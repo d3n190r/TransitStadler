@@ -1,34 +1,30 @@
 package be.kdg.transitstadler.view.overview.generalOverview;
 
+import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.overview.OverviewView;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewOperatorCellFactory;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class GeneralOverviewView extends VBox {
+public class GeneralOverviewView extends OverviewView {
     private Label lblStations;
     private Label lblOperators;
 
     private ListView<Station> lvStations;
     private ListView<Operator> lvOperator;
 
-    private Button btnEditStation;
-    private Button btnEditOperator;
-    private Button btnBackToLineOverview;
-
     private VBox vbStations;
     private VBox vbOperator;
 
-    private HBox hbLists;
-
     public GeneralOverviewView() {
+        super("Line Overview");
         this.initialiseNodes();
         this.layoutNodes();
         this.setNodeMarkup();
@@ -43,19 +39,13 @@ public class GeneralOverviewView extends VBox {
 
         this.lvOperator = new ListView<>();
         lvOperator.setCellFactory(new ListViewOperatorCellFactory());
-
-        btnEditStation = new Button("Edit station");
-        btnEditOperator = new Button("Edit operator");
-        btnBackToLineOverview = new Button("Back to line overview");
     }
 
     private void layoutNodes() {
-        vbStations = new VBox(lblStations, lvStations, btnEditStation);
-        vbOperator = new VBox(lblOperators, lvOperator, btnEditOperator);
+        vbStations = new VBox(lblStations, lvStations);
+        vbOperator = new VBox(lblOperators, lvOperator);
 
-        hbLists = new HBox(vbStations, vbOperator);
-
-        this.getChildren().setAll(hbLists, btnBackToLineOverview);
+        this.hbCenter.getChildren().addAll(vbStations, vbOperator);
     }
 
     private void setNodeMarkup() {
@@ -65,28 +55,30 @@ public class GeneralOverviewView extends VBox {
         HBox.setHgrow(vbStations, Priority.ALWAYS);
         HBox.setHgrow(vbOperator, Priority.ALWAYS);
 
-        this.setAlignment(Pos.TOP_CENTER);
-        this.setFillWidth(true);
+        this.lvStations.setPrefWidth(300);
+        this.lvOperator.setPrefWidth(300);
+
         this.setPrefSize(600, 500);
+
+        this.miEditLine.setDisable(true);
     }
 
-    public Button getBtnEditStation() {
-        return btnEditStation;
+    public ListView<Station> getLvStations() {return lvStations;}
+
+    public ListView<Operator> getLvOperator() {return lvOperator;}
+
+    @Override
+    public Line getSelectedLine() {
+        return null;
     }
 
-    public Button getBtnEditOperator() {
-        return btnEditOperator;
+    @Override
+    public Operator getSelectedOperator() {
+        return lvOperator.getSelectionModel().getSelectedItem();
     }
 
-    public Button getBtnBackToLineOverview() {
-        return btnBackToLineOverview;
-    }
-
-    public ListView<Station> getLvStations() {
-        return lvStations;
-    }
-
-    public ListView<Operator> getLvOperator() {
-        return lvOperator;
+    @Override
+    public Station getSelectedStation() {
+        return lvStations.getSelectionModel().getSelectedItem();
     }
 }

@@ -3,22 +3,10 @@ package be.kdg.transitstadler.view.overview.lineOverview;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.create.line.CreateLinePresenter;
-import be.kdg.transitstadler.view.create.line.CreateLineView;
-import be.kdg.transitstadler.view.create.operator.CreateOperatorPresenter;
-import be.kdg.transitstadler.view.create.operator.CreateOperatorView;
-import be.kdg.transitstadler.view.create.station.CreateStationPresenter;
-import be.kdg.transitstadler.view.create.station.CreateStationView;
-import be.kdg.transitstadler.view.edit.line.EditLinePresenter;
-import be.kdg.transitstadler.view.edit.line.EditLineView;
-import be.kdg.transitstadler.view.edit.operator.EditOperatorPresenter;
-import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
-import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
-import be.kdg.transitstadler.view.edit.station.EditStationView;
 
+import be.kdg.transitstadler.view.overview.OverviewPresenter;
 import be.kdg.transitstadler.view.overview.generalOverview.GeneralOverviewPresenter;
 import be.kdg.transitstadler.view.overview.generalOverview.GeneralOverviewView;
-import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -27,8 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.List;
@@ -36,8 +22,7 @@ import java.util.List;
 /**
  * @author Igor Goossens (INF 101)
  */
-public class LineOverviewPresenter {
-    private final TransitStadlerModel model;
+public class LineOverviewPresenter extends OverviewPresenter {
     private final LineOverviewView view;
 
     /**
@@ -45,7 +30,7 @@ public class LineOverviewPresenter {
      * @param view The view that interacts with the user.
      */
     public LineOverviewPresenter(TransitStadlerModel model, LineOverviewView view) {
-        this.model = model;
+        super(model, view);
         this.view = view;
         this.addEventHandlers();
         this.updateView();
@@ -61,23 +46,20 @@ public class LineOverviewPresenter {
             public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
                 if (newValue == null) {
                     view.getMiEditLine().setDisable(true);
-                    view.getMiEditStation().setDisable(true);
                     view.getMiEditOperator().setDisable(true);
                     return;
-                }
-                List<Station> stationList = view.getLvStationList().getItems();
-                stationList.clear();
-                List<Station> newStationList = model.getAllStationsByLine(newValue.lineId());
-                if (newStationList != null) {
-                    for (Station currentStation : newStationList) {
-                        view.getLvStationList().getItems().add(currentStation);
+                } else {
+                    List<Station> stationList = view.getLvStationList().getItems();
+                    stationList.clear();
+                    List<Station> newStationList = model.getAllStationsByLine(newValue.lineId());
+                    if (newStationList != null) {
+                        stationList.addAll(newStationList);
                     }
                     view.getTfLineId().setText(String.valueOf(newValue.lineId()));
                     view.getTfOperatorName().setText(model.getOperatorInfo(newValue.operatorId()).operatorName());
+                    view.getMiEditLine().setDisable(false);
+                    view.getMiEditStation().setDisable(true);
                 }
-                view.getMiEditLine().setDisable(false);
-                view.getMiEditOperator().setDisable(false);
-                view.getMiEditStation().setDisable(true);
             }
         });
 
@@ -89,51 +71,8 @@ public class LineOverviewPresenter {
             }
         });
 
-        // When editLine gets clicked
-        this.view.getMiEditLine().setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                EditLineView editLineView = new EditLineView();
-                new EditLinePresenter(model, editLineView, view.getLvLinesList().getSelectionModel().getSelectedItem());
-                Stage editLineStage = new Stage();
-                editLineStage.initOwner(view.getScene().getWindow());
-                editLineStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(editLineStage, editLineView, "Edit Line");
-                editLineStage.showAndWait();
-                updateView();
-            }
-        });
-
-        // When editOperator gets clicked
-        this.view.getMiEditOperator().setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                EditOperatorView editOperatorView = new EditOperatorView();
-                new EditOperatorPresenter(model, editOperatorView, model.getOperatorInfo(view.getLvLinesList().getSelectionModel().getSelectedItem().operatorId()));
-                Stage editOperatorStage = new Stage();
-                editOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(editOperatorStage, editOperatorView, "Edit Operator");
-                editOperatorStage.showAndWait();
-                updateView();
-            }
-        });
-
-        // When editStation gets clicked
-        this.view.getMiEditStation().setOnAction(new  EventHandler<>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                EditStationView editStationView = new EditStationView();
-                new EditStationPresenter(model, editStationView, view.getLvStationList().getSelectionModel().getSelectedItem());
-                Stage editStationStage = new Stage();
-                editStationStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(editStationStage, editStationView, "Edit Station");
-                editStationStage.showAndWait();
-                updateView();
-            }
-        });
-
         // When toUnassociated gets clicked
-        this.view.getBtnUnassociated().setOnAction(new EventHandler<>() {
+        this.view.getBtnSwitchOverview().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 GeneralOverviewView generalOverviewView = new GeneralOverviewView();
@@ -162,51 +101,13 @@ public class LineOverviewPresenter {
                 }
             }
         });
-
-        this.view.getMiAddLine().setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                CreateLineView createLineView = new CreateLineView();
-                new CreateLinePresenter(model, createLineView);
-                Stage createLineStage = new Stage();
-                createLineStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(createLineStage, createLineView, "Create Line");
-                createLineStage.showAndWait();
-                updateView();
-            }
-        });
-
-        this.view.getMiAddOperator().setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                CreateOperatorView createOperatorView = new CreateOperatorView();
-                new CreateOperatorPresenter(model, createOperatorView);
-                Stage createOperatorStage = new Stage();
-                createOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(createOperatorStage, createOperatorView, "Create Operator");
-                createOperatorStage.showAndWait();
-                updateView();
-            }
-        });
-
-        this.view.getMiAddStation().setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                CreateStationView createStationView = new CreateStationView();
-                new CreateStationPresenter(model, createStationView);
-                Stage createStationStage = new Stage();
-                createStationStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(createStationStage, createStationView, "Create Station");
-                createStationStage.showAndWait();
-                updateView();
-            }
-        });
     }
 
     /**
      * Puts the data from the model in the view.
      */
-    private void updateView() {
+    @Override
+    protected void updateView() {
         view.getLvStationList().getItems().clear();
         for (Station currentStation: model.getAllStations()) {
             view.getLvStationList().getItems().add(currentStation);
@@ -215,7 +116,6 @@ public class LineOverviewPresenter {
         for (Line currentLine: model.getAllLines()) {
             view.getLvLinesList().getItems().add(currentLine);
         }
-
         view.getLvLinesList().getSelectionModel().select(0);
     }
 }
