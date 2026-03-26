@@ -6,7 +6,6 @@ import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewPresenter;
 import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
 
 public class LoginPresenter {
     private final TransitStadlerModel model;
