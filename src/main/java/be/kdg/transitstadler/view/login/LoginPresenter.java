@@ -22,7 +22,7 @@ public class LoginPresenter {
         this.view.getBtnLogin().setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                DatabaseConnector.setServerLocation(view.getTfDatabase().getText());
+                DatabaseConnector.setServerLocation(view.getCbDatabase().getSelectionModel().getSelectedItem());
                 DatabaseConnector.setUsername(view.getTfUsername().getText());
                 DatabaseConnector.setPassword(view.getTfPassword().getText());
                 if (DatabaseConnector.getConnection() != null) {

@@ -3,6 +3,8 @@ package be.kdg.transitstadler.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnector {
     private static Connection connection = null;
@@ -39,6 +41,12 @@ public class DatabaseConnector {
             System.err.println("[DatabaseConnector.closeConnection()] An error occurred while closing the connection.");
         }
         connection = null;
+    }
+
+    public static List<String> getDatabaseNames() {
+        ArrayList<String> databaseNames = new ArrayList<>();
+        databaseNames.add("jdbc:hsqldb:file:Database/TransitStadler");
+        return databaseNames;
     }
 
     public static void setServerLocation(String newServerLocation) {serverLocation = newServerLocation;}
