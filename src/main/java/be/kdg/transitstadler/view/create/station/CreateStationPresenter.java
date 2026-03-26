@@ -43,6 +43,13 @@ public class CreateStationPresenter {
                 view.getBtnCreate().setDisable(false);
             }
         });
+
+        this.view.getBtnCancel().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.getScene().getWindow().hide();
+            }
+        });
     }
 
     private void updateView() {this.view.getBtnCreate().setDisable(true);}
