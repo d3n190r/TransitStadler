@@ -43,6 +43,13 @@ public class CreateOperatorPresenter {
                 view.getBtnCreateOperator().setDisable(false);
             }
         });
+
+        this.view.getBtnCancel().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                view.getScene().getWindow().hide();
+            }
+        });
     }
 
     private void updateView() {this.view.getBtnCreateOperator().setDisable(true);}

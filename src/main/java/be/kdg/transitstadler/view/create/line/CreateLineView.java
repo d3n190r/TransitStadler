@@ -52,7 +52,10 @@ public class CreateLineView extends VBox {
         LayoutUtils.applyMarginsToChildren(this.hbOperatorId, 5);
         LayoutUtils.applyMarginsToChildren(this.hbButtons, 5);
         this.hbButtons.setAlignment(Pos.TOP_CENTER);
-        this.btnCreate.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(5), null)));
+        this.btnCreate.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
+        this.btnCreate.setTextFill(Color.WHITE);
+        this.hbLineName.setAlignment(Pos.CENTER);
+        this.hbOperatorId.setAlignment(Pos.CENTER);
     }
 
     public Button getBtnCancel() {return this.btnCancel;}
