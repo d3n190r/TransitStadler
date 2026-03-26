@@ -2,6 +2,7 @@ package be.kdg.transitstadler.view.edit.station;
 
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -49,6 +50,8 @@ public class EditStationView extends VBox {
 
     private void setNodeMarkup() {
         LayoutUtils.applyMarginsToChildren(this, 5);
+        LayoutUtils.applyMarginsToChildren(this.hbButtons, 5);
+        this.hbButtons.setAlignment(Pos.TOP_CENTER);
         btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
         btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
         btnSave.setFont(new Font("FreeSerif", 12));

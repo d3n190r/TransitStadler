@@ -46,8 +46,6 @@ public class LineOverviewPresenter extends OverviewPresenter {
             public void changed(ObservableValue<? extends Line> observableValue, Line oldValue, Line newValue) {
                 if (newValue == null) {
                     view.getMiEditLine().setDisable(true);
-                    view.getMiEditOperator().setDisable(true);
-                    return;
                 } else {
                     List<Station> stationList = view.getLvStationList().getItems();
                     stationList.clear();
