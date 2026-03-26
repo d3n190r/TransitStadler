@@ -14,7 +14,6 @@ import be.kdg.transitstadler.view.edit.operator.EditOperatorView;
 import be.kdg.transitstadler.view.edit.station.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.station.EditStationView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Modality;

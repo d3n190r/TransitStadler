@@ -13,11 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-/**
- * @author Igor Goossens (INF 101)
- */
 public abstract class OverviewView extends BorderPane {
-    // private Node attributes (javafx.scene.control)
     protected Button btnSwitchOverview;
 
     protected Menu menuAdd;
@@ -32,14 +28,13 @@ public abstract class OverviewView extends BorderPane {
     protected MenuItem miEditOperator;
     protected MenuItem miEditStation;
 
-    // private Node attributes (javafx.scene.layout)
     protected HBox hbCenter;
 
     protected VBox vbBottom;
     protected VBox vbTop;
 
     protected OverviewView(String switchButtonName) {
-        btnSwitchOverview = new Button(switchButtonName);
+        this.btnSwitchOverview = new Button(switchButtonName);
         this.initialiseNodes();
         this.layoutNodes();
         this.setNodeMarkup();
@@ -63,9 +58,9 @@ public abstract class OverviewView extends BorderPane {
     }
 
     private void layoutNodes() {
-        this.vbBottom = new VBox(btnSwitchOverview);
+        this.vbBottom = new VBox(this.btnSwitchOverview);
         this.hbCenter = new HBox();
-        this.vbTop = new VBox(menuBar);
+        this.vbTop = new VBox(this.menuBar);
 
         this.setBottom(this.vbBottom);
         this.setCenter(this.hbCenter);
@@ -73,29 +68,34 @@ public abstract class OverviewView extends BorderPane {
     }
 
     private void setNodeMarkup() {
-        btnSwitchOverview.setMinWidth(175);
+        this.menuBar.setMinWidth(600);
 
-        vbTop.setAlignment(Pos.TOP_CENTER);
+        this.btnSwitchOverview.setMinWidth(175);
 
-        hbCenter.setAlignment(Pos.CENTER);
+        this.vbTop.setAlignment(Pos.TOP_CENTER);
 
-        vbBottom.setAlignment(Pos.TOP_CENTER);
+        this.hbCenter.setAlignment(Pos.CENTER);
+
+        this.vbBottom.setAlignment(Pos.TOP_CENTER);
+
         LayoutUtils.applyMarginsToChildren(this.vbBottom, 5);
+
+        this.setPrefSize(600, 500);
     }
 
-    public Button getBtnSwitchOverview() {return btnSwitchOverview;}
+    public Button getBtnSwitchOverview() {return this.btnSwitchOverview;}
 
-    public MenuItem getMiEditLine() {return miEditLine;}
+    public MenuItem getMiEditLine() {return this.miEditLine;}
 
-    public MenuItem getMiEditOperator() {return miEditOperator;}
+    public MenuItem getMiEditOperator() {return this.miEditOperator;}
 
-    public MenuItem getMiEditStation() {return miEditStation;}
+    public MenuItem getMiEditStation() {return this.miEditStation;}
 
-    public MenuItem getMiAddLine() {return miAddLine;}
+    public MenuItem getMiAddLine() {return this.miAddLine;}
 
-    public MenuItem getMiAddOperator() {return miAddOperator;}
+    public MenuItem getMiAddOperator() {return this.miAddOperator;}
 
-    public MenuItem getMiAddStation() {return miAddStation;}
+    public MenuItem getMiAddStation() {return this.miAddStation;}
 
     public abstract Line getSelectedLine();
 

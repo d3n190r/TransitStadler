@@ -4,7 +4,6 @@ import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
-
 import be.kdg.transitstadler.view.edit.line.addStop.AddStopPresenter;
 import be.kdg.transitstadler.view.edit.line.addStop.AddStopView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
@@ -17,7 +16,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.util.function.Consumer;
 
 public class EditLinePresenter {
@@ -133,20 +131,20 @@ public class EditLinePresenter {
     }
 
     private void updateView() {
-        this.view.getTfLineName().setText(line.lineName());
-        this.view.getTfLineId().setText(String.valueOf(line.lineId()));
-        this.view.getTfOperatorId().setText(String.valueOf(line.operatorId()));
+        this.view.getTfLineName().setText(this.line.lineName());
+        this.view.getTfLineId().setText(String.valueOf(this.line.lineId()));
+        this.view.getTfOperatorId().setText(String.valueOf(this.line.operatorId()));
         this.view.getCbOperatorName().getItems().clear();
-        for (Operator currentOperator : model.getAllOperators()) {
+        for (Operator currentOperator : this.model.getAllOperators()) {
             this.view.getCbOperatorName().getItems().add(currentOperator);
             if (currentOperator.operatorId() == line.operatorId()) {
                 this.view.getCbOperatorName().getSelectionModel().select(currentOperator);
             }
         }
-        for (Station station : model.getAllStationsByLine(line.lineId())) {
+        for (Station station : this.model.getAllStationsByLine(this.line.lineId())) {
             this.view.getLvStationList().getItems().add(station);
         }
-        if (!model.getAllStationsByLine(line.lineId()).isEmpty()) {
+        if (!this.model.getAllStationsByLine(line.lineId()).isEmpty()) {
             this.view.getBtnDelete().setDisable(true);
         }
         this.view.getBtnDeleteStop().setDisable(true);

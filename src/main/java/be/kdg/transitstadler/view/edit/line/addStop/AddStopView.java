@@ -8,8 +8,6 @@ import javafx.scene.layout.FlowPane;
 public class AddStopView extends FlowPane {
     private ComboBox<Station> cbStations;
 
-
-
     public AddStopView() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -17,17 +15,13 @@ public class AddStopView extends FlowPane {
     }
 
     private void initialiseNodes() {
-        cbStations = new ComboBox<>();
-        cbStations.setConverter(new StationStringConverter());
+        this.cbStations = new ComboBox<>();
+        this.cbStations.setConverter(new StationStringConverter());
     }
 
-    private void layoutNodes() {
-        this.getChildren().add(cbStations);
-    }
+    private void layoutNodes() {this.getChildren().add(this.cbStations);}
 
     private void setNodeMarkup() {}
 
-    public ComboBox<Station> getCbStations() {
-        return cbStations;
-    }
+    public ComboBox<Station> getCbStations() {return this.cbStations;}
 }

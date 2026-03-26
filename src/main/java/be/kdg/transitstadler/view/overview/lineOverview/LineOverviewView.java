@@ -4,10 +4,9 @@ import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.overview.OverviewView;
+import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewLineCellFactory;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
-import be.kdg.transitstadler.view.utils.LayoutUtils;
-
 import be.kdg.transitstadler.view.utils.stringConverter.OperatorStringConverter;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -23,11 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-/**
- * @author Igor Goossens (INF 101)
- */
 public class LineOverviewView extends OverviewView {
-    // private Node attributes (javafx.scene.control)
     private ComboBox<Operator> cbOperatorName;
 
     private Label lblId;
@@ -39,12 +34,9 @@ public class LineOverviewView extends OverviewView {
     private ListView<Station> lvStationList;
 
     private TextField tfLineId;
-    private TextField tfOperatorName;
 
-    // private Node attributes (javafx.scene.image)
     private ImageView imgNetwork;
 
-    // private Node attributes (javafx.scene.layout)
     private HBox hbLines;
 
     private VBox vbLineInfo;
@@ -57,114 +49,85 @@ public class LineOverviewView extends OverviewView {
         this.setNodeMarkup();
     }
 
-    /**
-     * Creates all the required nodes for the view (this doesn't include the panes).
-     */
     private void initialiseNodes() {
-        // javafx.scene.control
-        cbOperatorName = new ComboBox<>();
+        this.cbOperatorName = new ComboBox<>();
 
-        lblId = new Label("Id:");
-        lblLines = new Label("Lines:");
-        lblOperator = new Label("Operator:");
-        lblStations = new Label("Stations:");
+        this.lblId = new Label("Id:");
+        this.lblLines = new Label("Lines:");
+        this.lblOperator = new Label("Operator:");
+        this.lblStations = new Label("Stations:");
 
-        lvLinesList = new ListView<>();
-        lvStationList = new ListView<>();
+        this.lvLinesList = new ListView<>();
+        this.lvStationList = new ListView<>();
 
-        tfLineId = new TextField();
-        tfOperatorName = new TextField();
+        this.tfLineId = new TextField();
 
-        // javafx.scene.image
-        imgNetwork = new ImageView(new Image("networkMap.png"));
+        this.imgNetwork = new ImageView(new Image("networkMap.png"));
     }
 
-    /**
-     * Creates the panes and adds the nodes from this.initialiseNodes() to them.
-     */
     private void layoutNodes() {
-        // javafx.scene.layout
-        hbLines = new HBox();
+        this.hbLines = new HBox();
 
-        vbLineInfo = new VBox();
-        vbStations = new VBox();
+        this.vbLineInfo = new VBox();
+        this.vbStations = new VBox();
 
-        // Add to Panes
-        hbCenter.getChildren().addAll(vbStations, vbLineInfo);
-        hbLines.getChildren().addAll(lblLines, lvLinesList);
+        this.hbCenter.getChildren().addAll(this.vbStations, this.vbLineInfo);
+        this.hbLines.getChildren().addAll(this.lblLines, this.lvLinesList);
 
-        vbTop.getChildren().addAll(hbLines);
-        vbLineInfo.getChildren().addAll(lblId, tfLineId, lblOperator, cbOperatorName, imgNetwork);
-        vbStations.getChildren().addAll(lblStations, lvStationList);
+        this.vbTop.getChildren().addAll(this.hbLines);
+        this.vbLineInfo.getChildren().addAll(this.lblId, this.tfLineId, this.lblOperator, this.cbOperatorName, this.imgNetwork);
+        this.vbStations.getChildren().addAll(this.lblStations, this.lvStationList);
     }
 
-    /**
-     * Changes the appearance of the nodes created in this.initialiseNodes() & this.layoutNodes().
-     */
     protected void setNodeMarkup() {
-        cbOperatorName.setConverter(new OperatorStringConverter());
-        cbOperatorName.setDisable(true);
-        cbOperatorName.setMinWidth(300);
-        // lbl
-        lblLines.setFont(Font.font("System", FontWeight.BOLD, 12));
-        lblLines.setAlignment(Pos.CENTER_LEFT);
-        lblLines.setMinHeight(40);
-        lblLines.setMaxHeight(40);
-        lblLines.setPadding(new Insets(0, 0, 5, 0));
-        // lv
-        lvLinesList.setOrientation(Orientation.HORIZONTAL);
-        lvLinesList.setPrefWidth(300);
-        lvLinesList.setMinHeight(40);
-        lvLinesList.setMaxHeight(40);
-        lvLinesList.setCellFactory(new ListViewLineCellFactory());
-        lvStationList.setCellFactory(new ListViewStationCellFactory());
-        // mb
-        menuBar.setMinWidth(300);
-        // tf
-        tfLineId.setDisable(true);
-        tfOperatorName.setDisable(true);
-        // imageview
-        imgNetwork.setPreserveRatio(true);
-        imgNetwork.setFitWidth(300);
-        // Panes
-        LayoutUtils.applyMarginsToChildren(hbLines, 5);
-        LayoutUtils.applyMarginsToChildren(hbCenter, 5);
-            // HBox
-        hbLines.setAlignment(Pos.CENTER);
-            // VBox
-        vbStations.setAlignment(Pos.CENTER);
-        vbLineInfo.setAlignment(Pos.TOP_CENTER);
-            // OverviewView
-        this.setPrefSize(600, 500);
+        this.cbOperatorName.setConverter(new OperatorStringConverter());
+        this.cbOperatorName.setDisable(true);
+        this.cbOperatorName.setMinWidth(300);
 
-        // ???
-        VBox.setMargin(imgNetwork, new Insets(10, 0, 0, 0));
+        this.lblLines.setFont(Font.font("System", FontWeight.BOLD, 12));
+        this.lblLines.setAlignment(Pos.CENTER_LEFT);
+        this.lblLines.setMinHeight(40);
+        this.lblLines.setMaxHeight(40);
+
+        this.lvLinesList.setOrientation(Orientation.HORIZONTAL);
+        this.lvLinesList.setPrefWidth(300);
+        this.lvLinesList.setMinHeight(40);
+        this.lvLinesList.setMaxHeight(40);
+        this.lvLinesList.setCellFactory(new ListViewLineCellFactory());
+        this.lvStationList.setCellFactory(new ListViewStationCellFactory());
+
+        this.tfLineId.setDisable(true);
+
+        this.imgNetwork.setPreserveRatio(true);
+        this.imgNetwork.setFitWidth(300);
+
+        LayoutUtils.applyMarginsToChildren(this.hbLines, 5);
+        LayoutUtils.applyMarginsToChildren(this.hbCenter, 5);
+
+        this.hbLines.setAlignment(Pos.CENTER);
+
+        this.vbStations.setAlignment(Pos.CENTER);
+        this.vbLineInfo.setAlignment(Pos.TOP_CENTER);
+
+        VBox.setMargin(this.imgNetwork, new Insets(10, 0, 0, 0));
     }
 
-    public ComboBox<Operator> getCbOperatorName() {return cbOperatorName;}
+    public ComboBox<Operator> getCbOperatorName() {return this.cbOperatorName;}
 
-    public ListView<Line> getLvLinesList() {return lvLinesList;}
+    public ListView<Line> getLvLinesList() {return this.lvLinesList;}
 
-    public ListView<Station> getLvStationList() {return lvStationList;}
+    public ListView<Station> getLvStationList() {return this.lvStationList;}
 
-    public TextField getTfLineId() {return tfLineId;}
+    public TextField getTfLineId() {return this.tfLineId;}
 
-    //public TextField getTfOperatorName() {return tfOperatorName;}
-
-    public ImageView getImgNetwork() {return imgNetwork;}
+    public ImageView getImgNetwork() {return this.imgNetwork;}
 
     @Override
-    public Line getSelectedLine() {
-        return lvLinesList.getSelectionModel().getSelectedItem();
-    }
+    public Line getSelectedLine() {return this.lvLinesList.getSelectionModel().getSelectedItem();}
 
     @Override
-    public Operator getSelectedOperator() {
-        return cbOperatorName.getValue();
-    }
+    public Operator getSelectedOperator() {return cbOperatorName.getValue();}
 
     @Override
-    public Station getSelectedStation() {
-        return lvStationList.getSelectionModel().getSelectedItem();
-    }
+    public Station getSelectedStation() {return lvStationList.getSelectionModel().getSelectedItem();}
 }

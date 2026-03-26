@@ -18,7 +18,7 @@ public class CreateStationPresenter {
     }
 
     private void addEventHandlers() {
-        view.getBtnCreate().setOnAction(new EventHandler<ActionEvent>() {
+        this.view.getBtnCreate().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 model.addStation(view.getTxtStationName().getText());
@@ -26,7 +26,7 @@ public class CreateStationPresenter {
             }
         });
 
-        view.getTxtStationName().setOnKeyTyped(new EventHandler<KeyEvent>() {
+        this.view.getTxtStationName().setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 String text = view.getTxtStationName().getText();
@@ -45,7 +45,5 @@ public class CreateStationPresenter {
         });
     }
 
-    private void updateView() {
-        view.getBtnCreate().setDisable(true);
-    }
+    private void updateView() {this.view.getBtnCreate().setDisable(true);}
 }

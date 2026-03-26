@@ -1,22 +1,8 @@
 package be.kdg.transitstadler.database;
 
-/**
- * @author Igor Goossens (INF 101)
- */
 public class DatabaseBuilder {
-    /**
-     * static class -> private constructor
-     */
-    private DatabaseBuilder() {
-        // TODO: error
-        System.err.println("[DatabaseBuilder.DatabaseBuilder()] An instance of DatabaseBuilder was created.");
-    }
+    private DatabaseBuilder() {System.err.println("[DatabaseBuilder.DatabaseBuilder()] An instance of DatabaseBuilder was created.");}
 
-    /**
-     * Makes it easy to create the required tables in the database.
-     * @param dropEverythingAndAddData If true all the tables will be dropped before rebuilding and data will be inserted afterwards.
-     * @return A boolean indicating whether any query failed to execute.
-     */
     public static boolean buildDatabase(boolean dropEverythingAndAddData) {
         boolean success = true;
 

@@ -21,4 +21,3 @@ public class ListViewStationCellFactory implements Callback<ListView<Station>, L
         };
     }
 }
-

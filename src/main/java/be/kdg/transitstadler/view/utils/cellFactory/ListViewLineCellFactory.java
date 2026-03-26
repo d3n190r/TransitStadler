@@ -21,4 +21,3 @@ public class ListViewLineCellFactory implements Callback<ListView<Line>, ListCel
         };
     }
 }
-

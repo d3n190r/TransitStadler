@@ -5,9 +5,7 @@ import javafx.util.StringConverter;
 
 public class StationStringConverter extends StringConverter<Station> {
     @Override
-    public Station fromString(String string) {
-        return null;
-    }
+    public Station fromString(String string) {return null;}
 
     @Override
     public String toString(Station operator) {

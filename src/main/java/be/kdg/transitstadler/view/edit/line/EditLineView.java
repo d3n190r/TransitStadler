@@ -5,14 +5,10 @@ import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.utils.stringConverter.OperatorStringConverter;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
-
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class EditLineView extends BorderPane {
     private Label lblLineId;
@@ -52,105 +48,93 @@ public class EditLineView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        lblLineId = new Label("Line Id");
-        lblLineName = new Label("Line Name");
-        lblOperatorId = new Label("Operator Id");
-        lblOperatorName = new Label("Operator name");
-        lblStops = new Label("Stops");
+        this.lblLineId = new Label("Line Id");
+        this.lblLineName = new Label("Line Name");
+        this.lblOperatorId = new Label("Operator Id");
+        this.lblOperatorName = new Label("Operator name");
+        this.lblStops = new Label("Stops");
 
-        tfLineId = new TextField();
-        tfLineId.setDisable(true);
-        tfLineName = new TextField();
-        tfOperatorId = new TextField();
-        tfOperatorId.setDisable(true);
+        this.tfLineId = new TextField();
+        this.tfLineId.setDisable(true);
+        this.tfLineName = new TextField();
+        this.tfOperatorId = new TextField();
+        this.tfOperatorId.setDisable(true);
 
-        cbOperatorName = new ComboBox<>();
-        cbOperatorName.setConverter(new OperatorStringConverter());
+        this.cbOperatorName = new ComboBox<>();
+        this.cbOperatorName.setConverter(new OperatorStringConverter());
 
-        lvStationList = new ListView<>();
-        lvStationList.setCellFactory(new ListViewStationCellFactory());
+        this.lvStationList = new ListView<>();
+        this.lvStationList.setCellFactory(new ListViewStationCellFactory());
 
-        btnAddStop = new Button("Add stop");
-        btnDeleteStop = new Button("Delete stop");
-        btnCancel = new Button("Cancel");
-        btnSave = new Button("Save");
-        btnDelete = new Button("Delete");
+        this.btnAddStop = new Button("Add stop");
+        this.btnDeleteStop = new Button("Delete stop");
+        this.btnCancel = new Button("Cancel");
+        this.btnSave = new Button("Save");
+        this.btnDelete = new Button("Delete");
     }
 
     private void layoutNodes() {
-        hbId = new HBox(lblLineId, tfLineId);
-        hbName = new HBox(lblLineName, tfLineName);
-        hbOperatorId = new HBox(lblOperatorId, tfOperatorId);
-        hbOperatorName = new HBox(lblOperatorName, cbOperatorName);
-        hbButtons = new HBox(btnCancel, btnSave, btnDelete);
-        hbStopButtons = new HBox(btnAddStop, btnDeleteStop);
+        this.hbId = new HBox(this.lblLineId, this.tfLineId);
+        this.hbName = new HBox(this.lblLineName, this.tfLineName);
+        this.hbOperatorId = new HBox(this.lblOperatorId, this.tfOperatorId);
+        this.hbOperatorName = new HBox(this.lblOperatorName, this.cbOperatorName);
+        this.hbButtons = new HBox(this.btnCancel, this.btnSave, this.btnDelete);
+        this.hbStopButtons = new HBox(this.btnAddStop, this.btnDeleteStop);
 
-        vbStops = new VBox(lblStops, lvStationList, hbStopButtons);
-        vbCenter = new VBox(hbId, hbName, hbOperatorId, hbOperatorName, vbStops, hbButtons);
+        this.vbStops = new VBox(this.lblStops, this.lvStationList, this.hbStopButtons);
+        this.vbCenter = new VBox(this.hbId, this.hbName, this.hbOperatorId, this.hbOperatorName, this.vbStops, this.hbButtons);
 
-        this.setCenter(vbCenter);
+        this.setCenter(this.vbCenter);
     }
 
     private void setNodeMarkup() {
-        LayoutUtils.applyMarginsToChildren(hbId, 2);
-        hbId.setAlignment(Pos.CENTER);
+        LayoutUtils.applyMarginsToChildren(this.hbId, 2);
+        this.hbId.setAlignment(Pos.CENTER);
 
-        LayoutUtils.applyMarginsToChildren(hbName, 2);
-        hbName.setAlignment(Pos.CENTER);
+        LayoutUtils.applyMarginsToChildren(this.hbName, 2);
+        this.hbName.setAlignment(Pos.CENTER);
 
-        LayoutUtils.applyMarginsToChildren(hbOperatorId, 2);
-        hbOperatorId.setAlignment(Pos.CENTER);
+        LayoutUtils.applyMarginsToChildren(this.hbOperatorId, 2);
+        this.hbOperatorId.setAlignment(Pos.CENTER);
 
-        LayoutUtils.applyMarginsToChildren(hbOperatorName, 2);
-        hbOperatorName.setAlignment(Pos.CENTER);
+        LayoutUtils.applyMarginsToChildren(this.hbOperatorName, 2);
+        this.hbOperatorName.setAlignment(Pos.CENTER);
 
-        LayoutUtils.applyMarginsToChildren(hbButtons, 7);
+        LayoutUtils.applyMarginsToChildren(this.hbButtons, 7);
 
-        LayoutUtils.applyMarginsToChildren(hbStopButtons, 7);
+        LayoutUtils.applyMarginsToChildren(this.hbStopButtons, 7);
 
-        LayoutUtils.applyMarginsToChildren(vbCenter, 5);
+        LayoutUtils.applyMarginsToChildren(this.vbCenter, 5);
         LayoutUtils.applyMarginsToChildren(this, 5);
 
-        btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
-        btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
-        btnSave.setTextFill(Color.WHITE);
-        btnDelete.setTextFill(Color.WHITE);
+        this.btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
+        this.btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
+        this.btnSave.setTextFill(Color.WHITE);
+        this.btnDelete.setTextFill(Color.WHITE);
 
-        btnAddStop.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(5), null)));
-        btnDeleteStop.setBackground(new Background(new BackgroundFill(Color.ORANGERED, new CornerRadii(5), null)));
+        this.btnAddStop.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(5), null)));
+        this.btnDeleteStop.setBackground(new Background(new BackgroundFill(Color.ORANGERED, new CornerRadii(5), null)));
 
         this.setPrefSize(300, 400);
     }
 
-    public TextField getTfLineId() {
-        return tfLineId;
-    }
+    public TextField getTfLineId() {return this.tfLineId;}
 
-    public TextField getTfLineName() {
-        return tfLineName;
-    }
+    public TextField getTfLineName() {return this.tfLineName;}
 
-    public TextField getTfOperatorId() {
-        return tfOperatorId;
-    }
+    public TextField getTfOperatorId() {return this.tfOperatorId;}
 
-    public Button getBtnSave() {
-        return btnSave;
-    }
+    public Button getBtnSave() {return this.btnSave;}
 
-    public Button getBtnCancel() {return btnCancel;}
+    public Button getBtnCancel() {return this.btnCancel;}
 
-    public Button getBtnDelete() {return btnDelete;}
+    public Button getBtnDelete() {return this.btnDelete;}
 
-    public ComboBox<Operator> getCbOperatorName() {
-        return cbOperatorName;
-    }
+    public ComboBox<Operator> getCbOperatorName() {return this.cbOperatorName;}
 
-    public ListView<Station> getLvStationList() {
-        return lvStationList;
-    }
+    public ListView<Station> getLvStationList() {return this.lvStationList;}
 
-    public Button getBtnAddStop() {return btnAddStop;}
+    public Button getBtnAddStop() {return this.btnAddStop;}
 
-    public Button getBtnDeleteStop() {return btnDeleteStop;}
+    public Button getBtnDeleteStop() {return this.btnDeleteStop;}
 }

@@ -1,7 +1,6 @@
 package be.kdg.transitstadler.view.edit.station;
 
 import be.kdg.transitstadler.view.utils.LayoutUtils;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,7 +42,7 @@ public class EditStationView extends VBox {
     }
 
     private void layoutNodes() {
-        hbButtons = new HBox(btnCancel, btnSave, btnDelete);
+        this.hbButtons = new HBox(this.btnCancel, this.btnSave, this.btnDelete);
 
         this.getChildren().addAll(this.lblStationId, this.tfStationId, this.lblStationName, this.tfStationName, hbButtons);
     }
@@ -52,30 +51,20 @@ public class EditStationView extends VBox {
         LayoutUtils.applyMarginsToChildren(this, 5);
         LayoutUtils.applyMarginsToChildren(this.hbButtons, 5);
         this.hbButtons.setAlignment(Pos.TOP_CENTER);
-        btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
-        btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
-        btnSave.setFont(new Font("FreeSerif", 12));
-        btnSave.setTextFill(Color.WHITE);
-        btnDelete.setTextFill(Color.WHITE);
+        this.btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
+        this.btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
+        this.btnSave.setFont(new Font("FreeSerif", 12));
+        this.btnSave.setTextFill(Color.WHITE);
+        this.btnDelete.setTextFill(Color.WHITE);
     }
 
-    public TextField getTfStationId() {
-        return tfStationId;
-    }
+    public TextField getTfStationId() {return this.tfStationId;}
 
-    public TextField getTfStationName() {
-        return tfStationName;
-    }
+    public TextField getTfStationName() {return this.tfStationName;}
 
-    public Button getBtnCancel() {
-        return btnCancel;
-    }
+    public Button getBtnCancel() {return this.btnCancel;}
 
-    public Button getBtnSave() {
-        return btnSave;
-    }
+    public Button getBtnSave() {return this.btnSave;}
 
-    public Button getBtnDelete() {
-        return btnDelete;
-    }
+    public Button getBtnDelete() {return this.btnDelete;}
 }

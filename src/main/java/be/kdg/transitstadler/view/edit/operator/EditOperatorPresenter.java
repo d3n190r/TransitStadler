@@ -7,7 +7,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
-
 import java.util.function.Consumer;
 
 public class EditOperatorPresenter {
@@ -79,8 +78,8 @@ public class EditOperatorPresenter {
     private void updateView() {
         this.view.getTfOperatorId().setText(String.valueOf(operator.operatorId()));
         this.view.getTfOperatorName().setText(operator.operatorName());
-        if (!model.getAllLinesByOperator(operator.operatorId()).isEmpty()) {
-            view.getBtnDelete().setDisable(true);
+        if (!this.model.getAllLinesByOperator(operator.operatorId()).isEmpty()) {
+            this.view.getBtnDelete().setDisable(true);
         }
     }
 }

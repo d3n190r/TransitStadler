@@ -5,7 +5,6 @@ import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Station;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-
 import java.util.List;
 
 public class AddStopPresenter {
@@ -32,8 +31,8 @@ public class AddStopPresenter {
     }
 
     private void updateView() {
-        List<Station> lineStationList = model.getAllStationsByLine(line.lineId());
-        for (Station currentStation : model.getAllStations()) {
+        List<Station> lineStationList = this.model.getAllStationsByLine(this.line.lineId());
+        for (Station currentStation : this.model.getAllStations()) {
             if (!lineStationList.contains(currentStation)) {
                 this.view.getCbStations().getItems().add(currentStation);
             }

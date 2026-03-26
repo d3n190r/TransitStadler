@@ -17,22 +17,16 @@ public class CreateStationView extends HBox {
     }
 
     private void initialiseNodes() {
-        lblStationName = new Label("Station Name");
-        txtStationName = new TextField();
-        btnCreate = new Button("Create");
+        this.lblStationName = new Label("Station Name");
+        this.txtStationName = new TextField();
+        this.btnCreate = new Button("Create");
     }
 
-    private void layoutNodes() {
-        this.getChildren().addAll(lblStationName, txtStationName, btnCreate);
-    }
+    private void layoutNodes() {this.getChildren().addAll(this.lblStationName, this.txtStationName, this.btnCreate);}
 
     private void setNodeMarkup() {}
 
-    public TextField getTxtStationName() {
-        return txtStationName;
-    }
+    public TextField getTxtStationName() {return this.txtStationName;}
 
-    public Button getBtnCreate() {
-        return btnCreate;
-    }
+    public Button getBtnCreate() {return this.btnCreate;}
 }

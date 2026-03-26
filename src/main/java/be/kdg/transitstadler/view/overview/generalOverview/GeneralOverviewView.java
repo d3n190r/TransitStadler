@@ -4,6 +4,7 @@ import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.overview.OverviewView;
+import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewOperatorCellFactory;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;
 import javafx.geometry.Pos;
@@ -12,6 +13,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class GeneralOverviewView extends OverviewView {
     private Label lblStations;
@@ -55,12 +58,17 @@ public class GeneralOverviewView extends OverviewView {
         HBox.setHgrow(vbStations, Priority.ALWAYS);
         HBox.setHgrow(vbOperator, Priority.ALWAYS);
 
-        this.lvStations.setPrefWidth(300);
-        this.lvOperator.setPrefWidth(300);
+        this.lblOperators.setFont(Font.font("System", FontWeight.BOLD, 12));
+        this.lblStations.setFont(Font.font("System", FontWeight.BOLD, 12));
+
+        this.lvStations.setPrefWidth(290);
+        this.lvOperator.setPrefWidth(290);
 
         this.setPrefSize(600, 500);
 
         this.miEditLine.setDisable(true);
+
+        LayoutUtils.applyMarginsToChildren(this.hbCenter, 5);
     }
 
     public ListView<Station> getLvStations() {return lvStations;}

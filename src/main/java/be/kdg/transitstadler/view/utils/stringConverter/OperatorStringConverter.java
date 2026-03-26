@@ -5,9 +5,7 @@ import javafx.util.StringConverter;
 
 public class OperatorStringConverter extends StringConverter<Operator> {
     @Override
-    public Operator fromString(String string) {
-        return null;
-    }
+    public Operator fromString(String string) {return null;}
 
     @Override
     public String toString(Operator operator) {

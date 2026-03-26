@@ -18,7 +18,7 @@ public class CreateOperatorPresenter {
     }
 
     private void addEventHandlers() {
-        view.getBtnCreateOperator().setOnAction(new EventHandler<ActionEvent>() {
+        this.view.getBtnCreateOperator().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 model.addOperator(view.getTxtOperatorName().getText());
@@ -26,7 +26,7 @@ public class CreateOperatorPresenter {
             }
         });
 
-        view.getTxtOperatorName().setOnKeyTyped(new EventHandler<KeyEvent>() {
+        this.view.getTxtOperatorName().setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 String text = view.getTxtOperatorName().getText();
@@ -45,7 +45,5 @@ public class CreateOperatorPresenter {
         });
     }
 
-    private void updateView() {
-        view.getBtnCreateOperator().setDisable(true);
-    }
+    private void updateView() {this.view.getBtnCreateOperator().setDisable(true);}
 }

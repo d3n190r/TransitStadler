@@ -26,31 +26,25 @@ public class CreateLineView extends VBox {
     }
 
     private void initialiseNodes() {
-        lblLineName = new Label("Line Name");
-        txtLineName = new TextField();
-        lblOperatorId = new Label("Operator ID");
-        cbOperatorId = new ComboBox<>();
-        cbOperatorId.setConverter(new OperatorStringConverter());
-        btnCreate = new Button("Create");
+        this.lblLineName = new Label("Line Name");
+        this.txtLineName = new TextField();
+        this.lblOperatorId = new Label("Operator ID");
+        this.cbOperatorId = new ComboBox<>();
+        this.cbOperatorId.setConverter(new OperatorStringConverter());
+        this.btnCreate = new Button("Create");
     }
 
     private void layoutNodes() {
-        hbLineName = new HBox(lblLineName, txtLineName);
-        hbOperatorId = new HBox(lblOperatorId, cbOperatorId);
-        this.getChildren().addAll(hbLineName, hbOperatorId, btnCreate);
+        this.hbLineName = new HBox(this.lblLineName, this.txtLineName);
+        this.hbOperatorId = new HBox(this.lblOperatorId, this.cbOperatorId);
+        this.getChildren().addAll(this.hbLineName, this.hbOperatorId, this.btnCreate);
     }
 
     private void setNodeMarkup() {}
 
-    public Button getBtnCreate() {
-        return btnCreate;
-    }
+    public Button getBtnCreate() {return this.btnCreate;}
 
-    public TextField getTxtLineName() {
-        return txtLineName;
-    }
+    public TextField getTxtLineName() {return this.txtLineName;}
 
-    public ComboBox<Operator> getCbOperatorId() {
-        return cbOperatorId;
-    }
+    public ComboBox<Operator> getCbOperatorId() {return this.cbOperatorId;}
 }

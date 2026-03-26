@@ -17,22 +17,16 @@ public class CreateOperatorView extends HBox {
     }
 
     private void initialiseNodes() {
-        lblOperatorName = new Label("Operator Name");
-        txtOperatorName = new TextField();
-        btnCreateOperator = new Button("Create");
+        this.lblOperatorName = new Label("Operator Name");
+        this.txtOperatorName = new TextField();
+        this.btnCreateOperator = new Button("Create");
     }
 
-    private void layoutNodes() {
-        this.getChildren().addAll(lblOperatorName, txtOperatorName, btnCreateOperator);
-    }
+    private void layoutNodes() {this.getChildren().addAll(this.lblOperatorName, this.txtOperatorName, this.btnCreateOperator);}
 
     private void setNodeMarkup() {}
 
-    public Button getBtnCreateOperator() {
-        return btnCreateOperator;
-    }
+    public Button getBtnCreateOperator() {return this.btnCreateOperator;}
 
-    public TextField getTxtOperatorName() {
-        return txtOperatorName;
-    }
+    public TextField getTxtOperatorName() {return this.txtOperatorName;}
 }
