@@ -8,13 +8,10 @@ import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-/**
- * @author Igor Goossens (INF 101)
- */
 public class Main  extends Application {
     @Override
     public void start(Stage primaryStage) {
-        DatabaseBuilder.buildDatabase(true);
+        DatabaseBuilder.buildDatabase(false);
         TransitStadlerModel model = new TransitStadlerModel();
         LineOverviewView view = new LineOverviewView();
         new LineOverviewPresenter(model, view);
