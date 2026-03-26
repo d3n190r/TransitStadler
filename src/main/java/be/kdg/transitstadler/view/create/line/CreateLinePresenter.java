@@ -36,6 +36,11 @@ public class CreateLinePresenter {
             @Override
             public void handle(ActionEvent actionEvent) {checkDisableButton();}
         });
+
+        this.view.getBtnCancel().setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {view.getScene().getWindow().hide();}
+        });
     }
 
     private void updateView() {
