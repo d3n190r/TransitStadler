@@ -53,7 +53,6 @@ public class EditStationView extends VBox {
         this.hbButtons.setAlignment(Pos.TOP_CENTER);
         this.btnSave.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), null)));
         this.btnDelete.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), null)));
-        this.btnSave.setFont(new Font("FreeSerif", 12));
         this.btnSave.setTextFill(Color.WHITE);
         this.btnDelete.setTextFill(Color.WHITE);
     }
