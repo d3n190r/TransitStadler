@@ -1,6 +1,7 @@
 package be.kdg.transitstadler.presenter.overview;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
+import be.kdg.transitstadler.presenter.PresenterUtils;
 import be.kdg.transitstadler.presenter.create.CreateLinePresenter;
 import be.kdg.transitstadler.view.create.CreateLineView;
 import be.kdg.transitstadler.presenter.create.CreateOperatorPresenter;
@@ -14,7 +15,6 @@ import be.kdg.transitstadler.view.edit.EditOperatorView;
 import be.kdg.transitstadler.presenter.edit.EditStationPresenter;
 import be.kdg.transitstadler.view.edit.EditStationView;
 import be.kdg.transitstadler.view.overview.OverviewView;
-import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Modality;
@@ -39,7 +39,7 @@ public abstract class OverviewPresenter {
                 new CreateLinePresenter(model, createLineView);
                 Stage createLineStage = new Stage();
                 createLineStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(createLineStage, createLineView, "Create Line");
+                PresenterUtils.setupStage(createLineStage, createLineView, "Create Line");
                 createLineStage.showAndWait();
                 updateView();
             }
@@ -52,7 +52,7 @@ public abstract class OverviewPresenter {
                 new CreateOperatorPresenter(model, createOperatorView);
                 Stage createOperatorStage = new Stage();
                 createOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(createOperatorStage, createOperatorView, "Create Operator");
+                PresenterUtils.setupStage(createOperatorStage, createOperatorView, "Create Operator");
                 createOperatorStage.showAndWait();
                 updateView();
             }
@@ -65,7 +65,7 @@ public abstract class OverviewPresenter {
                 new CreateStationPresenter(model, createStationView);
                 Stage createStationStage = new Stage();
                 createStationStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(createStationStage, createStationView, "Create Station");
+                PresenterUtils.setupStage(createStationStage, createStationView, "Create Station");
                 createStationStage.showAndWait();
                 updateView();
             }
@@ -79,7 +79,7 @@ public abstract class OverviewPresenter {
                 Stage editLineStage = new Stage();
                 editLineStage.initOwner(view.getScene().getWindow());
                 editLineStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(editLineStage, editLineView, "Edit Line");
+                PresenterUtils.setupStage(editLineStage, editLineView, "Edit Line");
                 editLineStage.showAndWait();
                 updateView();
             }
@@ -92,7 +92,7 @@ public abstract class OverviewPresenter {
                 new EditOperatorPresenter(model, editOperatorView, view.getSelectedOperator());
                 Stage editOperatorStage = new Stage();
                 editOperatorStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(editOperatorStage, editOperatorView, "Edit Operator");
+                PresenterUtils.setupStage(editOperatorStage, editOperatorView, "Edit Operator");
                 editOperatorStage.showAndWait();
                 updateView();
             }
@@ -105,7 +105,7 @@ public abstract class OverviewPresenter {
                 new EditStationPresenter(model, editStationView, view.getSelectedStation());
                 Stage editStationStage = new Stage();
                 editStationStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(editStationStage, editStationView, "Edit Station");
+                PresenterUtils.setupStage(editStationStage, editStationView, "Edit Station");
                 editStationStage.showAndWait();
                 updateView();
             }

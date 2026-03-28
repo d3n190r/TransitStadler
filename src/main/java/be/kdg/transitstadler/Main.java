@@ -3,8 +3,8 @@ package be.kdg.transitstadler;
 import be.kdg.transitstadler.database.DatabaseBuilder;
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.presenter.LoginPresenter;
+import be.kdg.transitstadler.presenter.PresenterUtils;
 import be.kdg.transitstadler.view.LoginView;
-import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,7 +15,7 @@ public class Main  extends Application {
         TransitStadlerModel model = new TransitStadlerModel();
         LoginView view = new LoginView();
         new LoginPresenter(model, view);
-        LayoutUtils.setupStage(primaryStage, view, "TransitStadler");
+        PresenterUtils.setupStage(primaryStage, view, "TransitStadler");
         primaryStage.show();
     }
 }

@@ -4,9 +4,9 @@ import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.presenter.PresenterUtils;
 import be.kdg.transitstadler.view.edit.EditLineView;
 import be.kdg.transitstadler.view.edit.AddStopView;
-import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -79,7 +79,7 @@ public class EditLinePresenter {
                 new AddStopPresenter(model, addStopView, line);
                 Stage addStopStage = new Stage();
                 addStopStage.initModality(Modality.APPLICATION_MODAL);
-                LayoutUtils.setupStage(addStopStage, addStopView, "Add Stop");
+                PresenterUtils.setupStage(addStopStage, addStopView, "Add Stop");
                 addStopStage.showAndWait();
                 view.getScene().getWindow().hide();
             }
