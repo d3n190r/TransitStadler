@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.login;
+package be.kdg.transitstadler.view;
 
 import be.kdg.transitstadler.database.DatabaseConnector;
 import be.kdg.transitstadler.view.utils.LayoutUtils;

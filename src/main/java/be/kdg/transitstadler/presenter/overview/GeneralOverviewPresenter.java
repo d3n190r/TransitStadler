@@ -1,11 +1,10 @@
-package be.kdg.transitstadler.view.overview.generalOverview;
+package be.kdg.transitstadler.presenter.overview;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.overview.OverviewPresenter;
-import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewPresenter;
-import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewView;
+import be.kdg.transitstadler.view.overview.GeneralOverviewView;
+import be.kdg.transitstadler.view.overview.LineOverviewView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

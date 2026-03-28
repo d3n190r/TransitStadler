@@ -2,8 +2,8 @@ package be.kdg.transitstadler;
 
 import be.kdg.transitstadler.database.DatabaseBuilder;
 import be.kdg.transitstadler.model.TransitStadlerModel;
-import be.kdg.transitstadler.view.login.LoginPresenter;
-import be.kdg.transitstadler.view.login.LoginView;
+import be.kdg.transitstadler.presenter.LoginPresenter;
+import be.kdg.transitstadler.view.LoginView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.application.Application;
 import javafx.stage.Stage;

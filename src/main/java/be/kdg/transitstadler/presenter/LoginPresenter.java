@@ -1,9 +1,10 @@
-package be.kdg.transitstadler.view.login;
+package be.kdg.transitstadler.presenter;
 
 import be.kdg.transitstadler.database.DatabaseConnector;
 import be.kdg.transitstadler.model.TransitStadlerModel;
-import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewPresenter;
-import be.kdg.transitstadler.view.overview.lineOverview.LineOverviewView;
+import be.kdg.transitstadler.presenter.overview.LineOverviewPresenter;
+import be.kdg.transitstadler.view.LoginView;
+import be.kdg.transitstadler.view.overview.LineOverviewView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.edit.line.addStop;
+package be.kdg.transitstadler.view.edit;
 
 import be.kdg.transitstadler.model.businessobject.Station;
 import be.kdg.transitstadler.view.utils.stringConverter.StationStringConverter;

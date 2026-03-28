@@ -1,11 +1,11 @@
-package be.kdg.transitstadler.view.edit.line;
+package be.kdg.transitstadler.presenter.edit;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.edit.line.addStop.AddStopPresenter;
-import be.kdg.transitstadler.view.edit.line.addStop.AddStopView;
+import be.kdg.transitstadler.view.edit.EditLineView;
+import be.kdg.transitstadler.view.edit.AddStopView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

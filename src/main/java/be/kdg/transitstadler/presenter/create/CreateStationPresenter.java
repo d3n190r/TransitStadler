@@ -1,7 +1,8 @@
-package be.kdg.transitstadler.view.create.station;
+package be.kdg.transitstadler.presenter.create;
 
 import be.kdg.transitstadler.model.TransitStadlerModel;
 import be.kdg.transitstadler.model.businessobject.Station;
+import be.kdg.transitstadler.view.create.CreateStationView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;

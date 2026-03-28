@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.edit.line;
+package be.kdg.transitstadler.view.edit;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;

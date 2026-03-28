@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.create.line;
+package be.kdg.transitstadler.view.create;
 
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.view.utils.LayoutUtils;

@@ -1,9 +1,8 @@
-package be.kdg.transitstadler.view.overview.generalOverview;
+package be.kdg.transitstadler.view.overview;
 
 import be.kdg.transitstadler.model.businessobject.Line;
 import be.kdg.transitstadler.model.businessobject.Operator;
 import be.kdg.transitstadler.model.businessobject.Station;
-import be.kdg.transitstadler.view.overview.OverviewView;
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewOperatorCellFactory;
 import be.kdg.transitstadler.view.utils.cellFactory.ListViewStationCellFactory;

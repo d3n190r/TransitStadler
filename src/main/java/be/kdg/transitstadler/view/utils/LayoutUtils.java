@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class LayoutUtils {
     public static void setupStage(Stage stage, Parent view, String title) {
+        // TODO: move to presenter
         stage.setTitle(title);
         stage.setScene(new Scene(view));
         stage.setResizable(false);

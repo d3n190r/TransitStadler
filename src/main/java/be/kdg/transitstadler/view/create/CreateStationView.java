@@ -1,4 +1,4 @@
-package be.kdg.transitstadler.view.create.station;
+package be.kdg.transitstadler.view.create;
 
 import be.kdg.transitstadler.view.utils.LayoutUtils;
 import javafx.geometry.Pos;
